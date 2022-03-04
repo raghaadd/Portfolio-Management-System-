@@ -7,8 +7,8 @@
 ### - Siham
 ### - Asma
 
-<img src="https://user-images.githubusercontent.com/100478249/156829493-c02eff88-c3de-4a38-b786-8d1379cd370a.png" width="200" height="200"> <img src="https://user-images.githubusercontent.com/100478249/156829954-cc25e405-34e9-4a33-acf8-b10492b278c3.png" width="200" height="200"> 
-<img src="https://user-images.githubusercontent.com/100478249/156830517-2591429e-a43b-4671-b6f3-9c02765db884.png" width="200" height="200">
+<img src="https://user-images.githubusercontent.com/100478249/156830517-2591429e-a43b-4671-b6f3-9c02765db884.png" width="200" height="200"> <img src="https://user-images.githubusercontent.com/100478249/156829954-cc25e405-34e9-4a33-acf8-b10492b278c3.png" width="300" height="300"> 
+
 
 
 
