@@ -45,7 +45,7 @@ public class addpost22 extends javax.swing.JFrame {
         close.setIcon(new ImageIcon(getClass().getResource("images0/x1.png")));
         min.setIcon(new ImageIcon(getClass().getResource("images0/min1.png")));
         main.setIcon(new ImageIcon(getClass().getResource("images0/mainpage.jpeg")));
-        
+        back.setIcon(new ImageIcon(getClass().getResource("images0/back3.png")));
     }
 
  
@@ -83,6 +83,7 @@ public class addpost22 extends javax.swing.JFrame {
         jButtonupload = new javax.swing.JButton();
         close = new javax.swing.JLabel();
         min = new javax.swing.JLabel();
+        back = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -263,6 +264,11 @@ public class addpost22 extends javax.swing.JFrame {
         jButtoncancel.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         jButtoncancel.setText("Cancel");
         jButtoncancel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButtoncancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtoncancelActionPerformed(evt);
+            }
+        });
 
         jButtonupload.setBackground(new java.awt.Color(244, 216, 19));
         jButtonupload.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
@@ -420,29 +426,38 @@ public class addpost22 extends javax.swing.JFrame {
             }
         });
 
+        back.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        back.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        back.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                backMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout baseLayout = new javax.swing.GroupLayout(base);
         base.setLayout(baseLayout);
         baseLayout.setHorizontalGroup(
             baseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(baseLayout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(baseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(baseLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(back, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(min, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(close, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(baseLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(close, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         baseLayout.setVerticalGroup(
             baseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, baseLayout.createSequentialGroup()
                 .addGap(8, 8, 8)
-                .addGroup(baseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(close, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(min, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(baseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(close, javax.swing.GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE)
+                    .addComponent(min, javax.swing.GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE)
+                    .addComponent(back, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -498,7 +513,7 @@ public class addpost22 extends javax.swing.JFrame {
             PreparedStatement pstmt1=conn.prepareStatement(sql1);
             pstmt1.setString(1, filename);
             pstmt1.setString(2, jTextAreadesc.getText());
-            pstmt1.setString(3, "saja123");
+            pstmt1.setString(3, "asma");//"saja123");
             pstmt1.executeUpdate();
     
             
@@ -552,7 +567,7 @@ public class addpost22 extends javax.swing.JFrame {
                 } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
                 }
 
-                ImageIcon icon = new ImageIcon(LogIn.class.getResource("/images0/party.jpg"));
+                ImageIcon icon = new ImageIcon(LogIn.class.getResource("images0/party.jpg"));
                 JOptionPane.showMessageDialog(
                         null,
                         "Uploaded Succsffully!",
@@ -606,6 +621,19 @@ public class addpost22 extends javax.swing.JFrame {
             jTextFieldhashtag.setText("#Hashtag");
     }//GEN-LAST:event_jTextFieldhashtagFocusLost
 
+    private void jButtoncancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtoncancelActionPerformed
+        // TODO add your handling code here:
+        // close
+        this.dispose();
+        new mainpage22().setVisible(true);
+    }//GEN-LAST:event_jButtoncancelActionPerformed
+
+    private void backMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backMouseClicked
+        // TODO add your handling code here:
+        this.dispose();
+        new mainpage22().setVisible(true);
+    }//GEN-LAST:event_backMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -646,6 +674,7 @@ public class addpost22 extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel back;
     private javax.swing.JPanel base;
     private javax.swing.JLabel close;
     private javax.swing.JButton jButtoncancel;
