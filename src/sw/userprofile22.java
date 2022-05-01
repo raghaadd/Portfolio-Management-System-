@@ -30,6 +30,10 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.ScrollPaneConstants;
+import javax.swing.SwingConstants;
 
 /**
  *
@@ -49,13 +53,33 @@ public class userprofile22 extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         
         close.setIcon(new ImageIcon(getClass().getResource("images0/x1.png")));
+        close.setToolTipText("Exit.");
+        
         min.setIcon(new ImageIcon(getClass().getResource("images0/min1.png")));
+        min.setToolTipText("Minimize.");
+        
         back.setIcon(new ImageIcon(getClass().getResource("images0/back3.png")));
+        back.setToolTipText("Go back.");
+        
         addpost.setIcon(new ImageIcon(getClass().getResource("images0/add3.png")));
+        addpost.setToolTipText("To add post page.");
+        
         explore.setIcon(new ImageIcon(getClass().getResource("images0/explore0.png")));
+        explore.setToolTipText("To explore page.");
+        
         contact.setIcon(new ImageIcon(getClass().getResource("images0/contact.png")));
+        contact.setToolTipText("Contact us.");
+        
         out.setIcon(new ImageIcon(getClass().getResource("images0/out.png")));
+        out.setToolTipText("Sign out.");
+        
         edit.setIcon(new ImageIcon(getClass().getResource("images0/edit.png")));
+        edit.setToolTipText("Settings.");
+        
+        fing.setIcon(new ImageIcon(getClass().getResource("images0/fing.png")));
+        
+        fer.setIcon(new ImageIcon(getClass().getResource("images0/fer.png")));
+        
         
         scrollPane1.add(postbase);
        // String usenamepost = "asma";
@@ -65,35 +89,7 @@ public class userprofile22 extends javax.swing.JFrame {
     }
 
     
-    //////////////////////////////////////////////////////////////////////////////////////////////////
-    public Connection dbconnect(String sql1){
     
-       //we have to open post table then compare username that we have with username in post table:
-         Connection conn = null;
-         ResultSet rs = null;
-         PreparedStatement ps = null;
-       //  String usernameorigin="asma";//saja123"; //get this value from login page
-         String usenamepost=null;
-         
-        // int count=0;
-           try{
-           conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/softwareproject","root","iNEEDtostudy@202");
-         //  String sql1="select * from post";//DELETE FROM table_name WHERE condition of which row(s) to delete;
-           
-           Statement st1=conn.createStatement();
-           st1.executeQuery(sql1);
-           
-           
-           conn.close();}
-           catch(Exception ex){
-              JOptionPane.showMessageDialog(null, ex.getMessage());
-               System.err.println(ex);
-           }
-           
-           
-        return conn;
-        
-    }
     
 //////////////////////////////////////////////////////////////////////////////////////////////////
     public void makepanel(){
@@ -101,14 +97,18 @@ public class userprofile22 extends javax.swing.JFrame {
         JPanel jhh =new JPanel(); 
         postbase.setLayout(new BoxLayout(postbase, BoxLayout.Y_AXIS));  
         
-        //we have to open post table then compare username that we have with username in post table:
+       //we have to open post table then compare username that we have with username in post table:
          Connection conn = null;
          ResultSet rs = null;
          PreparedStatement ps = null;
-       //  String usernameorigin="asma";//saja123"; //get this value from login page
+       //String usernameorigin="asma";//saja123"; //get this value from login page
          String usenamepost=null;
          String idpost;
-        // int count=0;
+       //int count=0;
+        
+        
+        
+        
            try{
            conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/softwareproject","root","iNEEDtostudy@202");
            String sql1="select * from post";
@@ -123,31 +123,111 @@ public class userprofile22 extends javax.swing.JFrame {
                usenamepost=rs1.getString("username");
                System.out.println("user::: "+usenamepost);
                name.setText(usenamepost);
-             //  Object usernameorigin = null;
-               
-              idpost=rs1.getString("idpost");
+             //Object usernameorigin = null;
+               idpost=rs1.getString("idpost");
                
              
                if(usenamepost.equals(usernameorigin))
                {
                    String content=rs1.getString("content");
-                   //make a lable that have all the content here ////////////////////////////////////////////////////////////////////
-                   
                    System.out.println("content::: "+content);
+                   
+                   
+                   
+               
+           
+               
+               
+               //***********************getbio and photo******************************
+               String sql5="select * from appuser where username='"+usenamepost+"'";
+               Statement st5=conn.createStatement();
+               ResultSet rs5=st5.executeQuery(sql5);
+               if(rs5.next()){
+                   
+                   //********bio
+                   String setbio = rs5.getString("bio");
+                   
+                   if(setbio!=null)
+                      this.bio.setText(setbio);
+                   else
+                      this.bio.setText("Write a bio");
+                   
+                   //*******photo
+                   String mail = rs5.getString("email");
+                   String sql6="select * from person where email='"+mail+"'";
+                   Statement st6=conn.createStatement();
+                   ResultSet rs6=st6.executeQuery(sql6);
+                   
+                    if(rs6.next()){//there is photo
+                       String image = rs6.getString("image");
+                       
+                       if((!image.equals("")) && image!=null){
+                           //************display image************
+                           //*********************** change scale for icon to fit the label:
+                           //Icon icon6=new ImageIcon(content);
+                            ImageIcon imgicon6=new ImageIcon(image);
+                            Image img6=imgicon6.getImage();
+                            Image imgscale6=img6.getScaledInstance(userimage.getWidth(), userimage.getHeight(), Image.SCALE_SMOOTH);
+                            ImageIcon scaledIcon6=new ImageIcon(imgscale6);
+                            userimage.setIcon(scaledIcon6);
+                            userimage.setOpaque(true);
+                            userimage.setBackground(new java.awt.Color(250,250,250));
+                           
+                            System.out.println("user::: you have come here? havent you! ");
+                       }
+                       else{
+                           //************display noimage icon********
+                            ImageIcon imgicon6=new ImageIcon(getClass().getResource("images0/noimage.png"));
+                            Image img6=imgicon6.getImage();
+                            Image imgscale6=img6.getScaledInstance(userimage.getWidth(), userimage.getHeight(), Image.SCALE_SMOOTH);
+                            ImageIcon scaledIcon6=new ImageIcon(imgscale6);
+                            userimage.setIcon(scaledIcon6);
+                            userimage.setOpaque(true);
+                            userimage.setBackground(new java.awt.Color(250,250,250));
+                           System.out.println("user::: guess not");
+                       }
+                      
+                      
+                   }//photo if
+                    else{//there is no photo
                         
+                    }
+                   
+               }//bio if
+               else{/*there is no user*/}
+               
+               
+               
+               
+               //*****************follow count**************************   
+               //get the following and followers count fron data base
+               fing.setToolTipText("followingcount");
+               fer.setToolTipText("followerscount");
+               ercount.setToolTipText("followingcount");
+               ingcount.setToolTipText("followerscount");
+                 
+               ercount.setText("count");
+               ingcount.setText("count");
+               
+               
+               
+            //******************************************************************
             jhh.setLayout(null);//new FlowLayout());
             //add the jpanel in which the post will be displayed on
             jhh.setPreferredSize(new Dimension(50, 240));
             jhh.setBackground(new java.awt.Color(255,255,255));//blue
          
-              postbase.add(jhh);  
+            postbase.add(jhh);  
          
             //add the jlable that will have the image 
-          //  JLabel l = new JLabel("here please", SwingConstants.CENTER);
+            //JLabel l = new JLabel("here please", SwingConstants.CENTER);
           
-           //Icon icon=new ImageIcon(content);
+       //Icon icon=new ImageIcon(content);
        // ImageIcon imgicon=new ImageIcon(content);
        // Image img=imgicon.getImage();
+       
+       
+       
        
         JLabel l=new JLabel();
         l.setBounds(15, 15, 300,210); //size.width, size.height);
@@ -164,7 +244,110 @@ public class userprofile22 extends javax.swing.JFrame {
         jhh.add( l );
         
         
-        //**************************the delete button///////////////////////////////////////////////////////////////////////////
+        
+        
+        
+        
+        //**************************the description display*************************
+        //JLabel des=new JLabel();
+        JTextArea des = new JTextArea();
+        des.setLineWrap(true);
+        des.setBounds(330, 20, 580, 140);//330, 240, 300,210); //x, y, width, height);
+        des.setBackground(new java.awt.Color(255,255,255));//200,200,200));
+        
+        String description=rs1.getString("description");
+        des.setText(description);
+        
+       // JScrollPane scroll = new JScrollPane(des);
+       // scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+       // scroll.setBounds(330, 20, 465, 150);
+      
+       
+        des.setForeground(new java.awt.Color(0,0,0));//text color
+        des.setFont(new java.awt.Font("iCiel Baliho Script", 0, 18));//text type
+        des.setBorder(null);
+        des.setEditable(false);
+        des.setOpaque(true);
+       
+        jhh.add(des); //scroll );
+        
+        
+        
+        
+        
+        
+        //**************************like icon*************************
+        JLabel like=new JLabel();
+        like.setText(null);
+ 
+        like.setBounds(330, 165, 50, 50);
+        like.setHorizontalAlignment(SwingConstants.CENTER);
+        like.setVerticalAlignment(SwingConstants.CENTER);
+        
+        //*********************** change scale for icon to fit the label:
+        ImageIcon imgicon1=new ImageIcon(getClass().getResource("images0/emptyh.png"));
+        Image img1=imgicon1.getImage();
+        Image imgscale1=img1.getScaledInstance(like.getWidth(), like.getHeight(), Image.SCALE_SMOOTH);
+        ImageIcon scaledIcon1=new ImageIcon(imgscale1);
+        like.setIcon(scaledIcon1);
+        like.setOpaque(true);
+        like.setBackground(new java.awt.Color(255,255,255));
+        like.setToolTipText("Like.");
+        
+        
+        jhh.add(like);
+        
+        
+        //**************************like information*************************
+        JLabel likeinfo=new JLabel();
+        likeinfo.setText("likecount");//this should be the number of likes this post has
+        likeinfo.setToolTipText("likecount");//if the number is larger than the space to show it ill show the full number in this
+        likeinfo.setBounds(330, 215, 65, 10);
+       // likeinfo.setOpaque(true);
+       // likeinfo.setBackground(Color.red);
+        
+        
+        jhh.add(likeinfo);
+        
+        
+        //**************************comment icon*************************
+        JLabel comm=new JLabel();
+        comm.setText(null);
+        //comm.setOpaque(true);
+       // comm.setBackground(Color.red);
+        comm.setBounds(400, 165, 50, 50);
+        comm.setHorizontalAlignment(SwingConstants.CENTER);
+        comm.setVerticalAlignment(SwingConstants.CENTER);
+        
+        //*********************** change scale for icon to fit the label:
+        //Icon icon2=new ImageIcon(getClass().getResource("images0/heart.png"));
+        ImageIcon imgicon2=new ImageIcon(getClass().getResource("images0/comm1.png"));
+        Image img2=imgicon2.getImage();
+        Image imgscale2=img2.getScaledInstance(like.getWidth(), like.getHeight(), Image.SCALE_SMOOTH);
+        ImageIcon scaledIcon2=new ImageIcon(imgscale2);
+        comm.setIcon(scaledIcon2);
+        comm.setOpaque(true);
+        comm.setBackground(new java.awt.Color(250,250,250));
+        comm.setToolTipText("Comment.");
+        
+        
+        jhh.add(comm);
+        
+        //**************************comm information*************************
+        JLabel comminfo=new JLabel();
+        comminfo.setText("commcount");//this should be the number of likes this post has
+        comminfo.setToolTipText("commcount");//if the number is larger than the space to show it ill show the full number in this
+        comminfo.setBounds(400, 215, 65, 10);
+       // comminfo.setOpaque(true);
+       // comminfo.setBackground(Color.red);
+        
+        
+        jhh.add(comminfo);
+        
+        
+        
+        
+        //**************************the delete button*************************
         JButton jbuttondelete=new JButton("Delete");
         jbuttondelete.setForeground(new java.awt.Color(255,255,255));//text color
         jbuttondelete.setFont(new java.awt.Font("iCiel Baliho Script", 0, 18));//text type
@@ -179,18 +362,16 @@ public class userprofile22 extends javax.swing.JFrame {
         jbuttondelete.setCursor(new Cursor(Cursor.HAND_CURSOR));
         
         /////////////////////////////////////////////////////////
-        //******eventlistener******
         jbuttondelete.addMouseListener(new MouseAdapter() {
-        public void mouseClicked(MouseEvent e) {
-            String idpost = ((JButton) e.getSource()).getName();
-            
-            System.out.println("Clicked!"+idpost);
-     //   System.out.println("Clicked edit!"+idpost);
-        deletepost();
-        }});
+        public void mouseClicked(MouseEvent e) {String idpost = ((JButton) e.getSource()).getName();
+            deletepost(idpost);}});
         /////////////////////////////////////////////////////////
         
         jhh.add(jbuttondelete);
+        
+        
+        
+        
         
         //**************************the edit button///////////////////////////////////////////////////////////////////////////
         JButton jbuttonedit=new JButton("Edit");
@@ -207,21 +388,24 @@ public class userprofile22 extends javax.swing.JFrame {
         jbuttonedit.setCursor(new Cursor(Cursor.HAND_CURSOR));
         
         /////////////////////////////////////////////////////////
-        //******eventlistener******
         jbuttonedit.addMouseListener(new MouseAdapter() {
         public void mouseClicked(MouseEvent e) {
             String idpost = ((JButton) e.getSource()).getName();
-            
-            System.out.println("Clicked!"+idpost);
-     //   System.out.println("Clicked edit!"+idpost);
-        editpost();
+            edit22 editobj = new edit22();
+            editobj.my_update(idpost, usernameorigin);//Execute the method my_update to pass str
+	    editobj.setVisible(true); // Open the Second.java window
+	    dispose(); // Close 
+         // System.out.println("Clicked!"+idpost);
         }});
         /////////////////////////////////////////////////////////
-        
         
         jhh.add(jbuttonedit);
         
         
+        
+        
+        
+        //*****************************************************************************
         //create new jpanel:
         jhh =new JPanel(); 
         jhh.setVisible(true);
@@ -231,7 +415,6 @@ public class userprofile22 extends javax.swing.JFrame {
             
           //  Dimension size = l.getPreferredSize();
           
-            
              if(!flag)
              { flag=true;
              jhh.setBackground(new java.awt.Color(240,240,240));
@@ -252,29 +435,42 @@ public class userprofile22 extends javax.swing.JFrame {
                System.err.println(ex);
            }
            
-
       }//end function
     
     
-     ////////////////////////////////////////////////////////////////////
-    public void deletepost(){
+    
+    
+    
+    
+    
+     
+    public void deletepost(String id){
     System.out.println("Clicked delete inside fun!");
     
-       String sql1="select * from post";//DELETE FROM table_name WHERE condition of which row(s) to delete;
-        
+      
+            Connection con = null;
+            try{
+            con=DriverManager.getConnection("jdbc:mysql://localhost:3306/softwareproject","root","iNEEDtostudy@202");
+            
+            Statement t = con.createStatement();
+            String sql="delete from post where idpost ='"+id+"'";
+            t.executeUpdate(sql);
+            
+            con.setAutoCommit(false);
+            con.commit();
+            con.close();
+            this.dispose();
+            new userprofile22().setVisible(true);
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, e);
+        }
     }//end function
-    ////////////////////////////////////////////////////////////////////
-    public void editpost(){
-    System.out.println("Clicked edit inside fun!");
-       
-        
-    }//end function
-     ////////////////////////////////////////////////////////////////////
-    /**
-     * This method is called from within the constructor to initialize the form.
-     * WARNING: Do NOT modify this code. The content of this method is always
-     * regenerated by the Form Editor.
-     */
+    
+    
+    
+    
+    
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -297,15 +493,21 @@ public class userprofile22 extends javax.swing.JFrame {
         jPanel12 = new javax.swing.JPanel();
         jPanel13 = new javax.swing.JPanel();
         jPanel14 = new javax.swing.JPanel();
-        jLabelRound1 = new rounded.JLabelRound();
+        userimage = new rounded.JLabelRound();
         out = new javax.swing.JLabel();
         contact = new javax.swing.JLabel();
         explore = new javax.swing.JLabel();
         edit = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
         name = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        bio = new javax.swing.JLabel();
         addpost = new javax.swing.JLabel();
+        followers = new javax.swing.JLabel();
+        following = new javax.swing.JLabel();
+        fing = new javax.swing.JLabel();
+        fer = new javax.swing.JLabel();
+        ercount = new javax.swing.JLabel();
+        ingcount = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         scrollPane1 = new java.awt.ScrollPane();
 
@@ -371,7 +573,7 @@ public class userprofile22 extends javax.swing.JFrame {
             .addGroup(jPanel11Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel3)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
 
         jPanel12.setBackground(new java.awt.Color(255, 255, 255));
@@ -380,8 +582,7 @@ public class userprofile22 extends javax.swing.JFrame {
 
         jPanel14.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabelRound1.setBackground(new java.awt.Color(0, 0, 0));
-        jLabelRound1.setText("jLabelRound1");
+        userimage.setBackground(new java.awt.Color(250, 250, 250));
 
         javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
         jPanel14.setLayout(jPanel14Layout);
@@ -389,14 +590,14 @@ public class userprofile22 extends javax.swing.JFrame {
             jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel14Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabelRound1, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(userimage, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel14Layout.setVerticalGroup(
             jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel14Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabelRound1, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(userimage, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -432,8 +633,9 @@ public class userprofile22 extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        jLabel2.setText(" bio");
+        bio.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        bio.setText(" bio");
+        bio.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
         addpost.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         addpost.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -442,6 +644,24 @@ public class userprofile22 extends javax.swing.JFrame {
                 addpostMouseClicked(evt);
             }
         });
+
+        followers.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        followers.setForeground(new java.awt.Color(18, 33, 139));
+        followers.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        followers.setText("following");
+
+        following.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        following.setForeground(new java.awt.Color(18, 33, 139));
+        following.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        following.setText("followers");
+
+        fer.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+
+        ercount.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ercount.setText("count");
+
+        ingcount.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ingcount.setText("count");
 
         javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
         jPanel13.setLayout(jPanel13Layout);
@@ -452,7 +672,7 @@ public class userprofile22 extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel13Layout.createSequentialGroup()
-                        .addComponent(name, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(name, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
                         .addGap(18, 18, 18)
                         .addComponent(edit, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -464,11 +684,25 @@ public class userprofile22 extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(out, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jSeparator2)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel13Layout.createSequentialGroup()
+                        .addComponent(bio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(following, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(ercount, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(fer, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(followers, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(fing, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(ingcount, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         jPanel13Layout.setVerticalGroup(
             jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel13Layout.createSequentialGroup()
+                .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
             .addGroup(jPanel13Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -482,11 +716,20 @@ public class userprofile22 extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 77, Short.MAX_VALUE)
-                .addContainerGap())
-            .addGroup(jPanel13Layout.createSequentialGroup()
-                .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(bio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel13Layout.createSequentialGroup()
+                        .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(following, javax.swing.GroupLayout.DEFAULT_SIZE, 19, Short.MAX_VALUE)
+                            .addComponent(followers, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(fer, javax.swing.GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE)
+                            .addComponent(fing, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(ingcount, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(ercount, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
         );
 
         javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
@@ -506,10 +749,10 @@ public class userprofile22 extends javax.swing.JFrame {
             .addGroup(jPanel12Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(scrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(scrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 557, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
@@ -794,13 +1037,18 @@ public class userprofile22 extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel addpost;
     private javax.swing.JLabel back;
+    private javax.swing.JLabel bio;
     private javax.swing.JLabel close;
     private javax.swing.JLabel contact;
     private javax.swing.JLabel edit;
+    private javax.swing.JLabel ercount;
     private javax.swing.JLabel explore;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel fer;
+    private javax.swing.JLabel fing;
+    private javax.swing.JLabel followers;
+    private javax.swing.JLabel following;
+    private javax.swing.JLabel ingcount;
     private javax.swing.JLabel jLabel3;
-    private rounded.JLabelRound jLabelRound1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
@@ -821,5 +1069,6 @@ public class userprofile22 extends javax.swing.JFrame {
     private javax.swing.JLabel name;
     private javax.swing.JLabel out;
     private java.awt.ScrollPane scrollPane1;
+    private rounded.JLabelRound userimage;
     // End of variables declaration//GEN-END:variables
 }

@@ -36,7 +36,7 @@ public class edit22 extends javax.swing.JFrame {
     /**
      * Creates new form edit22
      */
-    String filename=null;
+    String filename;
     public edit22() {
         initComponents();
         
@@ -46,8 +46,68 @@ public class edit22 extends javax.swing.JFrame {
         min.setIcon(new ImageIcon(getClass().getResource("images0/min1.png")));
         main.setIcon(new ImageIcon(getClass().getResource("images0/mainpage.jpeg")));
         back.setIcon(new ImageIcon(getClass().getResource("images0/back3.png")));
+      //  my_update("1", "asma");
     }
 
+    
+    public void my_update(String postid, String name) {
+		
+            //    jTextFieldhashtag.setText();
+             //   jTextAreadesc.setText(pdescription);
+               
+                // TODO add your handling code here:
+        
+                fake.setText(postid);
+                try{
+            //******************* open connection with mysql:
+            Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/softwareproject","root","iNEEDtostudy@202");
+
+            //********************* insert data into post table:
+            //System.out.println("filepath new:: "+filename);
+            String sql8="select * from post where idpost ="+postid+" and username = '"+name+"'";
+            Statement st8 = conn.createStatement();
+            ResultSet rs8 = st8.executeQuery(sql8);
+            if(rs8.next()){
+            String postcontent = rs8.getString("content");
+            String postdescription = rs8.getString("description");
+            
+            this.jTextAreadesc.setText(postdescription);
+           // String posthashtag = rs8.getString("username");
+            }
+            //jTextFieldhashtag.setText();
+           // jTextAreadesc.setText(postdescription);
+       
+           
+            String sql9="select * from post_hashtag where idpost ='"+postid+"'";
+            Statement st9 = conn.createStatement();
+            ResultSet rs9 = st9.executeQuery(sql9);
+            
+            if(rs9.next()){
+            String hashid = rs9.getString("idhashtag");
+            
+            
+            String sql10="select * from hashtag where idhashtag ='"+hashid+"'";
+            Statement st10 = conn.createStatement();
+            ResultSet rs10 = st10.executeQuery(sql10);
+            if(rs10.next()){
+            String hashkeyword = rs10.getString("keyword");
+            this.jTextFieldhashtag.setText(hashkeyword);}
+            }
+            
+        
+
+        //******************** close addpost frame then close connection:
+        conn.close();
+
+        }catch(Exception e)
+        {
+            JOptionPane.showMessageDialog(null,e);
+            System.out.println(e);
+            Logger.getLogger(LogIn.class.getName()).log(Level.SEVERE, null, e);
+        }
+
+      
+	}
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -67,8 +127,6 @@ public class edit22 extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
-        jPanel7 = new javax.swing.JPanel();
-        main = new javax.swing.JLabel();
         jPanel8 = new javax.swing.JPanel();
         jPanel9 = new javax.swing.JPanel();
         jPanel10 = new javax.swing.JPanel();
@@ -80,6 +138,9 @@ public class edit22 extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextAreadesc = new javax.swing.JTextArea();
         jButtoncancel = new javax.swing.JButton();
+        main = new javax.swing.JLabel();
+        fake = new javax.swing.JLabel();
+        fake2 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -118,29 +179,11 @@ public class edit22 extends javax.swing.JFrame {
 
         jPanel5.setBackground(new java.awt.Color(48, 171, 172));
 
-        jPanel6.setBackground(new java.awt.Color(255, 255, 255));
-
-        jPanel7.setPreferredSize(new java.awt.Dimension(280, 769));
-
-        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
-        jPanel7.setLayout(jPanel7Layout);
-        jPanel7Layout.setHorizontalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel7Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(main, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        jPanel7Layout.setVerticalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(main, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
+        jPanel6.setBackground(new java.awt.Color(48, 171, 172));
 
         jPanel8.setBackground(new java.awt.Color(48, 171, 172));
 
+        jPanel9.setBackground(new java.awt.Color(255, 255, 255));
         jPanel9.setPreferredSize(new java.awt.Dimension(680, 206));
 
         jLabelsefile.setBackground(new java.awt.Color(255, 255, 255));
@@ -177,8 +220,8 @@ public class edit22 extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabelchoosefile, javax.swing.GroupLayout.PREFERRED_SIZE, 401, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(74, Short.MAX_VALUE))
+                .addComponent(jLabelchoosefile, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -260,11 +303,11 @@ public class edit22 extends javax.swing.JFrame {
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel11, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 668, Short.MAX_VALUE)
-                    .addComponent(jPanel9, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 668, Short.MAX_VALUE)
+                    .addComponent(jPanel11, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 609, Short.MAX_VALUE)
+                    .addComponent(jPanel9, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 609, Short.MAX_VALUE)
                     .addComponent(jScrollPane1)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGap(0, 93, Short.MAX_VALUE)
                         .addComponent(jButtoncancel, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(58, 58, 58)
                         .addComponent(jButtonupload, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -279,7 +322,7 @@ public class edit22 extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 434, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 453, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonupload, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -287,13 +330,17 @@ public class edit22 extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        main.setBackground(new java.awt.Color(255, 255, 255));
+        main.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        main.setOpaque(true);
+
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(main, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -302,10 +349,10 @@ public class edit22 extends javax.swing.JFrame {
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, 786, Short.MAX_VALUE)
-                    .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(main, javax.swing.GroupLayout.PREFERRED_SIZE, 769, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
@@ -393,6 +440,18 @@ public class edit22 extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        fake.setBackground(new java.awt.Color(9, 16, 69));
+        fake.setForeground(new java.awt.Color(9, 16, 69));
+        fake.setOpaque(true);
+
+        fake2.setBackground(new java.awt.Color(9, 16, 69));
+        fake2.setForeground(new java.awt.Color(9, 16, 69));
+        fake2.setBorder(null);
+        fake2.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        fake2.setDisabledTextColor(new java.awt.Color(9, 16, 69));
+        fake2.setSelectedTextColor(new java.awt.Color(9, 16, 69));
+        fake2.setSelectionColor(new java.awt.Color(9, 16, 69));
+
         javax.swing.GroupLayout baseLayout = new javax.swing.GroupLayout(base);
         base.setLayout(baseLayout);
         baseLayout.setHorizontalGroup(
@@ -403,7 +462,11 @@ public class edit22 extends javax.swing.JFrame {
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(baseLayout.createSequentialGroup()
                         .addComponent(back, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(240, 240, 240)
+                        .addComponent(fake2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(fake, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 549, Short.MAX_VALUE)
                         .addComponent(min, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(close, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -413,10 +476,13 @@ public class edit22 extends javax.swing.JFrame {
             baseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(baseLayout.createSequentialGroup()
                 .addGap(8, 8, 8)
-                .addGroup(baseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(back, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(min, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(close, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(baseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(baseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(back, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(min, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(close, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(fake, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(fake2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -462,18 +528,17 @@ public class edit22 extends javax.swing.JFrame {
 
             //********************* insert data into post table:
             System.out.println("filepath new:: "+filename);
-            String sql1="insert into post (content,description,username) values (?,?,?)";
+            String id = fake.getText();
+            String sql1="update post set content =?,description='"+jTextAreadesc.getText()+"',username='asma' where idpost ='"+id+"'";
             PreparedStatement pstmt1=conn.prepareStatement(sql1);
             pstmt1.setString(1, filename);
-            pstmt1.setString(2, jTextAreadesc.getText());
-            pstmt1.setString(3, "asma");//"saja123");
-        pstmt1.executeUpdate();
+            pstmt1.executeUpdate();
 
         //******************** open hashtag table and post hashtag:
         if(!jTextFieldhashtag.getText().equals("#Hashtag") && !jTextFieldhashtag.getText().equals(""))
         {
             //**************** insert data into hashtag table:
-            String sql2="insert into hashtag(keyword) values('"+jTextFieldhashtag.getText()+"')";
+            String sql2="update hashtag set keyword ='"+jTextFieldhashtag.getText()+"'";
             PreparedStatement pstmt2=conn.prepareStatement(sql2);
             pstmt2.executeUpdate();
 
@@ -495,7 +560,7 @@ public class edit22 extends javax.swing.JFrame {
             }
 
             //********************* insert data into post_hashtag table:
-            String sql5="insert into post_hashtag (idpost,idhashtag)values ('"+idpost+"','"+idhastag+"')";
+            String sql5="update post_hashtag set idpost = '"+idpost+"',idhashtag='"+idhastag+"'";
             PreparedStatement pstmt3=conn.prepareStatement(sql5);
             pstmt3.executeUpdate();
 
@@ -520,16 +585,18 @@ public class edit22 extends javax.swing.JFrame {
                 ImageIcon icon = new ImageIcon(LogIn.class.getResource("images0/party.jpg"));
                 JOptionPane.showMessageDialog(
                     null,
-                    "Uploaded Succsffully!",
+                    "edited Succsffully!",
                     "State", JOptionPane.PLAIN_MESSAGE,
                     icon);
-                dispose();
+                
 
             }
         });
 
         //******************** close addpost frame then close connection:
         conn.close();
+        this.dispose();
+        new userprofile22().setVisible(true);
 
         }catch(Exception e)
         {
@@ -537,6 +604,7 @@ public class edit22 extends javax.swing.JFrame {
             System.out.println(e);
             Logger.getLogger(LogIn.class.getName()).log(Level.SEVERE, null, e);
         }
+        
     }//GEN-LAST:event_jButtonuploadActionPerformed
 
     private void jButtoncancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtoncancelActionPerformed
@@ -578,8 +646,11 @@ public class edit22 extends javax.swing.JFrame {
 
     private void jTextFieldhashtagFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldhashtagFocusGained
         // TODO add your handling code here:
-        if(jTextFieldhashtag.getText().trim().equals("#Hashtag"))
+        if(jTextFieldhashtag.getText().trim().equals("#Hashtag")){
+            
             jTextFieldhashtag.setText("");
+            
+        }
     }//GEN-LAST:event_jTextFieldhashtagFocusGained
 
     private void jTextFieldhashtagFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldhashtagFocusLost
@@ -627,6 +698,8 @@ public class edit22 extends javax.swing.JFrame {
     private javax.swing.JLabel back;
     private javax.swing.JPanel base;
     private javax.swing.JLabel close;
+    private javax.swing.JLabel fake;
+    private javax.swing.JTextField fake2;
     private javax.swing.JButton jButtoncancel;
     private javax.swing.JButton jButtonupload;
     private javax.swing.JLabel jLabelchoosefile;
@@ -639,7 +712,6 @@ public class edit22 extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;

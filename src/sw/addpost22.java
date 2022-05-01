@@ -84,6 +84,7 @@ public class addpost22 extends javax.swing.JFrame {
         close = new javax.swing.JLabel();
         min = new javax.swing.JLabel();
         back = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -143,8 +144,8 @@ public class addpost22 extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabelsefile, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabelchoosefile, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(100, Short.MAX_VALUE))
+                .addComponent(jLabelchoosefile, javax.swing.GroupLayout.PREFERRED_SIZE, 382, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(131, Short.MAX_VALUE))
         );
         jPanel13Layout.setVerticalGroup(
             jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -175,7 +176,7 @@ public class addpost22 extends javax.swing.JFrame {
         jTextAreadesc.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         jTextAreadesc.setForeground(new java.awt.Color(18, 33, 139));
         jTextAreadesc.setRows(5);
-        jTextAreadesc.setText("\n");
+        jTextAreadesc.setText("Enter your Description\n");
         jTextAreadesc.setSelectionColor(new java.awt.Color(244, 216, 19));
         jTextAreadesc.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -285,9 +286,9 @@ public class addpost22 extends javax.swing.JFrame {
         jPanel16Layout.setHorizontalGroup(
             jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel16Layout.createSequentialGroup()
-                .addGap(197, 197, 197)
+                .addGap(159, 159, 159)
                 .addComponent(jButtoncancel, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(45, 45, 45)
+                .addGap(63, 63, 63)
                 .addComponent(jButtonupload, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -434,6 +435,14 @@ public class addpost22 extends javax.swing.JFrame {
             }
         });
 
+        jTextField1.setBackground(new java.awt.Color(9, 16, 69));
+        jTextField1.setForeground(new java.awt.Color(9, 16, 69));
+        jTextField1.setBorder(null);
+        jTextField1.setCaretColor(new java.awt.Color(9, 16, 69));
+        jTextField1.setDisabledTextColor(new java.awt.Color(9, 16, 69));
+        jTextField1.setSelectedTextColor(new java.awt.Color(9, 16, 69));
+        jTextField1.setSelectionColor(new java.awt.Color(9, 16, 69));
+
         javax.swing.GroupLayout baseLayout = new javax.swing.GroupLayout(base);
         base.setLayout(baseLayout);
         baseLayout.setHorizontalGroup(
@@ -444,6 +453,8 @@ public class addpost22 extends javax.swing.JFrame {
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(baseLayout.createSequentialGroup()
                         .addComponent(back, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(293, 293, 293)
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(min, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -457,7 +468,8 @@ public class addpost22 extends javax.swing.JFrame {
                 .addGroup(baseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(close, javax.swing.GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE)
                     .addComponent(min, javax.swing.GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE)
-                    .addComponent(back, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(back, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jTextField1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -574,6 +586,7 @@ public class addpost22 extends javax.swing.JFrame {
                         "State", JOptionPane.PLAIN_MESSAGE,
                         icon);
                   dispose();
+                  new userprofile22().setVisible(true);
                
             }
         });
@@ -697,6 +710,7 @@ public class addpost22 extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextAreadesc;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextFieldhashtag;
     private javax.swing.JLabel main;
     private javax.swing.JLabel min;
