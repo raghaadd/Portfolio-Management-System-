@@ -386,7 +386,7 @@
                                                       <Group type="102" alignment="0" attributes="0">
                                                           <EmptySpace max="-2" attributes="0"/>
                                                           <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
-                                                          <EmptySpace max="32767" attributes="0"/>
+                                                          <EmptySpace pref="25" max="32767" attributes="0"/>
                                                       </Group>
                                                   </Group>
                                                 </DimensionLayout>
@@ -427,10 +427,10 @@
                                                       <Group type="102" alignment="0" attributes="0">
                                                           <EmptySpace max="-2" attributes="0"/>
                                                           <Component id="jPanel13" min="-2" max="-2" attributes="0"/>
-                                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                                          <EmptySpace max="-2" attributes="0"/>
                                                           <Component id="jSeparator1" min="-2" max="-2" attributes="0"/>
                                                           <EmptySpace max="-2" attributes="0"/>
-                                                          <Component id="scrollPane1" max="32767" attributes="0"/>
+                                                          <Component id="scrollPane1" min="-2" pref="557" max="-2" attributes="0"/>
                                                       </Group>
                                                   </Group>
                                                 </DimensionLayout>
@@ -451,7 +451,7 @@
                                                               <EmptySpace type="separate" max="-2" attributes="0"/>
                                                               <Group type="103" groupAlignment="0" attributes="0">
                                                                   <Group type="102" alignment="0" attributes="0">
-                                                                      <Component id="name" max="32767" attributes="0"/>
+                                                                      <Component id="name" pref="220" max="32767" attributes="0"/>
                                                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                                                       <Component id="edit" min="-2" pref="67" max="-2" attributes="0"/>
                                                                       <EmptySpace max="-2" attributes="0"/>
@@ -464,7 +464,21 @@
                                                                       <Component id="out" min="-2" pref="68" max="-2" attributes="0"/>
                                                                   </Group>
                                                                   <Component id="jSeparator2" max="32767" attributes="0"/>
-                                                                  <Component id="jLabel2" max="32767" attributes="0"/>
+                                                                  <Group type="102" alignment="0" attributes="0">
+                                                                      <Component id="bio" max="32767" attributes="0"/>
+                                                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                                                          <Component id="following" max="32767" attributes="0"/>
+                                                                          <Component id="ercount" alignment="1" max="32767" attributes="0"/>
+                                                                          <Component id="fer" alignment="1" max="32767" attributes="0"/>
+                                                                      </Group>
+                                                                      <EmptySpace max="-2" attributes="0"/>
+                                                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                                                          <Component id="followers" max="32767" attributes="0"/>
+                                                                          <Component id="fing" max="32767" attributes="0"/>
+                                                                          <Component id="ingcount" alignment="0" max="32767" attributes="0"/>
+                                                                      </Group>
+                                                                  </Group>
                                                               </Group>
                                                               <EmptySpace max="-2" attributes="0"/>
                                                           </Group>
@@ -472,7 +486,11 @@
                                                     </DimensionLayout>
                                                     <DimensionLayout dim="1">
                                                       <Group type="103" groupAlignment="0" attributes="0">
-                                                          <Group type="102" alignment="0" attributes="0">
+                                                          <Group type="102" attributes="0">
+                                                              <Component id="jPanel14" min="-2" max="-2" attributes="0"/>
+                                                              <EmptySpace max="-2" attributes="0"/>
+                                                          </Group>
+                                                          <Group type="102" attributes="0">
                                                               <EmptySpace max="-2" attributes="0"/>
                                                               <Group type="103" groupAlignment="1" attributes="0">
                                                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -487,12 +505,25 @@
                                                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                                               <Component id="jSeparator2" min="-2" max="-2" attributes="0"/>
                                                               <EmptySpace max="-2" attributes="0"/>
-                                                              <Component id="jLabel2" pref="77" max="32767" attributes="0"/>
-                                                              <EmptySpace max="-2" attributes="0"/>
-                                                          </Group>
-                                                          <Group type="102" alignment="0" attributes="0">
-                                                              <Component id="jPanel14" min="-2" max="-2" attributes="0"/>
-                                                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                                  <Component id="bio" max="32767" attributes="0"/>
+                                                                  <Group type="102" attributes="0">
+                                                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                                                          <Component id="following" pref="19" max="32767" attributes="0"/>
+                                                                          <Component id="followers" max="32767" attributes="0"/>
+                                                                      </Group>
+                                                                      <EmptySpace max="-2" attributes="0"/>
+                                                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                                                          <Component id="fer" pref="41" max="32767" attributes="0"/>
+                                                                          <Component id="fing" max="32767" attributes="0"/>
+                                                                      </Group>
+                                                                      <EmptySpace max="-2" attributes="0"/>
+                                                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                                                          <Component id="ingcount" max="32767" attributes="0"/>
+                                                                          <Component id="ercount" max="32767" attributes="0"/>
+                                                                      </Group>
+                                                                  </Group>
+                                                              </Group>
                                                           </Group>
                                                       </Group>
                                                     </DimensionLayout>
@@ -510,7 +541,7 @@
                                                           <Group type="103" groupAlignment="0" attributes="0">
                                                               <Group type="102" alignment="0" attributes="0">
                                                                   <EmptySpace max="-2" attributes="0"/>
-                                                                  <Component id="jLabelRound1" min="-2" pref="89" max="-2" attributes="0"/>
+                                                                  <Component id="userimage" min="-2" pref="89" max="-2" attributes="0"/>
                                                                   <EmptySpace max="32767" attributes="0"/>
                                                               </Group>
                                                           </Group>
@@ -519,19 +550,18 @@
                                                           <Group type="103" groupAlignment="0" attributes="0">
                                                               <Group type="102" alignment="0" attributes="0">
                                                                   <EmptySpace max="-2" attributes="0"/>
-                                                                  <Component id="jLabelRound1" min="-2" pref="87" max="-2" attributes="0"/>
+                                                                  <Component id="userimage" min="-2" pref="87" max="-2" attributes="0"/>
                                                                   <EmptySpace max="32767" attributes="0"/>
                                                               </Group>
                                                           </Group>
                                                         </DimensionLayout>
                                                       </Layout>
                                                       <SubComponents>
-                                                        <Component class="rounded.JLabelRound" name="jLabelRound1">
+                                                        <Component class="rounded.JLabelRound" name="userimage">
                                                           <Properties>
                                                             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                                                              <Color blue="0" green="0" red="0" type="rgb"/>
+                                                              <Color blue="fa" green="fa" red="fa" type="rgb"/>
                                                             </Property>
-                                                            <Property name="text" type="java.lang.String" value="jLabelRound1"/>
                                                           </Properties>
                                                         </Component>
                                                       </SubComponents>
@@ -593,12 +623,13 @@
                                                         <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="nameMouseClicked"/>
                                                       </Events>
                                                     </Component>
-                                                    <Component class="javax.swing.JLabel" name="jLabel2">
+                                                    <Component class="javax.swing.JLabel" name="bio">
                                                       <Properties>
                                                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                                                           <Font name="Times New Roman" size="18" style="0"/>
                                                         </Property>
                                                         <Property name="text" type="java.lang.String" value=" bio"/>
+                                                        <Property name="verticalAlignment" type="int" value="1"/>
                                                       </Properties>
                                                     </Component>
                                                     <Component class="javax.swing.JLabel" name="addpost">
@@ -611,6 +642,49 @@
                                                       <Events>
                                                         <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="addpostMouseClicked"/>
                                                       </Events>
+                                                    </Component>
+                                                    <Component class="javax.swing.JLabel" name="followers">
+                                                      <Properties>
+                                                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                                          <Font name="Times New Roman" size="14" style="1"/>
+                                                        </Property>
+                                                        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                                          <Color blue="8b" green="21" red="12" type="rgb"/>
+                                                        </Property>
+                                                        <Property name="horizontalAlignment" type="int" value="0"/>
+                                                        <Property name="text" type="java.lang.String" value="following"/>
+                                                      </Properties>
+                                                    </Component>
+                                                    <Component class="javax.swing.JLabel" name="following">
+                                                      <Properties>
+                                                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                                          <Font name="Times New Roman" size="14" style="1"/>
+                                                        </Property>
+                                                        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                                          <Color blue="8b" green="21" red="12" type="rgb"/>
+                                                        </Property>
+                                                        <Property name="horizontalAlignment" type="int" value="0"/>
+                                                        <Property name="text" type="java.lang.String" value="followers"/>
+                                                      </Properties>
+                                                    </Component>
+                                                    <Component class="javax.swing.JLabel" name="fing">
+                                                    </Component>
+                                                    <Component class="javax.swing.JLabel" name="fer">
+                                                      <Properties>
+                                                        <Property name="verticalAlignment" type="int" value="1"/>
+                                                      </Properties>
+                                                    </Component>
+                                                    <Component class="javax.swing.JLabel" name="ercount">
+                                                      <Properties>
+                                                        <Property name="horizontalAlignment" type="int" value="0"/>
+                                                        <Property name="text" type="java.lang.String" value="count"/>
+                                                      </Properties>
+                                                    </Component>
+                                                    <Component class="javax.swing.JLabel" name="ingcount">
+                                                      <Properties>
+                                                        <Property name="horizontalAlignment" type="int" value="0"/>
+                                                        <Property name="text" type="java.lang.String" value="count"/>
+                                                      </Properties>
                                                     </Component>
                                                   </SubComponents>
                                                 </Container>

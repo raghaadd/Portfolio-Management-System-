@@ -50,6 +50,8 @@
                       <Component id="jPanel1" max="32767" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="back" min="-2" pref="47" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="293" max="-2" attributes="0"/>
+                          <Component id="jTextField1" min="-2" pref="120" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
                           <Component id="min" min="-2" pref="43" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
@@ -68,6 +70,7 @@
                       <Component id="close" pref="41" max="32767" attributes="0"/>
                       <Component id="min" pref="41" max="32767" attributes="0"/>
                       <Component id="back" max="32767" attributes="0"/>
+                      <Component id="jTextField1" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jPanel1" max="32767" attributes="0"/>
@@ -356,8 +359,8 @@
                                                       <EmptySpace max="-2" attributes="0"/>
                                                       <Component id="jLabelsefile" min="-2" pref="166" max="-2" attributes="0"/>
                                                       <EmptySpace max="-2" attributes="0"/>
-                                                      <Component id="jLabelchoosefile" min="-2" pref="390" max="-2" attributes="0"/>
-                                                      <EmptySpace pref="100" max="32767" attributes="0"/>
+                                                      <Component id="jLabelchoosefile" min="-2" pref="382" max="-2" attributes="0"/>
+                                                      <EmptySpace pref="131" max="32767" attributes="0"/>
                                                   </Group>
                                               </Group>
                                             </DimensionLayout>
@@ -453,7 +456,7 @@
                                                       <Color blue="8b" green="21" red="12" type="rgb"/>
                                                     </Property>
                                                     <Property name="rows" type="int" value="5"/>
-                                                    <Property name="text" type="java.lang.String" value="&#xa;"/>
+                                                    <Property name="text" type="java.lang.String" value="Enter your Description&#xa;"/>
                                                     <Property name="selectionColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                                                       <Color blue="13" green="d8" red="f4" type="rgb"/>
                                                     </Property>
@@ -519,9 +522,9 @@
                                     <DimensionLayout dim="0">
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Group type="102" alignment="1" attributes="0">
-                                              <EmptySpace min="-2" pref="197" max="-2" attributes="0"/>
+                                              <EmptySpace min="-2" pref="159" max="-2" attributes="0"/>
                                               <Component id="jButtoncancel" min="-2" pref="164" max="-2" attributes="0"/>
-                                              <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
+                                              <EmptySpace min="-2" pref="63" max="-2" attributes="0"/>
                                               <Component id="jButtonupload" min="-2" pref="159" max="-2" attributes="0"/>
                                               <EmptySpace max="32767" attributes="0"/>
                                           </Group>
@@ -618,6 +621,31 @@
           <Events>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="backMouseClicked"/>
           </Events>
+        </Component>
+        <Component class="javax.swing.JTextField" name="jTextField1">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="45" green="10" red="9" type="rgb"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="45" green="10" red="9" type="rgb"/>
+            </Property>
+            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+              <Border info="null"/>
+            </Property>
+            <Property name="caretColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="45" green="10" red="9" type="rgb"/>
+            </Property>
+            <Property name="disabledTextColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="45" green="10" red="9" type="rgb"/>
+            </Property>
+            <Property name="selectedTextColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="45" green="10" red="9" type="rgb"/>
+            </Property>
+            <Property name="selectionColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="45" green="10" red="9" type="rgb"/>
+            </Property>
+          </Properties>
         </Component>
       </SubComponents>
     </Container>
