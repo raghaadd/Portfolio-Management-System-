@@ -268,8 +268,8 @@
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Group type="102" alignment="0" attributes="0">
                                           <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="main" min="-2" pref="280" max="-2" attributes="0"/>
-                                          <EmptySpace min="-2" max="-2" attributes="0"/>
+                                          <Component id="jLabel3" min="-2" pref="276" max="-2" attributes="0"/>
+                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                           <Component id="jPanel8" max="32767" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
                                       </Group>
@@ -280,7 +280,7 @@
                                       <Group type="102" alignment="0" attributes="0">
                                           <EmptySpace max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="main" min="-2" pref="769" max="-2" attributes="0"/>
+                                              <Component id="jLabel3" min="-2" pref="753" max="-2" attributes="0"/>
                                               <Component id="jPanel8" min="-2" max="-2" attributes="0"/>
                                           </Group>
                                           <EmptySpace max="32767" attributes="0"/>
@@ -302,18 +302,18 @@
                                           <Group type="102" attributes="0">
                                               <EmptySpace max="-2" attributes="0"/>
                                               <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Component id="jPanel11" alignment="1" pref="609" max="32767" attributes="0"/>
-                                                  <Component id="jPanel9" alignment="1" pref="609" max="32767" attributes="0"/>
+                                                  <Component id="jPanel11" alignment="1" pref="604" max="32767" attributes="0"/>
+                                                  <Component id="jPanel9" alignment="1" pref="604" max="32767" attributes="0"/>
                                                   <Component id="jScrollPane1" alignment="0" max="32767" attributes="0"/>
-                                                  <Group type="102" alignment="1" attributes="0">
-                                                      <EmptySpace min="0" pref="93" max="32767" attributes="0"/>
-                                                      <Component id="jButtoncancel" min="-2" pref="164" max="-2" attributes="0"/>
-                                                      <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
-                                                      <Component id="jButtonupload" min="-2" pref="159" max="-2" attributes="0"/>
-                                                      <EmptySpace min="-2" pref="135" max="-2" attributes="0"/>
-                                                  </Group>
                                               </Group>
                                               <EmptySpace max="-2" attributes="0"/>
+                                          </Group>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <EmptySpace min="-2" pref="101" max="-2" attributes="0"/>
+                                              <Component id="jButtoncancel" min="-2" pref="164" max="-2" attributes="0"/>
+                                              <EmptySpace min="-2" pref="64" max="-2" attributes="0"/>
+                                              <Component id="jButtonupload" min="-2" pref="159" max="-2" attributes="0"/>
+                                              <EmptySpace max="32767" attributes="0"/>
                                           </Group>
                                       </Group>
                                     </DimensionLayout>
@@ -325,11 +325,11 @@
                                               <EmptySpace max="-2" attributes="0"/>
                                               <Component id="jPanel11" min="-2" max="-2" attributes="0"/>
                                               <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="jScrollPane1" pref="453" max="32767" attributes="0"/>
+                                              <Component id="jScrollPane1" min="-2" pref="382" max="-2" attributes="0"/>
                                               <EmptySpace max="-2" attributes="0"/>
                                               <Group type="103" groupAlignment="3" attributes="0">
-                                                  <Component id="jButtonupload" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
                                                   <Component id="jButtoncancel" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
+                                                  <Component id="jButtonupload" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
                                               </Group>
                                               <EmptySpace max="-2" attributes="0"/>
                                           </Group>
@@ -524,13 +524,12 @@
                                     </Component>
                                   </SubComponents>
                                 </Container>
-                                <Component class="javax.swing.JLabel" name="main">
+                                <Component class="javax.swing.JLabel" name="jLabel3">
                                   <Properties>
-                                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
-                                    </Property>
                                     <Property name="horizontalAlignment" type="int" value="0"/>
-                                    <Property name="opaque" type="boolean" value="true"/>
+                                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                                      <Image iconType="3" name="/image/mainpage.jpeg"/>
+                                    </Property>
                                   </Properties>
                                 </Component>
                               </SubComponents>

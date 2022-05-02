@@ -456,10 +456,8 @@
                                                               <Group type="103" groupAlignment="0" attributes="0">
                                                                   <Group type="102" alignment="0" attributes="0">
                                                                       <Component id="name" min="-2" pref="223" max="-2" attributes="0"/>
-                                                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                                                      <Component id="edit" min="-2" pref="67" max="-2" attributes="0"/>
-                                                                      <EmptySpace max="-2" attributes="0"/>
-                                                                      <Component id="addpost" min="-2" pref="67" max="-2" attributes="0"/>
+                                                                      <EmptySpace min="-2" pref="97" max="-2" attributes="0"/>
+                                                                      <Component id="follow" min="-2" pref="64" max="-2" attributes="0"/>
                                                                       <EmptySpace max="-2" attributes="0"/>
                                                                       <Component id="explore" min="-2" pref="74" max="-2" attributes="0"/>
                                                                       <EmptySpace max="-2" attributes="0"/>
@@ -497,15 +495,12 @@
                                                           </Group>
                                                           <Group type="102" attributes="0">
                                                               <EmptySpace max="-2" attributes="0"/>
-                                                              <Group type="103" groupAlignment="1" attributes="0">
-                                                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                                                      <Component id="out" pref="58" max="32767" attributes="0"/>
-                                                                      <Component id="contact" max="32767" attributes="0"/>
-                                                                      <Component id="edit" alignment="0" max="32767" attributes="0"/>
-                                                                      <Component id="explore" alignment="0" max="32767" attributes="0"/>
-                                                                      <Component id="addpost" alignment="0" max="32767" attributes="0"/>
-                                                                  </Group>
-                                                                  <Component id="name" min="-2" pref="58" max="-2" attributes="0"/>
+                                                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                                                  <Component id="out" alignment="0" max="32767" attributes="0"/>
+                                                                  <Component id="contact" alignment="0" max="32767" attributes="0"/>
+                                                                  <Component id="explore" alignment="0" max="32767" attributes="0"/>
+                                                                  <Component id="name" pref="58" max="32767" attributes="0"/>
+                                                                  <Component id="follow" max="32767" attributes="0"/>
                                                               </Group>
                                                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                                               <Component id="jSeparator2" min="-2" max="-2" attributes="0"/>
@@ -597,17 +592,6 @@
                                                         </Property>
                                                       </Properties>
                                                     </Component>
-                                                    <Component class="javax.swing.JLabel" name="edit">
-                                                      <Properties>
-                                                        <Property name="horizontalAlignment" type="int" value="0"/>
-                                                        <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                                                          <Color id="Hand Cursor"/>
-                                                        </Property>
-                                                      </Properties>
-                                                      <Events>
-                                                        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="editMouseClicked"/>
-                                                      </Events>
-                                                    </Component>
                                                     <Component class="javax.swing.JSeparator" name="jSeparator2">
                                                     </Component>
                                                     <Component class="javax.swing.JLabel" name="name">
@@ -636,17 +620,6 @@
                                                         <Property name="text" type="java.lang.String" value=" bio"/>
                                                         <Property name="verticalAlignment" type="int" value="1"/>
                                                       </Properties>
-                                                    </Component>
-                                                    <Component class="javax.swing.JLabel" name="addpost">
-                                                      <Properties>
-                                                        <Property name="horizontalAlignment" type="int" value="0"/>
-                                                        <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                                                          <Color id="Hand Cursor"/>
-                                                        </Property>
-                                                      </Properties>
-                                                      <Events>
-                                                        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="addpostMouseClicked"/>
-                                                      </Events>
                                                     </Component>
                                                     <Component class="javax.swing.JLabel" name="followers">
                                                       <Properties>
@@ -711,6 +684,8 @@
                                                         </DimensionLayout>
                                                       </Layout>
                                                     </Container>
+                                                    <Component class="javax.swing.JLabel" name="follow">
+                                                    </Component>
                                                   </SubComponents>
                                                 </Container>
                                                 <Component class="javax.swing.JSeparator" name="jSeparator1">
