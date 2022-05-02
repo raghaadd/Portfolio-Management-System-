@@ -38,8 +38,9 @@ public class Loading extends javax.swing.JFrame implements Runnable{
                 {
                     i=101;
                     setVisible(false);
-                    LogIn log=new LogIn();
-                    log.setVisible(true);
+                    firstpage22.mainpage.setVisible(true);
+//                    LogIn log=new LogIn();
+//                    log.setVisible(true);
                     
                     
                 }//end of else

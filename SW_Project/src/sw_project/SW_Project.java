@@ -15,7 +15,7 @@ public class SW_Project {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-       MainPage main=new MainPage();
+       firstpage22 main=new firstpage22();
        main.setVisible(true);
     }
     
