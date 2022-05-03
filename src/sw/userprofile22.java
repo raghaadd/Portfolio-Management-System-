@@ -741,6 +741,12 @@ public class userprofile22 extends javax.swing.JFrame {
         );
 
         saved.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        saved.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        saved.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                savedMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
         jPanel13.setLayout(jPanel13Layout);
@@ -1055,8 +1061,9 @@ public class userprofile22 extends javax.swing.JFrame {
 
     private void backMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backMouseClicked
         // TODO add your handling code here:
-        this.dispose();
+        
         new mainpage22().setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_backMouseClicked
 
     private void outMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_outMouseClicked
@@ -1081,16 +1088,24 @@ public class userprofile22 extends javax.swing.JFrame {
 
     private void nameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nameMouseClicked
         // TODO add your handling code here:
-        this.dispose();
+        
         new userprofile22().setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_nameMouseClicked
 
     private void addpostMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addpostMouseClicked
         // TODO add your handling code here:
         // close
-        this.dispose();
+        
         new addpost22().setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_addpostMouseClicked
+
+    private void savedMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_savedMouseClicked
+        // TODO add your handling code here:
+        new saved22().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_savedMouseClicked
 
     /**
      * @param args the command line arguments
