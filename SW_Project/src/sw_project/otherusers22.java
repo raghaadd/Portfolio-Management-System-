@@ -40,7 +40,7 @@ import javax.swing.SwingConstants;
  * @author LENOVO
  */
 public class otherusers22 extends javax.swing.JFrame {
-    
+
     JPanel postbase = new JPanel();
     //String usernameorigin = "sabreen123";
     String usernameorigin = "saja123";//changggge
@@ -51,29 +51,29 @@ public class otherusers22 extends javax.swing.JFrame {
 
     public otherusers22() {
         initComponents();
-        
+
         this.setLocationRelativeTo(null);
-        
+
         close.setIcon(new ImageIcon(getClass().getResource("/images0/x1.png")));
         close.setToolTipText("Exit.");
-        
+
         min.setIcon(new ImageIcon(getClass().getResource("/images0/min1.png")));
         min.setToolTipText("Minimize.");
-        
+
         back.setIcon(new ImageIcon(getClass().getResource("/images0/back3.png")));
         back.setToolTipText("Go back.");
-        
+
         explore.setIcon(new ImageIcon(getClass().getResource("/images0/ex.png")));
         contact.setToolTipText("explore.");
-        
+
         contact.setIcon(new ImageIcon(getClass().getResource("/images0/contact.png")));
         contact.setToolTipText("Contact us.");
-        
+
         out.setIcon(new ImageIcon(getClass().getResource("/images0/out.png")));
         out.setToolTipText("Sign out.");
-        
+
         fing.setIcon(new ImageIcon(getClass().getResource("/images0/fing.png")));
-        
+
         fer.setIcon(new ImageIcon(getClass().getResource("/images0/fer.png")));
 
         //************************** check if usernameorgin follow usernamevisit:
@@ -89,7 +89,7 @@ public class otherusers22 extends javax.swing.JFrame {
                         follow.setIcon(new ImageIcon(getClass().getResource("/images0/follow.png")));
                     }
                 }
-                
+
             }//while
         } catch (SQLException ex) {
             Logger.getLogger(otherusers22.class.getName()).log(Level.SEVERE, null, ex);
@@ -97,18 +97,73 @@ public class otherusers22 extends javax.swing.JFrame {
         if (!followflag) {
             follow.setIcon(new ImageIcon(getClass().getResource("/images0/unfollow.png")));
         }
-        
+
+        scrollPane1.add(postbase);
+        // String usenamepost =/ "asma";
+        setResizable(false);
+        makepanel();
+    }
+
+    public otherusers22(String user) {
+        initComponents();
+
+        this.setLocationRelativeTo(null);
+
+        close.setIcon(new ImageIcon(getClass().getResource("/images0/x1.png")));
+        close.setToolTipText("Exit.");
+
+        min.setIcon(new ImageIcon(getClass().getResource("/images0/min1.png")));
+        min.setToolTipText("Minimize.");
+
+        back.setIcon(new ImageIcon(getClass().getResource("/images0/back3.png")));
+        back.setToolTipText("Go back.");
+
+        explore.setIcon(new ImageIcon(getClass().getResource("/images0/ex.png")));
+        contact.setToolTipText("explore.");
+
+        contact.setIcon(new ImageIcon(getClass().getResource("/images0/contact.png")));
+        contact.setToolTipText("Contact us.");
+
+        out.setIcon(new ImageIcon(getClass().getResource("/images0/out.png")));
+        out.setToolTipText("Sign out.");
+
+        fing.setIcon(new ImageIcon(getClass().getResource("/images0/fing.png")));
+
+        fer.setIcon(new ImageIcon(getClass().getResource("/images0/fer.png")));
+
+        //************************** check if usernameorgin follow usernamevisit:
+        try {
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sys", "root", "123456");
+            String sql = "select * from following";
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            while (rs.next()) {
+                if (usernameorigin.equals(rs.getString("username"))) {
+                    if (usernamevisit.equals(rs.getString("following"))) {
+                        followflag = true;
+                        follow.setIcon(new ImageIcon(getClass().getResource("/images0/follow.png")));
+                    }
+                }
+
+            }//while
+        } catch (SQLException ex) {
+            Logger.getLogger(otherusers22.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        if (!followflag) {
+            follow.setIcon(new ImageIcon(getClass().getResource("/images0/unfollow.png")));
+        }
+
         scrollPane1.add(postbase);
         // String usenamepost = "asma";
         setResizable(false);
         makepanel();
     }
-    //dbconnect();
 
+    //dbconnect();
     //////////////////////////////////////////////////////////////////////////////////////////////////
     public void makepanel() {
         pack();
-        
+
         JPanel jhh = new JPanel();
         postbase.setLayout(new BoxLayout(postbase, BoxLayout.Y_AXIS));
 
@@ -127,15 +182,15 @@ public class otherusers22 extends javax.swing.JFrame {
             Statement st1 = conn.createStatement();
             ResultSet rs1 = st1.executeQuery(sql1);
             Boolean flag = true;
-            
+
             while (rs1.next()) {
-                
+
                 usenamepost = rs1.getString("username");
                 System.out.println("user::: " + usenamepost);
                 name.setText(usernamevisit);
                 //Object usernameorigin = null;
                 idpost = rs1.getString("idpost");
-                
+
                 if (usenamepost.equals(usernamevisit)) {
                     String content = rs1.getString("content");
                     System.out.println("content::: " + content);
@@ -148,7 +203,7 @@ public class otherusers22 extends javax.swing.JFrame {
 
                         //********bio
                         String setbio = rs5.getString("bio");
-                        
+
                         if (setbio != null) {
                             this.bio.setText(setbio);
                         } else {
@@ -160,10 +215,10 @@ public class otherusers22 extends javax.swing.JFrame {
                         String sql6 = "select * from person where email='" + mail + "'";
                         Statement st6 = conn.createStatement();
                         ResultSet rs6 = st6.executeQuery(sql6);
-                        
+
                         if (rs6.next()) {//there is photo
                             String image = rs6.getString("image");
-                            
+
                             if ((!image.equals("")) && image != null) {
                                 //************display image************
                                 //*********************** change scale for icon to fit the label:
@@ -175,7 +230,7 @@ public class otherusers22 extends javax.swing.JFrame {
                                 jLabelRound1.setIcon(scaledIcon6);
                                 jLabelRound1.setOpaque(true);
                                 jLabelRound1.setBackground(new java.awt.Color(250, 250, 250));
-                                
+
                                 System.out.println("user::: you have come here? havent you! ");
                             } else {
                                 //************display noimage icon********
@@ -188,12 +243,12 @@ public class otherusers22 extends javax.swing.JFrame {
                                 jLabelRound1.setBackground(new java.awt.Color(250, 250, 250));
                                 System.out.println("user::: guess not");
                             }
-                            
+
                         }//photo if
                         else {//there is no photo
 
                         }
-                        
+
                     }//bio if
                     else {/*there is no user*/
                     }
@@ -214,7 +269,7 @@ public class otherusers22 extends javax.swing.JFrame {
                         if (usernamevisit.equals(rs6.getString("username"))) {
                             nofollowing++;
                         }
-                        
+
                     }//while
                     ingcount.setText(String.valueOf(nofollowing));
 
@@ -227,7 +282,7 @@ public class otherusers22 extends javax.swing.JFrame {
                         if (usernamevisit.equals(rs7.getString("username"))) {
                             nofollower++;
                         }
-                        
+
                     }//while
                     ercount.setText(String.valueOf(nofollower));
                     ercount.setToolTipText(String.valueOf(nofollower));
@@ -240,7 +295,7 @@ public class otherusers22 extends javax.swing.JFrame {
                     jhh.setBackground(new java.awt.Color(255, 255, 255));//blue
 
                     postbase.add(jhh);
-                    
+
                     JLabel l = new JLabel();
                     l.setBounds(15, 15, 300, 210); //size.width, size.height);
 
@@ -273,13 +328,13 @@ public class otherusers22 extends javax.swing.JFrame {
                     des.setBorder(null);
                     des.setEditable(false);
                     des.setOpaque(true);
-                    
+
                     jhh.add(des); //scroll );
 
                     //**************************like icon*************************
                     JLabel like = new JLabel();
                     like.setText(null);
-                    
+
                     like.setBounds(330, 165, 50, 50);
                     like.setHorizontalAlignment(SwingConstants.CENTER);
                     like.setVerticalAlignment(SwingConstants.CENTER);
@@ -293,7 +348,7 @@ public class otherusers22 extends javax.swing.JFrame {
                     like.setOpaque(true);
                     like.setBackground(new java.awt.Color(255, 255, 255));
                     like.setToolTipText("Like.");
-                    
+
                     jhh.add(like);
 
                     //**************************like information*************************
@@ -304,7 +359,7 @@ public class otherusers22 extends javax.swing.JFrame {
                     ResultSet rs8 = st8.executeQuery(sql8);
                     int nolikes = 0;
                     while (rs8.next()) {
-                        if (usernamevisit.equals(rs8.getString("username"))) {
+                        if (usernamevisit.equals(rs8.getString("userlike"))) {
                             if (idpost.equals(String.valueOf(rs8.getInt("idpost")))) {
                                 nolikes++;
                             }
@@ -338,7 +393,7 @@ public class otherusers22 extends javax.swing.JFrame {
                     comm.setOpaque(true);
                     comm.setBackground(new java.awt.Color(250, 250, 250));
                     comm.setToolTipText("Comment.");
-                    
+
                     jhh.add(comm);
 
                     //**************************comm information*************************
@@ -349,7 +404,7 @@ public class otherusers22 extends javax.swing.JFrame {
                     ResultSet rs9 = st9.executeQuery(sql9);
                     int nocomments = 0;
                     while (rs9.next()) {
-                        if (usernamevisit.equals(rs9.getString("username"))) {
+                        if (usernamevisit.equals(rs9.getString("usercomment"))) {
                             if (idpost.equals(String.valueOf(rs9.getInt("idpost")))) {
                                 nocomments++;
                             }
@@ -379,7 +434,7 @@ public class otherusers22 extends javax.swing.JFrame {
                         postbase.add(jhh);
                         jhh = new JPanel();
                         jhh.setVisible(true);
-                        
+
                     }
                     //flag=false;
 
@@ -391,7 +446,7 @@ public class otherusers22 extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, ex.getMessage());
             System.err.println(ex);
         }
-        
+
     }//end function
 
     @SuppressWarnings("unchecked")
@@ -928,7 +983,7 @@ public class otherusers22 extends javax.swing.JFrame {
                     pstmt1.setString(1, usernameorigin);
                     pstmt1.setString(2, usernamevisit);
                     pstmt1.executeUpdate();
-                    
+
                     String sql2 = "insert into follower (username,follower) values (?,?)";
                     PreparedStatement pstmt2 = conn.prepareStatement(sql2);
                     pstmt2.setString(1, usernamevisit);
@@ -946,7 +1001,7 @@ public class otherusers22 extends javax.swing.JFrame {
                         if (usernamevisit.equals(rs7.getString("username"))) {
                             nofollower++;
                         }
-                        
+
                     }//while
                     ercount.setText(String.valueOf(nofollower));
                     ercount.setToolTipText(String.valueOf(nofollower));
@@ -962,13 +1017,13 @@ public class otherusers22 extends javax.swing.JFrame {
                         preparedStmt.setString(1, usernameorigin);
                         preparedStmt.setString(2, usernamevisit);
                         preparedStmt.execute();
-                        
+
                         String query1 = "delete from follower where username = ? AND follower=?";
                         PreparedStatement preparedStmt1 = conn.prepareStatement(query1);
                         preparedStmt1.setString(1, usernamevisit);
                         preparedStmt1.setString(2, usernameorigin);
                         preparedStmt1.execute();
-                        
+
                         //**************** decrease follower count:
                         int nofollower = Integer.parseInt(ercount.getText());
                         nofollower--;
@@ -976,11 +1031,11 @@ public class otherusers22 extends javax.swing.JFrame {
                         follow.setIcon(new ImageIcon(getClass().getResource("/images0/unfollow.png")));
                     }
                 }
-                
+
             } catch (SQLException ex) {
                 Logger.getLogger(otherusers22.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
+
         }
     }//GEN-LAST:event_followMouseClicked
 

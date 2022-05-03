@@ -29,7 +29,7 @@
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="base" max="32767" attributes="0"/>
+          <Component id="base" min="-2" max="-2" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>
@@ -64,7 +64,7 @@
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Component id="min" pref="39" max="32767" attributes="0"/>
                       <Component id="close" max="32767" attributes="0"/>
@@ -72,6 +72,7 @@
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -296,7 +297,7 @@
                                     <Container class="javax.swing.JPanel" name="jPanel8">
                                       <Properties>
                                         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                                          <Color blue="13" green="d8" red="f4" type="rgb"/>
+                                          <Color blue="8b" green="21" red="12" type="rgb"/>
                                         </Property>
                                       </Properties>
 
@@ -342,8 +343,8 @@
                                               <Group type="103" groupAlignment="0" attributes="0">
                                                   <Group type="102" alignment="0" attributes="0">
                                                       <EmptySpace max="-2" attributes="0"/>
-                                                      <Component id="jPanel10" max="32767" attributes="0"/>
-                                                      <EmptySpace max="-2" attributes="0"/>
+                                                      <Component id="jPanel10" min="-2" max="-2" attributes="0"/>
+                                                      <EmptySpace max="32767" attributes="0"/>
                                                   </Group>
                                               </Group>
                                             </DimensionLayout>
@@ -362,19 +363,11 @@
                                                       <Group type="102" alignment="1" attributes="0">
                                                           <EmptySpace max="-2" attributes="0"/>
                                                           <Component id="jPanel11" min="-2" max="-2" attributes="0"/>
+                                                          <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
                                                           <Group type="103" groupAlignment="0" attributes="0">
-                                                              <Group type="102" alignment="0" attributes="0">
-                                                                  <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
-                                                                  <Component id="jSeparator1" max="32767" attributes="0"/>
-                                                              </Group>
-                                                              <Group type="102" alignment="0" attributes="0">
-                                                                  <EmptySpace max="-2" attributes="0"/>
-                                                                  <Component id="scrollPane1" max="32767" attributes="0"/>
-                                                              </Group>
-                                                              <Group type="102" alignment="0" attributes="0">
-                                                                  <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
-                                                                  <Component id="jPanel12" max="32767" attributes="0"/>
-                                                              </Group>
+                                                              <Component id="jPanel12" alignment="0" max="32767" attributes="0"/>
+                                                              <Component id="jSeparator1" max="32767" attributes="0"/>
+                                                              <Component id="scrollPane2" max="32767" attributes="0"/>
                                                           </Group>
                                                           <EmptySpace max="-2" attributes="0"/>
                                                       </Group>
@@ -383,15 +376,19 @@
                                                 <DimensionLayout dim="1">
                                                   <Group type="103" groupAlignment="0" attributes="0">
                                                       <Group type="102" alignment="0" attributes="0">
-                                                          <EmptySpace max="-2" attributes="0"/>
-                                                          <Component id="jPanel12" min="-2" max="-2" attributes="0"/>
-                                                          <EmptySpace max="-2" attributes="0"/>
-                                                          <Component id="jSeparator1" min="-2" max="-2" attributes="0"/>
-                                                          <EmptySpace max="-2" attributes="0"/>
-                                                          <Component id="scrollPane1" min="-2" pref="479" max="-2" attributes="0"/>
-                                                          <EmptySpace pref="23" max="32767" attributes="0"/>
+                                                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                                              <Component id="jPanel11" alignment="0" max="32767" attributes="0"/>
+                                                              <Group type="102" alignment="0" attributes="0">
+                                                                  <EmptySpace max="-2" attributes="0"/>
+                                                                  <Component id="jPanel12" min="-2" max="-2" attributes="0"/>
+                                                                  <EmptySpace max="-2" attributes="0"/>
+                                                                  <Component id="jSeparator1" min="-2" max="-2" attributes="0"/>
+                                                                  <EmptySpace max="-2" attributes="0"/>
+                                                                  <Component id="scrollPane2" min="-2" pref="575" max="-2" attributes="0"/>
+                                                              </Group>
+                                                          </Group>
+                                                          <EmptySpace max="32767" attributes="0"/>
                                                       </Group>
-                                                      <Component id="jPanel11" alignment="0" max="32767" attributes="0"/>
                                                   </Group>
                                                 </DimensionLayout>
                                               </Layout>
@@ -419,7 +416,7 @@
                                                       <Group type="103" groupAlignment="0" attributes="0">
                                                           <Group type="102" alignment="0" attributes="0">
                                                               <EmptySpace max="-2" attributes="0"/>
-                                                              <Component id="jLabel3" min="-2" pref="656" max="-2" attributes="0"/>
+                                                              <Component id="jLabel3" min="-2" pref="661" max="-2" attributes="0"/>
                                                               <EmptySpace max="32767" attributes="0"/>
                                                           </Group>
                                                       </Group>
@@ -435,35 +432,34 @@
                                                     </Component>
                                                   </SubComponents>
                                                 </Container>
-                                                <Container class="java.awt.ScrollPane" name="scrollPane1">
-
-                                                  <Layout class="org.netbeans.modules.form.compat2.layouts.support.ScrollPaneSupportLayout"/>
-                                                </Container>
                                                 <Container class="javax.swing.JPanel" name="jPanel12">
+                                                  <Properties>
+                                                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                                                    </Property>
+                                                  </Properties>
 
                                                   <Layout>
                                                     <DimensionLayout dim="0">
                                                       <Group type="103" groupAlignment="0" attributes="0">
                                                           <Group type="102" alignment="0" attributes="0">
                                                               <Component id="jPanel16" min="-2" max="-2" attributes="0"/>
-                                                              <EmptySpace max="-2" attributes="0"/>
+                                                              <EmptySpace min="-2" max="-2" attributes="0"/>
                                                               <Group type="103" groupAlignment="0" attributes="0">
                                                                   <Group type="102" alignment="0" attributes="0">
-                                                                      <Component id="jPanel13" max="32767" attributes="0"/>
-                                                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                                                      <Component id="addpost" min="-2" pref="67" max="-2" attributes="0"/>
+                                                                      <Component id="jLabelusername" min="-2" pref="118" max="-2" attributes="0"/>
+                                                                      <EmptySpace pref="202" max="32767" attributes="0"/>
+                                                                      <Component id="profile" min="-2" pref="62" max="-2" attributes="0"/>
                                                                       <EmptySpace max="-2" attributes="0"/>
-                                                                      <Component id="explore" min="-2" pref="74" max="-2" attributes="0"/>
+                                                                      <Component id="addpost" min="-2" pref="60" max="-2" attributes="0"/>
                                                                       <EmptySpace max="-2" attributes="0"/>
-                                                                      <Component id="contact" min="-2" pref="69" max="-2" attributes="0"/>
+                                                                      <Component id="explore" min="-2" pref="57" max="-2" attributes="0"/>
                                                                       <EmptySpace max="-2" attributes="0"/>
-                                                                      <Component id="out" min="-2" pref="72" max="-2" attributes="0"/>
+                                                                      <Component id="contact" min="-2" pref="60" max="-2" attributes="0"/>
+                                                                      <EmptySpace max="-2" attributes="0"/>
+                                                                      <Component id="out" min="-2" pref="63" max="-2" attributes="0"/>
                                                                   </Group>
-                                                                  <Component id="jSeparator2" alignment="0" max="32767" attributes="0"/>
-                                                                  <Group type="102" attributes="0">
-                                                                      <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
-                                                                      <Component id="jLabelbio" max="32767" attributes="0"/>
-                                                                  </Group>
+                                                                  <Component id="jSeparator2" alignment="1" max="32767" attributes="0"/>
                                                               </Group>
                                                               <EmptySpace max="-2" attributes="0"/>
                                                           </Group>
@@ -474,21 +470,18 @@
                                                           <Group type="102" alignment="0" attributes="0">
                                                               <EmptySpace max="-2" attributes="0"/>
                                                               <Group type="103" groupAlignment="0" attributes="0">
-                                                                  <Component id="jPanel16" max="32767" attributes="0"/>
-                                                                  <Group type="102" attributes="0">
-                                                                      <Group type="103" groupAlignment="0" attributes="0">
-                                                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                                                              <Component id="out" pref="54" max="32767" attributes="0"/>
-                                                                              <Component id="contact" alignment="1" max="32767" attributes="0"/>
-                                                                              <Component id="explore" alignment="0" max="32767" attributes="0"/>
-                                                                              <Component id="addpost" alignment="0" max="32767" attributes="0"/>
-                                                                          </Group>
-                                                                          <Component id="jPanel13" min="-2" max="-2" attributes="0"/>
+                                                                  <Component id="jPanel16" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                                  <Group type="102" alignment="0" attributes="0">
+                                                                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                                                          <Component id="jLabelusername" alignment="0" pref="56" max="32767" attributes="0"/>
+                                                                          <Component id="addpost" alignment="0" max="32767" attributes="0"/>
+                                                                          <Component id="explore" alignment="0" max="32767" attributes="0"/>
+                                                                          <Component id="contact" alignment="0" max="32767" attributes="0"/>
+                                                                          <Component id="out" alignment="0" max="32767" attributes="0"/>
+                                                                          <Component id="profile" max="32767" attributes="0"/>
                                                                       </Group>
                                                                       <EmptySpace max="-2" attributes="0"/>
-                                                                      <Component id="jSeparator2" min="-2" pref="10" max="-2" attributes="0"/>
-                                                                      <EmptySpace max="-2" attributes="0"/>
-                                                                      <Component id="jLabelbio" max="32767" attributes="0"/>
+                                                                      <Component id="jSeparator2" min="-2" max="-2" attributes="0"/>
                                                                   </Group>
                                                               </Group>
                                                               <EmptySpace max="-2" attributes="0"/>
@@ -498,32 +491,48 @@
                                                   </Layout>
                                                   <SubComponents>
                                                     <Container class="javax.swing.JPanel" name="jPanel16">
+                                                      <Properties>
+                                                        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                                          <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                                                        </Property>
+                                                      </Properties>
 
                                                       <Layout>
                                                         <DimensionLayout dim="0">
                                                           <Group type="103" groupAlignment="0" attributes="0">
-                                                              <Component id="jLabelRound1" alignment="0" pref="163" max="32767" attributes="0"/>
+                                                              <EmptySpace min="0" pref="77" max="32767" attributes="0"/>
+                                                              <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
+                                                                  <Group type="102" alignment="0" attributes="0">
+                                                                      <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
+                                                                      <Component id="jLabelRound1" min="-2" pref="67" max="-2" attributes="0"/>
+                                                                      <EmptySpace max="32767" attributes="0"/>
+                                                                  </Group>
+                                                              </Group>
                                                           </Group>
                                                         </DimensionLayout>
                                                         <DimensionLayout dim="1">
                                                           <Group type="103" groupAlignment="0" attributes="0">
-                                                              <Component id="jLabelRound1" alignment="0" pref="147" max="32767" attributes="0"/>
+                                                              <EmptySpace min="0" pref="73" max="32767" attributes="0"/>
+                                                              <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
+                                                                  <Group type="102" alignment="0" attributes="0">
+                                                                      <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
+                                                                      <Component id="jLabelRound1" min="-2" pref="63" max="-2" attributes="0"/>
+                                                                      <EmptySpace max="32767" attributes="0"/>
+                                                                  </Group>
+                                                              </Group>
                                                           </Group>
                                                         </DimensionLayout>
                                                       </Layout>
                                                       <SubComponents>
                                                         <Component class="rounded_label.JLabelRound" name="jLabelRound1">
                                                           <Properties>
-                                                            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                                                              <Image iconType="3" name="/image/user32.png"/>
-                                                            </Property>
+                                                            <Property name="text" type="java.lang.String" value="jLabelRound1"/>
                                                           </Properties>
                                                         </Component>
                                                       </SubComponents>
                                                     </Container>
                                                     <Component class="javax.swing.JLabel" name="out">
                                                       <Properties>
-                                                        <Property name="toolTipText" type="java.lang.String" value="logout"/>
                                                         <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
                                                           <Color id="Hand Cursor"/>
                                                         </Property>
@@ -535,7 +544,6 @@
                                                     <Component class="javax.swing.JLabel" name="contact">
                                                       <Properties>
                                                         <Property name="horizontalAlignment" type="int" value="0"/>
-                                                        <Property name="toolTipText" type="java.lang.String" value="contact us"/>
                                                         <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
                                                           <Color id="Hand Cursor"/>
                                                         </Property>
@@ -544,7 +552,6 @@
                                                     <Component class="javax.swing.JLabel" name="explore">
                                                       <Properties>
                                                         <Property name="horizontalAlignment" type="int" value="0"/>
-                                                        <Property name="toolTipText" type="java.lang.String" value="explore"/>
                                                         <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
                                                           <Color id="Hand Cursor"/>
                                                         </Property>
@@ -553,7 +560,6 @@
                                                     <Component class="javax.swing.JLabel" name="addpost">
                                                       <Properties>
                                                         <Property name="horizontalAlignment" type="int" value="0"/>
-                                                        <Property name="toolTipText" type="java.lang.String" value="add post"/>
                                                         <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
                                                           <Color id="Hand Cursor"/>
                                                         </Property>
@@ -562,50 +568,47 @@
                                                         <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="addpostMouseClicked"/>
                                                       </Events>
                                                     </Component>
-                                                    <Component class="javax.swing.JLabel" name="jLabelbio">
-                                                      <Properties>
-                                                        <Property name="text" type="java.lang.String" value=" bio"/>
-                                                        <Property name="verticalAlignment" type="int" value="1"/>
-                                                      </Properties>
-                                                    </Component>
                                                     <Component class="javax.swing.JSeparator" name="jSeparator2">
                                                     </Component>
-                                                    <Container class="javax.swing.JPanel" name="jPanel13">
+                                                    <Component class="javax.swing.JLabel" name="jLabelusername">
+                                                      <Properties>
+                                                        <Property name="text" type="java.lang.String" value="@username"/>
+                                                        <Property name="verticalAlignment" type="int" value="3"/>
+                                                        <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+                                                          <Color id="Hand Cursor"/>
+                                                        </Property>
+                                                      </Properties>
+                                                      <Events>
+                                                        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabelusernameMouseClicked"/>
+                                                      </Events>
+                                                    </Component>
+                                                    <Component class="javax.swing.JLabel" name="profile">
+                                                      <Properties>
+                                                        <Property name="horizontalAlignment" type="int" value="0"/>
+                                                        <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+                                                          <Color id="Hand Cursor"/>
+                                                        </Property>
+                                                      </Properties>
+                                                      <Events>
+                                                        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="profileMouseClicked"/>
+                                                      </Events>
+                                                    </Component>
+                                                  </SubComponents>
+                                                </Container>
+                                                <Container class="java.awt.ScrollPane" name="scrollPane2">
 
-                                                      <Layout>
-                                                        <DimensionLayout dim="0">
-                                                          <Group type="103" groupAlignment="0" attributes="0">
-                                                              <Group type="102" alignment="0" attributes="0">
-                                                                  <EmptySpace max="-2" attributes="0"/>
-                                                                  <Component id="jLabelusername" pref="135" max="32767" attributes="0"/>
-                                                                  <EmptySpace max="-2" attributes="0"/>
-                                                              </Group>
-                                                          </Group>
-                                                        </DimensionLayout>
-                                                        <DimensionLayout dim="1">
-                                                          <Group type="103" groupAlignment="0" attributes="0">
-                                                              <Group type="102" alignment="0" attributes="0">
-                                                                  <EmptySpace max="-2" attributes="0"/>
-                                                                  <Component id="jLabelusername" pref="50" max="32767" attributes="0"/>
-                                                              </Group>
-                                                          </Group>
-                                                        </DimensionLayout>
-                                                      </Layout>
-                                                      <SubComponents>
-                                                        <Component class="javax.swing.JLabel" name="jLabelusername">
-                                                          <Properties>
-                                                            <Property name="text" type="java.lang.String" value="@username"/>
-                                                            <Property name="verticalAlignment" type="int" value="3"/>
-                                                            <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                                                              <Color id="Hand Cursor"/>
-                                                            </Property>
-                                                          </Properties>
-                                                          <Events>
-                                                            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabelusernameMouseClicked"/>
-                                                          </Events>
-                                                        </Component>
-                                                      </SubComponents>
-                                                    </Container>
+                                                  <Layout class="org.netbeans.modules.form.compat2.layouts.support.ScrollPaneSupportLayout"/>
+                                                  <SubComponents>
+                                                    <Component class="rounded_label.JLabelRound" name="jLabelRound3">
+                                                      <Properties>
+                                                        <Property name="text" type="java.lang.String" value="jLabelRound3"/>
+                                                      </Properties>
+                                                    </Component>
+                                                    <Component class="rounded_label.JLabelRound" name="jLabelRound2">
+                                                      <Properties>
+                                                        <Property name="text" type="java.lang.String" value="jLabelRound2"/>
+                                                      </Properties>
+                                                    </Component>
                                                   </SubComponents>
                                                 </Container>
                                               </SubComponents>

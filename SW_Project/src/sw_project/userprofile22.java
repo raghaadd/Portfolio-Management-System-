@@ -280,7 +280,7 @@ public class userprofile22 extends javax.swing.JFrame {
                     ResultSet rs8 = st8.executeQuery(sql8);
                     int nolikes = 0;
                     while (rs8.next()) {
-                        if (usernameorigin.equals(rs8.getString("username"))) {
+                        if (usernameorigin.equals(rs8.getString("userlike"))) {
                             if (idpost.equals(String.valueOf(rs8.getInt("idpost")))) {
                                 nolikes++;
                             }
@@ -325,7 +325,7 @@ public class userprofile22 extends javax.swing.JFrame {
                     ResultSet rs9 = st9.executeQuery(sql9);
                     int nocomments = 0;
                     while (rs9.next()) {
-                        if (usernameorigin.equals(rs9.getString("username"))) {
+                        if (usernameorigin.equals(rs9.getString("usercomment"))) {
                             if (idpost.equals(String.valueOf(rs9.getInt("idpost")))) {
                                 nocomments++;
                             }
