@@ -455,8 +455,10 @@
                                                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                                               <Group type="103" groupAlignment="0" attributes="0">
                                                                   <Group type="102" alignment="0" attributes="0">
-                                                                      <Component id="name" min="-2" pref="223" max="-2" attributes="0"/>
-                                                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                                                      <Component id="name" min="-2" pref="161" max="-2" attributes="0"/>
+                                                                      <EmptySpace max="-2" attributes="0"/>
+                                                                      <Component id="saved" min="-2" pref="59" max="-2" attributes="0"/>
+                                                                      <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                                                                       <Component id="edit" min="-2" pref="67" max="-2" attributes="0"/>
                                                                       <EmptySpace max="-2" attributes="0"/>
                                                                       <Component id="addpost" min="-2" pref="67" max="-2" attributes="0"/>
@@ -497,15 +499,14 @@
                                                           </Group>
                                                           <Group type="102" attributes="0">
                                                               <EmptySpace max="-2" attributes="0"/>
-                                                              <Group type="103" groupAlignment="1" attributes="0">
-                                                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                                                      <Component id="out" pref="58" max="32767" attributes="0"/>
-                                                                      <Component id="contact" max="32767" attributes="0"/>
-                                                                      <Component id="edit" alignment="0" max="32767" attributes="0"/>
-                                                                      <Component id="explore" alignment="0" max="32767" attributes="0"/>
-                                                                      <Component id="addpost" alignment="0" max="32767" attributes="0"/>
-                                                                  </Group>
-                                                                  <Component id="name" min="-2" pref="58" max="-2" attributes="0"/>
+                                                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                                                  <Component id="out" alignment="0" pref="58" max="32767" attributes="0"/>
+                                                                  <Component id="contact" alignment="0" max="32767" attributes="0"/>
+                                                                  <Component id="edit" alignment="0" max="32767" attributes="0"/>
+                                                                  <Component id="explore" alignment="0" max="32767" attributes="0"/>
+                                                                  <Component id="addpost" alignment="0" max="32767" attributes="0"/>
+                                                                  <Component id="name" pref="58" max="32767" attributes="0"/>
+                                                                  <Component id="saved" max="32767" attributes="0"/>
                                                               </Group>
                                                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                                               <Component id="jSeparator2" min="-2" max="-2" attributes="0"/>
@@ -711,6 +712,11 @@
                                                         </DimensionLayout>
                                                       </Layout>
                                                     </Container>
+                                                    <Component class="javax.swing.JLabel" name="saved">
+                                                      <Properties>
+                                                        <Property name="horizontalAlignment" type="int" value="0"/>
+                                                      </Properties>
+                                                    </Component>
                                                   </SubComponents>
                                                 </Container>
                                                 <Component class="javax.swing.JSeparator" name="jSeparator1">

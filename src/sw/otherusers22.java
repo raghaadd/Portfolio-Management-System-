@@ -83,7 +83,42 @@ public class otherusers22 extends javax.swing.JFrame {
         //dbconnect();
     }
 
-    
+    public otherusers22(String user){
+        initComponents();
+        
+        
+        this.setLocationRelativeTo(null);
+        
+        close.setIcon(new ImageIcon(getClass().getResource("images0/x1.png")));
+        close.setToolTipText("Exit.");
+        
+        min.setIcon(new ImageIcon(getClass().getResource("images0/min1.png")));
+        min.setToolTipText("Minimize.");
+        
+        back.setIcon(new ImageIcon(getClass().getResource("images0/back3.png")));
+        back.setToolTipText("Go back.");
+        
+        explore.setIcon(new ImageIcon(getClass().getResource("images0/ex.png")));
+        contact.setToolTipText("explore.");
+       
+        contact.setIcon(new ImageIcon(getClass().getResource("images0/contact.png")));
+        contact.setToolTipText("Contact us.");
+        
+        out.setIcon(new ImageIcon(getClass().getResource("images0/out.png")));
+        out.setToolTipText("Sign out.");
+        
+        
+        fing.setIcon(new ImageIcon(getClass().getResource("images0/fing.png")));
+        
+        fer.setIcon(new ImageIcon(getClass().getResource("images0/fer.png")));
+        
+        follow.setIcon(new ImageIcon(getClass().getResource("images0/unfollow.png")));
+        
+        scrollPane1.add(postbase);
+       // String usenamepost = "asma";
+        setResizable(false);
+        makepanel();
+    }
     
     
 //////////////////////////////////////////////////////////////////////////////////////////////////

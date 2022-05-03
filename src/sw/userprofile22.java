@@ -44,9 +44,7 @@ public class userprofile22 extends javax.swing.JFrame {
     JPanel postbase = new JPanel();
     String usernameorigin ="asma";
     
-    /**
-     * Creates new form userprofile22
-     */
+    
     public userprofile22() {
         initComponents();
         
@@ -80,12 +78,12 @@ public class userprofile22 extends javax.swing.JFrame {
         
         fer.setIcon(new ImageIcon(getClass().getResource("images0/fer.png")));
         
+        saved.setIcon(new ImageIcon(getClass().getResource("images0/saved.png")));
         
         scrollPane1.add(postbase);
        // String usenamepost = "asma";
         setResizable(false);
         makepanel();
-        //dbconnect();
     }
 
     
@@ -98,21 +96,18 @@ public class userprofile22 extends javax.swing.JFrame {
         JPanel jhh =new JPanel(); 
         postbase.setLayout(new BoxLayout(postbase, BoxLayout.Y_AXIS));  
         
-       //we have to open post table then compare username that we have with username in post table:
+         //********************we have to open post table then compare username that we have with username in post table:
          Connection conn = null;
          ResultSet rs = null;
          PreparedStatement ps = null;
-       //String usernameorigin="asma";//saja123"; //get this value from login page
          String usenamepost=null;
          String idpost;
-       //int count=0;
-        
         
         
         
            try{
            conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/softwareproject","root","iNEEDtostudy@202");
-           String sql1="select * from post";
+           String sql1="select * from post ORDER BY date DESC";
            Statement st1=conn.createStatement();
            ResultSet rs1=st1.executeQuery(sql1);
            Boolean flag=true;
@@ -122,20 +117,18 @@ public class userprofile22 extends javax.swing.JFrame {
            {
                
                usenamepost=rs1.getString("username");
-               System.out.println("user::: "+usenamepost);
-               name.setText(usenamepost);
-             //Object usernameorigin = null;
+             //  System.out.println("user::: "+usenamepost);
+               //name.setText(usenamepost);
+               name.setText(usernameorigin);
                idpost=rs1.getString("idpost");
                
              
                if(usenamepost.equals(usernameorigin))
                {
                    String content=rs1.getString("content");
-                   System.out.println("content::: "+content);
+                  // System.out.println("content::: "+content);
                    
-                   
-                   
-               
+                  
            
                
                
@@ -162,7 +155,7 @@ public class userprofile22 extends javax.swing.JFrame {
                     if(rs6.next()){//there is photo
                        String image = rs6.getString("image");
                        
-                       if((!image.equals("")) && image!=null){
+                       if((!image.equals("")) &&(!image.equals(null))){// image!=null){
                            //************display image************
                            //*********************** change scale for icon to fit the label:
                            //Icon icon6=new ImageIcon(content);
@@ -174,7 +167,7 @@ public class userprofile22 extends javax.swing.JFrame {
                             userimage.setOpaque(true);
                             userimage.setBackground(new java.awt.Color(250,250,250));
                            
-                            System.out.println("user::: you have come here? havent you! ");
+                           // System.out.println("user::: you have come here? havent you! ");
                        }
                        else{
                            //************display noimage icon********
@@ -185,7 +178,7 @@ public class userprofile22 extends javax.swing.JFrame {
                             userimage.setIcon(scaledIcon6);
                             userimage.setOpaque(true);
                             userimage.setBackground(new java.awt.Color(250,250,250));
-                           System.out.println("user::: guess not");
+                         //  System.out.println("user::: guess not");
                        }
                       
                       
@@ -198,42 +191,65 @@ public class userprofile22 extends javax.swing.JFrame {
                else{/*there is no user*/}
                
                
-               
+               //******************tooltip:
+                    fing.setToolTipText("followingcount");
+                    fer.setToolTipText("followerscount");
                
                //*****************follow count**************************   
-               //get the following and followers count fron data base
-               fing.setToolTipText("followingcount");
-               fer.setToolTipText("followerscount");
-               ercount.setToolTipText("followingcount");
-               ingcount.setToolTipText("followerscount");
-                 
-               ercount.setText("count");
-               ingcount.setText("count");
+               //*******************get the following and followers count from data base:
+               //*******************in order to find out number of following we have to open following table and count how many time username repeated:
+                    String sql6 = "select * from following";
+                    Statement st6 = conn.createStatement();
+                    ResultSet rs6 = st6.executeQuery(sql6);
+                    int nofollowing = 0;
+                    
+                    while (rs6.next()) {
+                        if (usernameorigin.equals(rs6.getString("username"))) {
+                            nofollowing++;
+                        }
+
+                    }//while
+                    ingcount.setText(String.valueOf(nofollowing));
+                    
+                    
+                    //*******************in order to find out number of following we have to open follower table and count how many time username repeated:
+                    String sql7 = "select * from follower";
+                    Statement st7 = conn.createStatement();
+                    ResultSet rs7 = st7.executeQuery(sql7);
+                    int nofollower = 0;
+                    while (rs7.next()) {
+                        if (usernameorigin.equals(rs7.getString("username"))) {
+                            nofollower++;
+                        }
+
+                    }//while
+                    ercount.setText(String.valueOf(nofollower));
+                    ercount.setToolTipText(String.valueOf(nofollower));
+                    ingcount.setToolTipText(String.valueOf(nofollowing));
+                    //******************************************************************
+               
+               
+              
                
                
                
             //******************************************************************
             jhh.setLayout(null);//new FlowLayout());
             //add the jpanel in which the post will be displayed on
-            jhh.setPreferredSize(new Dimension(50, 240));
+            jhh.setPreferredSize(new Dimension(this.scrollPane1.getWidth(), 250));
             jhh.setBackground(new java.awt.Color(255,255,255));//blue
          
             postbase.add(jhh);  
          
-            //add the jlable that will have the image 
-            //JLabel l = new JLabel("here please", SwingConstants.CENTER);
-          
-       //Icon icon=new ImageIcon(content);
-       // ImageIcon imgicon=new ImageIcon(content);
-       // Image img=imgicon.getImage();
-       
-       
+            
        
        
         JLabel l=new JLabel();
-        l.setBounds(15, 15, 300,210); //size.width, size.height);
+        l.setBounds(15, 15, 300,220); //size.width, size.height);
         
-        //*********************** change scale for icon to fit the label:
+         //*********************** change scale for icon to fit the label:
+         
+             
         Icon icon=new ImageIcon(content);
         ImageIcon imgicon=new ImageIcon(content);
         Image img=imgicon.getImage();
@@ -253,7 +269,8 @@ public class userprofile22 extends javax.swing.JFrame {
         //JLabel des=new JLabel();
         JTextArea des = new JTextArea();
         des.setLineWrap(true);
-        des.setBounds(330, 20, 580, 140);//330, 240, 300,210); //x, y, width, height);
+        des.setWrapStyleWord(true);
+        des.setBounds(330, 20, 380, 140);//330, 240, 300,210); //x, y, width, height);
         des.setBackground(new java.awt.Color(255,255,255));//200,200,200));
         
         String description=rs1.getString("description");
@@ -301,8 +318,24 @@ public class userprofile22 extends javax.swing.JFrame {
         
         //**************************like information*************************
         JLabel likeinfo=new JLabel();
-        likeinfo.setText("likecount");//this should be the number of likes this post has
-        likeinfo.setToolTipText("likecount");//if the number is larger than the space to show it ill show the full number in this
+        
+        //*************** we have to open likes table then search for username that we have then compare ifpost with idpost that dispaly:
+                    String sql8 = "select * from likes";
+                    Statement st8 = conn.createStatement();
+                    ResultSet rs8 = st8.executeQuery(sql8);
+                    int nolikes = 0;
+                    while (rs8.next()) {
+                        if (usernameorigin.equals(rs8.getString("username"))) {
+                            if (idpost.equals(String.valueOf(rs8.getInt("idpost")))) {
+                                nolikes++;
+                            }
+                        }
+                    }
+                    likeinfo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+                    likeinfo.setText(String.valueOf(nolikes));//this should be the number of likes this post has
+                    likeinfo.setToolTipText(String.valueOf(nolikes));//if the number is larger than the space to show it all show the full number in this
+        
+        
         likeinfo.setBounds(330, 215, 65, 10);
        // likeinfo.setOpaque(true);
        // likeinfo.setBackground(Color.red);
@@ -336,8 +369,24 @@ public class userprofile22 extends javax.swing.JFrame {
         
         //**************************comm information*************************
         JLabel comminfo=new JLabel();
-        comminfo.setText("commcount");//this should be the number of likes this post has
-        comminfo.setToolTipText("commcount");//if the number is larger than the space to show it ill show the full number in this
+        
+        //*************** we have to open likes table then search for username that we have then compare ifpost with idpost that dispaly:
+                    String sql9 = "select * from comments";
+                    Statement st9 = conn.createStatement();
+                    ResultSet rs9 = st9.executeQuery(sql9);
+                    int nocomments = 0;
+                    while (rs9.next()) {
+                        if (usernameorigin.equals(rs9.getString("username"))) {
+                            if (idpost.equals(String.valueOf(rs9.getInt("idpost")))) {
+                                nocomments++;
+                            }
+                        }
+                    }
+                    comminfo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+                    comminfo.setText(String.valueOf(nocomments));//this should be the number of likes this post has
+                    comminfo.setToolTipText(String.valueOf(nocomments));//if the number is larger than the space to show it ill show the full number in this
+        
+        
         comminfo.setBounds(400, 215, 65, 10);
        // comminfo.setOpaque(true);
        // comminfo.setBackground(Color.red);
@@ -364,12 +413,12 @@ public class userprofile22 extends javax.swing.JFrame {
         
         /////////////////////////////////////////////////////////
         jbuttondelete.addMouseListener(new MouseAdapter() {
-        public void mouseClicked(MouseEvent e) {String idpost = ((JButton) e.getSource()).getName();
-            deletepost(idpost);}});
+              public void mouseClicked(MouseEvent e) {
+                  String idpost = ((JButton) e.getSource()).getName();
+                  deletepost(idpost);}});
         /////////////////////////////////////////////////////////
         
         jhh.add(jbuttondelete);
-        
         
         
         
@@ -425,7 +474,7 @@ public class userprofile22 extends javax.swing.JFrame {
              jhh.setVisible(true);
            
              }
-         //flag=false;
+             //flag=false;
                
                }//if
            }//while
@@ -446,7 +495,7 @@ public class userprofile22 extends javax.swing.JFrame {
     
      
     public void deletepost(String id){
-    System.out.println("Clicked delete inside fun!");
+   // System.out.println("Clicked delete inside fun!");
     
       
             Connection con = null;
@@ -454,14 +503,27 @@ public class userprofile22 extends javax.swing.JFrame {
             con=DriverManager.getConnection("jdbc:mysql://localhost:3306/softwareproject","root","iNEEDtostudy@202");
             
             Statement t = con.createStatement();
+            
+            //like delete
+            String sql2 = "delete from likes where idpost ='" + id + "'";
+            t.executeUpdate(sql2);
+            
+            //commemtes delete
+            String sql3 = "delete from comments where idpost ='" + id + "'";
+            t.executeUpdate(sql3);
+            
+            //post delete
             String sql="delete from post where idpost ='"+id+"'";
             t.executeUpdate(sql);
+            
+            
             
             con.setAutoCommit(false);
             con.commit();
             con.close();
-            this.dispose();
+            
             new userprofile22().setVisible(true);
+            this.dispose();
         }catch(Exception e){
             JOptionPane.showMessageDialog(null, e);
         }
@@ -510,6 +572,7 @@ public class userprofile22 extends javax.swing.JFrame {
         ercount = new javax.swing.JLabel();
         ingcount = new javax.swing.JLabel();
         jPanel15 = new javax.swing.JPanel();
+        saved = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         scrollPane1 = new java.awt.ScrollPane();
 
@@ -677,6 +740,8 @@ public class userprofile22 extends javax.swing.JFrame {
             .addGap(0, 75, Short.MAX_VALUE)
         );
 
+        saved.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
         javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
         jPanel13.setLayout(jPanel13Layout);
         jPanel13Layout.setHorizontalGroup(
@@ -689,8 +754,10 @@ public class userprofile22 extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel13Layout.createSequentialGroup()
-                        .addComponent(name, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addComponent(name, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(saved, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(12, 12, 12)
                         .addComponent(edit, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(addpost, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -723,14 +790,14 @@ public class userprofile22 extends javax.swing.JFrame {
                 .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(jPanel13Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(out, javax.swing.GroupLayout.DEFAULT_SIZE, 58, Short.MAX_VALUE)
-                        .addComponent(contact, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(edit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(explore, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(addpost, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(name, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(out, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 58, Short.MAX_VALUE)
+                    .addComponent(contact, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(edit, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(explore, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(addpost, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(name, javax.swing.GroupLayout.DEFAULT_SIZE, 58, Short.MAX_VALUE)
+                    .addComponent(saved, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1007,6 +1074,7 @@ public class userprofile22 extends javax.swing.JFrame {
             editobj.info(usernameorigin);//Execute the method my_update to pass str
 	    editobj.setVisible(true);
        
+            this.dispose();
        // new userinfo22().setVisible(true);
        // new addpost22().setVisible(true);
     }//GEN-LAST:event_editMouseClicked
@@ -1094,6 +1162,7 @@ public class userprofile22 extends javax.swing.JFrame {
     private javax.swing.JLabel min;
     private javax.swing.JLabel name;
     private javax.swing.JLabel out;
+    private javax.swing.JLabel saved;
     private java.awt.ScrollPane scrollPane1;
     private rounded.JLabelRound userimage;
     // End of variables declaration//GEN-END:variables

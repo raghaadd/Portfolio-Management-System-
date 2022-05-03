@@ -53,7 +53,6 @@ public class userinfo22 extends javax.swing.JFrame {
         lastnametext.setBorder(text_border);
         emailtext.setBorder(text_border);
         usernametext.setBorder(text_border);
-     //   passtext.setBorder(text_border);
         biotext.setBorder(text_border);
         
 
@@ -222,6 +221,7 @@ public class userinfo22 extends javax.swing.JFrame {
 
         jPanel9.setBackground(new java.awt.Color(48, 171, 172));
 
+        usernametext.setEditable(false);
         usernametext.setBackground(new java.awt.Color(48, 171, 172));
         usernametext.setBorder(null);
 

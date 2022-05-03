@@ -69,6 +69,35 @@ public class edit22 extends javax.swing.JFrame {
             ResultSet rs8 = st8.executeQuery(sql8);
             if(rs8.next()){
             String postcontent = rs8.getString("content");
+            filename = postcontent;
+            
+            if((!postcontent.equals("")) && postcontent!=null){
+                           //************display image************
+                           //*********************** change scale for icon to fit the label:
+                           //Icon icon6=new ImageIcon(content);
+                            ImageIcon imgicon6=new ImageIcon(postcontent);
+                            Image img6=imgicon6.getImage();
+                            Image imgscale6=img6.getScaledInstance(jLabelsefile.getWidth(), jLabelsefile.getHeight(), Image.SCALE_SMOOTH);
+                            ImageIcon scaledIcon6=new ImageIcon(imgscale6);
+                            jLabelsefile.setIcon(scaledIcon6);
+                            jLabelsefile.setOpaque(true);
+                            jLabelsefile.setBackground(new java.awt.Color(250,250,250));
+                           
+                            System.out.println("user::: image found");
+                       }
+                       else{
+                           //************display noimage icon********
+                            ImageIcon imgicon6=new ImageIcon(getClass().getResource("images0/noimage.png"));
+                            Image img6=imgicon6.getImage();
+                            Image imgscale6=img6.getScaledInstance(jLabelsefile.getWidth(), jLabelsefile.getHeight(), Image.SCALE_SMOOTH);
+                            ImageIcon scaledIcon6=new ImageIcon(imgscale6);
+                            jLabelsefile.setIcon(scaledIcon6);
+                            jLabelsefile.setOpaque(true);
+                            jLabelsefile.setBackground(new java.awt.Color(250,250,250));
+                           System.out.println("user::: no image set one");
+                       }
+            
+            
             String postdescription = rs8.getString("description");
             
             this.jTextAreadesc.setText(postdescription);
@@ -565,33 +594,7 @@ public class edit22 extends javax.swing.JFrame {
 
         }
 
-        //*********************** change scale for icon to fit the label:
-
-        ImageIcon imgicon=new ImageIcon("../images0/party.jpg");
-        Image img=imgicon.getImage();
-        Image imgscale=img.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
-        ImageIcon scaledIcon=new ImageIcon(imgscale);
-
-        //***************** cahnge Icon for Joptionpane:
-        EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-                } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
-                }
-
-                ImageIcon icon = new ImageIcon(LogIn.class.getResource("images0/party.jpg"));
-                JOptionPane.showMessageDialog(
-                    null,
-                    "edited Succsffully!",
-                    "State", JOptionPane.PLAIN_MESSAGE,
-                    icon);
-                
-
-            }
-        });
-
+       
         //******************** close addpost frame then close connection:
         conn.close();
         this.dispose();

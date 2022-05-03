@@ -521,7 +521,7 @@ public class addpost22 extends javax.swing.JFrame {
             
             //********************* insert data into post table:
             System.out.println("filepath new:: "+filename);
-            String sql1="insert into post (content,description,username) values (?,?,?)";
+            String sql1="insert into post (content,description,username,date) values (?,?,?,now())";
             PreparedStatement pstmt1=conn.prepareStatement(sql1);
             pstmt1.setString(1, filename);
             pstmt1.setString(2, jTextAreadesc.getText());
@@ -562,40 +562,13 @@ public class addpost22 extends javax.swing.JFrame {
             }
             
             
-            //*********************** change scale for icon to fit the label:
-       
-        ImageIcon imgicon=new ImageIcon("../images0/party.jpg");
-        Image img=imgicon.getImage();
-        Image imgscale=img.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
-        ImageIcon scaledIcon=new ImageIcon(imgscale);
-        
-        
-         //***************** cahnge Icon for Joptionpane:
-        EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-                } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
-                }
+         
 
-                ImageIcon icon = new ImageIcon(LogIn.class.getResource("images0/party.jpg"));
-                JOptionPane.showMessageDialog(
-                        null,
-                        "Uploaded Succsffully!",
-                        "State", JOptionPane.PLAIN_MESSAGE,
-                        icon);
-                  dispose();
-                  new userprofile22().setVisible(true);
-               
-            }
-        });
-        
-       
-            //******************** close addpost frame then close connection:
-            conn.close();
-          
-           
+        //******************** close addpost frame then close connection:
+        conn.close();
+        this.dispose();
+        new userprofile22().setVisible(true);
+
 
         }catch(Exception e)
         {
