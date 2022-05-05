@@ -42,10 +42,14 @@ public class addpost22 extends javax.swing.JFrame {
        // super.pack();
         this.setLocationRelativeTo(null);
         
+
         close.setIcon(new ImageIcon(getClass().getResource("images0/x1.png")));
         min.setIcon(new ImageIcon(getClass().getResource("images0/min1.png")));
         main.setIcon(new ImageIcon(getClass().getResource("images0/mainpage.jpeg")));
         back.setIcon(new ImageIcon(getClass().getResource("images0/back3.png")));
+        pp.setIcon(new ImageIcon(getClass().getResource("images0/f1.png")));
+        jLabelsefile.setIcon(new ImageIcon(getClass().getResource("images0/p1.png")));
+        
     }
 
  
@@ -72,6 +76,7 @@ public class addpost22 extends javax.swing.JFrame {
         jPanel13 = new javax.swing.JPanel();
         jLabelsefile = new javax.swing.JLabel();
         jLabelchoosefile = new javax.swing.JLabel();
+        pp = new javax.swing.JLabel();
         jPanel11 = new javax.swing.JPanel();
         jPanel15 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -124,15 +129,30 @@ public class addpost22 extends javax.swing.JFrame {
 
         jPanel9.setBackground(new java.awt.Color(186, 227, 227));
 
-        jPanel13.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel13.setBackground(new java.awt.Color(18, 33, 139));
 
+        jLabelsefile.setBackground(new java.awt.Color(255, 255, 255));
+        jLabelsefile.setOpaque(true);
+
+        jLabelchoosefile.setBackground(new java.awt.Color(255, 255, 255));
         jLabelchoosefile.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         jLabelchoosefile.setForeground(new java.awt.Color(18, 33, 139));
         jLabelchoosefile.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelchoosefile.setText("Click here to add new file");
+        jLabelchoosefile.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabelchoosefile.setOpaque(true);
         jLabelchoosefile.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabelchoosefileMouseClicked(evt);
+            }
+        });
+
+        pp.setBackground(new java.awt.Color(255, 255, 255));
+        pp.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        pp.setOpaque(true);
+        pp.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ppMouseClicked(evt);
             }
         });
 
@@ -142,16 +162,19 @@ public class addpost22 extends javax.swing.JFrame {
             jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel13Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabelsefile, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabelsefile, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabelchoosefile, javax.swing.GroupLayout.PREFERRED_SIZE, 382, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(131, Short.MAX_VALUE))
+                .addComponent(jLabelchoosefile, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel13Layout.setVerticalGroup(
             jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel13Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(pp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabelchoosefile, javax.swing.GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
                     .addComponent(jLabelsefile, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
@@ -176,7 +199,7 @@ public class addpost22 extends javax.swing.JFrame {
         jTextAreadesc.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         jTextAreadesc.setForeground(new java.awt.Color(18, 33, 139));
         jTextAreadesc.setRows(5);
-        jTextAreadesc.setText("Enter your Description\n");
+        jTextAreadesc.setText("Enter your Description");
         jTextAreadesc.setSelectionColor(new java.awt.Color(244, 216, 19));
         jTextAreadesc.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -192,11 +215,11 @@ public class addpost22 extends javax.swing.JFrame {
         jPanel15.setLayout(jPanel15Layout);
         jPanel15Layout.setHorizontalGroup(
             jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 700, Short.MAX_VALUE)
         );
         jPanel15Layout.setVerticalGroup(
             jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addComponent(jScrollPane1)
         );
 
         javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
@@ -520,7 +543,9 @@ public class addpost22 extends javax.swing.JFrame {
             Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/softwareproject","root","iNEEDtostudy@202");
             
             //********************* insert data into post table:
-            System.out.println("filepath new:: "+filename);
+            //System.out.println("filepath new:: "+filename);
+            
+              
             String sql1="insert into post (content,description,username,date) values (?,?,?,now())";
             PreparedStatement pstmt1=conn.prepareStatement(sql1);
             pstmt1.setString(1, filename);
@@ -546,7 +571,7 @@ public class addpost22 extends javax.swing.JFrame {
                     idpost=String.valueOf(rs1.getInt("idpost"));
                 }
                 
-                 Statement st2=conn.createStatement();
+                Statement st2=conn.createStatement();
                 String sql4="select * from hashtag";
                 ResultSet rs2=st2.executeQuery(sql4);
                 String idhastag=null;
@@ -566,9 +591,9 @@ public class addpost22 extends javax.swing.JFrame {
 
         //******************** close addpost frame then close connection:
         conn.close();
-        this.dispose();
+        
         new userprofile22().setVisible(true);
-
+        this.dispose();
 
         }catch(Exception e)
         {
@@ -593,8 +618,25 @@ public class addpost22 extends javax.swing.JFrame {
         Image imgscale=img.getScaledInstance(jLabelsefile.getWidth(), jLabelsefile.getHeight(), Image.SCALE_SMOOTH);
         ImageIcon scaledIcon=new ImageIcon(imgscale);
         jLabelsefile.setIcon(scaledIcon);
+        jLabelchoosefile.setText("Click here to add new file");
+        jLabelchoosefile.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        jLabelchoosefile.setForeground(new java.awt.Color(18, 33, 139));
+        
+        if(getFileExtension(filename).equals("pptx"))
+        {
+            //*************get photo for ppt
+        }
+        System.out.println(getFileExtension(filename));
     }//GEN-LAST:event_jLabelchoosefileMouseClicked
 
+    //******************** to know the extension for aploaded file
+    public static String getFileExtension(String fullName) {
+        String fileName = new File(fullName).getName();
+        int dotIndex = fileName.lastIndexOf('.');
+        return (dotIndex == -1) ? "" : fileName.substring(dotIndex + 1);
+    }
+    
+    
     private void jTextFieldhashtagFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldhashtagFocusGained
         // TODO add your handling code here:
         if(jTextFieldhashtag.getText().trim().equals("#Hashtag"))
@@ -619,6 +661,23 @@ public class addpost22 extends javax.swing.JFrame {
         this.dispose();
         new mainpage22().setVisible(true);
     }//GEN-LAST:event_backMouseClicked
+
+    private void ppMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ppMouseClicked
+        // TODO add your handling code here:
+        JFileChooser chooser=new JFileChooser();
+        chooser.showOpenDialog(null);
+        File file=chooser.getSelectedFile();
+        filename=file.getAbsolutePath();
+        System.out.println("file path: "+filename);
+        jLabelchoosefile.setText("");
+        //*********************** change scale for icon to fit the label:
+        Icon icon=new ImageIcon(filename);
+        ImageIcon imgicon=new ImageIcon(filename);
+        Image img=imgicon.getImage();
+        Image imgscale=img.getScaledInstance(jLabelsefile.getWidth(), jLabelsefile.getHeight(), Image.SCALE_SMOOTH);
+        ImageIcon scaledIcon=new ImageIcon(imgscale);
+        jLabelsefile.setIcon(scaledIcon);
+    }//GEN-LAST:event_ppMouseClicked
 
     /**
      * @param args the command line arguments
@@ -687,5 +746,6 @@ public class addpost22 extends javax.swing.JFrame {
     private javax.swing.JTextField jTextFieldhashtag;
     private javax.swing.JLabel main;
     private javax.swing.JLabel min;
+    private javax.swing.JLabel pp;
     // End of variables declaration//GEN-END:variables
 }
