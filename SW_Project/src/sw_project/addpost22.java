@@ -10,7 +10,6 @@ import java.awt.Image;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
-
 import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -36,19 +35,19 @@ public class addpost22 extends javax.swing.JFrame {
     /**
      * Creates new form addpost22
      */
-    String filename=null;
+    String filename = null;
+
     public addpost22() {
         initComponents();
-       // super.pack();
+        // super.pack();
         this.setLocationRelativeTo(null);
-        
+
         close.setIcon(new ImageIcon(getClass().getResource("/images0/x1.png")));
         min.setIcon(new ImageIcon(getClass().getResource("/images0/min1.png")));
         main.setIcon(new ImageIcon(getClass().getResource("/images0/mainpage.jpeg")));
         back.setIcon(new ImageIcon(getClass().getResource("/images0/back3.png")));
     }
 
- 
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -498,134 +497,138 @@ public class addpost22 extends javax.swing.JFrame {
 
     private void jTextAreadescFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextAreadescFocusGained
         // TODO add your handling code here:
-         if(jTextAreadesc.getText().trim().equals("Enter your Description"))
+        if (jTextAreadesc.getText().trim().equals("Enter your Description"))
             jTextAreadesc.setText("");
     }//GEN-LAST:event_jTextAreadescFocusGained
 
     private void jTextAreadescFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextAreadescFocusLost
         // TODO add your handling code here:
-        if(jTextAreadesc.getText().trim().equals(""))
+        if (jTextAreadesc.getText().trim().equals(""))
             jTextAreadesc.setText("Enter your Description");
     }//GEN-LAST:event_jTextAreadescFocusLost
 
     private void jButtonuploadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonuploadActionPerformed
         // TODO add your handling code here:
-        try{
-              //******************* open connection with mysql:
-            Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/sys", "root", "123456");
-            
+        try {
+            //******************* open connection with mysql:
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sys", "root", "123456");
+
             //********************* insert data into post table:
-            System.out.println("filepath new:: "+filename);
-            String sql1="insert into post (content,description,username) values (?,?,?)";
-            PreparedStatement pstmt1=conn.prepareStatement(sql1);
+            System.out.println("filepath new:: " + filename);
+            String sql1 = "insert into post (content,description,username) values (?,?,?)";
+            PreparedStatement pstmt1 = conn.prepareStatement(sql1);
             pstmt1.setString(1, filename);
             pstmt1.setString(2, jTextAreadesc.getText());
             pstmt1.setString(3, "saja123");
             pstmt1.executeUpdate();
-    
-            
+
             //******************** open hashtag table and post hashtag:
-            if(!jTextFieldhashtag.getText().equals("#Hashtag") && !jTextFieldhashtag.getText().equals(""))
-            {
-               //**************** insert data into hashtag table:
-                String sql2="insert into hashtag(keyword) values('"+jTextFieldhashtag.getText()+"')";
-                PreparedStatement pstmt2=conn.prepareStatement(sql2);
+            if (!jTextFieldhashtag.getText().equals("#Hashtag") && !jTextFieldhashtag.getText().equals("")) {
+                //**************** insert data into hashtag table:
+                String sql2 = "insert into hashtag(keyword) values('" + jTextFieldhashtag.getText() + "')";
+                PreparedStatement pstmt2 = conn.prepareStatement(sql2);
                 pstmt2.executeUpdate();
-                
+
                 //*************** open post and hashtag tables to get postid and hashtagid:
-                Statement st1=conn.createStatement();
-                String sql3="select * from post";
-                ResultSet rs1=st1.executeQuery(sql3);
-                String idpost=null;
-                while(rs1.next()){
-                    idpost=String.valueOf(rs1.getInt("idpost"));
-                }
-                
-                 Statement st2=conn.createStatement();
-                String sql4="select * from hashtag";
-                ResultSet rs2=st2.executeQuery(sql4);
-                String idhastag=null;
-                while(rs2.next()){
-                    idhastag=String.valueOf(rs2.getInt("idhashtag"));
-                }
-                 
-                //********************* insert data into post_hashtag table:
-                String sql5="insert into post_hashtag (idpost,idhashtag)values ('"+idpost+"','"+idhastag+"')";
-                PreparedStatement pstmt3=conn.prepareStatement(sql5);
-                pstmt3.executeUpdate();
-                
-            }
-            
-            
-            //*********************** change scale for icon to fit the label:
-       
-        ImageIcon imgicon=new ImageIcon("/images0/party.jpg");
-        Image img=imgicon.getImage();
-        Image imgscale=img.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
-        ImageIcon scaledIcon=new ImageIcon(imgscale);
-        
-        
-         //***************** cahnge Icon for Joptionpane:
-        EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-                } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
+                Statement st1 = conn.createStatement();
+                String sql3 = "select * from post";
+                ResultSet rs1 = st1.executeQuery(sql3);
+                String idpost = null;
+                while (rs1.next()) {
+                    idpost = String.valueOf(rs1.getInt("idpost"));
                 }
 
-                ImageIcon icon = new ImageIcon(LogIn.class.getResource("/images0/party.jpg"));
-                JOptionPane.showMessageDialog(
-                        null,
-                        "Uploaded Succsffully!",
-                        "State", JOptionPane.PLAIN_MESSAGE,
-                        icon);
-                  dispose();
-                  new userprofile22().setVisible(true);
-               
+                Statement st2 = conn.createStatement();
+                String sql4 = "select * from hashtag";
+                ResultSet rs2 = st2.executeQuery(sql4);
+                String idhastag = null;
+                while (rs2.next()) {
+                    idhastag = String.valueOf(rs2.getInt("idhashtag"));
+                }
+
+                //********************* insert data into post_hashtag table:
+                String sql5 = "insert into post_hashtag (idpost,idhashtag)values ('" + idpost + "','" + idhastag + "')";
+                PreparedStatement pstmt3 = conn.prepareStatement(sql5);
+                pstmt3.executeUpdate();
+
             }
-        });
-        
-       
+
+            //*********************** change scale for icon to fit the label:
+            ImageIcon imgicon = new ImageIcon("/images0/party.jpg");
+            Image img = imgicon.getImage();
+            Image imgscale = img.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+            ImageIcon scaledIcon = new ImageIcon(imgscale);
+
+            //***************** cahnge Icon for Joptionpane:
+            EventQueue.invokeLater(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+                    } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
+                    }
+
+                    ImageIcon icon = new ImageIcon(LogIn.class.getResource("/images0/party.jpg"));
+                    JOptionPane.showMessageDialog(
+                            null,
+                            "Uploaded Succsffully!",
+                            "State", JOptionPane.PLAIN_MESSAGE,
+                            icon);
+                    dispose();
+                    new userprofile22().setVisible(true);
+
+                }
+            });
+
             //******************** close addpost frame then close connection:
             conn.close();
-          
-           
 
-        }catch(Exception e)
-        {
-              JOptionPane.showMessageDialog(null,e);
-              System.out.println(e);
-              Logger.getLogger(LogIn.class.getName()).log(Level.SEVERE, null, e);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+            System.out.println(e);
+            Logger.getLogger(LogIn.class.getName()).log(Level.SEVERE, null, e);
         }
     }//GEN-LAST:event_jButtonuploadActionPerformed
 
     private void jLabelchoosefileMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelchoosefileMouseClicked
         // TODO add your handling code here:
-        JFileChooser chooser=new JFileChooser();
+        //************************************** upload file:
+        JFileChooser chooser = new JFileChooser();
         chooser.showOpenDialog(null);
-        File file=chooser.getSelectedFile();
-        filename=file.getAbsolutePath();
-        System.out.println("file path: "+filename);
+        File file = chooser.getSelectedFile();
+        filename = file.getAbsolutePath();
+        System.out.println("file path: " + filename);
         jLabelchoosefile.setText("");
         //*********************** change scale for icon to fit the label:
-        Icon icon=new ImageIcon(filename);
-        ImageIcon imgicon=new ImageIcon(filename);
-        Image img=imgicon.getImage();
-        Image imgscale=img.getScaledInstance(jLabelsefile.getWidth(), jLabelsefile.getHeight(), Image.SCALE_SMOOTH);
-        ImageIcon scaledIcon=new ImageIcon(imgscale);
+        Icon icon = new ImageIcon(filename);
+        ImageIcon imgicon = new ImageIcon(filename);
+        Image img = imgicon.getImage();
+        Image imgscale = img.getScaledInstance(jLabelsefile.getWidth(), jLabelsefile.getHeight(), Image.SCALE_SMOOTH);
+        ImageIcon scaledIcon = new ImageIcon(imgscale);
         jLabelsefile.setIcon(scaledIcon);
+        if(getFileExtension(filename).equals("pptx"))
+        {
+            //*************get photo for ppt
+        }
+        System.out.println(getFileExtension(filename));
+       
     }//GEN-LAST:event_jLabelchoosefileMouseClicked
 
+    //******************** to know the extension for aploaded file
+    public static String getFileExtension(String fullName) {
+        String fileName = new File(fullName).getName();
+        int dotIndex = fileName.lastIndexOf('.');
+        return (dotIndex == -1) ? "" : fileName.substring(dotIndex + 1);
+    }
     private void jTextFieldhashtagFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldhashtagFocusGained
         // TODO add your handling code here:
-        if(jTextFieldhashtag.getText().trim().equals("#Hashtag"))
+        if (jTextFieldhashtag.getText().trim().equals("#Hashtag"))
             jTextFieldhashtag.setText("");
     }//GEN-LAST:event_jTextFieldhashtagFocusGained
 
     private void jTextFieldhashtagFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldhashtagFocusLost
         // TODO add your handling code here:
-        if(jTextFieldhashtag.getText().trim().equals(""))
+        if (jTextFieldhashtag.getText().trim().equals(""))
             jTextFieldhashtag.setText("#Hashtag");
     }//GEN-LAST:event_jTextFieldhashtagFocusLost
 
