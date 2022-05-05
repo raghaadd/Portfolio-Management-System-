@@ -5,23 +5,21 @@
  */
 package sw;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
+import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.BoxLayout;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -30,23 +28,43 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
-import javax.swing.ScrollPaneConstants;
+import javax.swing.JTextPane;
 import javax.swing.SwingConstants;
+import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.beans.binding.Bindings;
+import static javafx.beans.binding.Bindings.length;
+import javafx.beans.property.DoubleProperty;
+import javafx.embed.swing.JFXPanel;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import static javafx.scene.input.KeyCode.R;
+import javafx.scene.layout.StackPane;
+import javafx.scene.media.Media;
+import javafx.stage.Stage;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaView;
+import javafx.stage.Screen;
+import javax.swing.text.View;
 
 /**
  *
  * @author LENOVO
  */
-public class userprofile22 extends javax.swing.JFrame {
+public class userprofile22 extends javax.swing.JFrame{
 
     JPanel postbase = new JPanel();
     String usernameorigin ="asma";
-    
+    String id = null;
+    @FXML
+    MediaPlayer player = null;
     
     public userprofile22() {
         initComponents();
+       // @FXML
+        player = null;
         
         this.setLocationRelativeTo(null);
         
@@ -126,6 +144,7 @@ public class userprofile22 extends javax.swing.JFrame {
                if(usenamepost.equals(usernameorigin))
                {
                    String content=rs1.getString("content");
+                   
                   // System.out.println("content::: "+content);
                    
                   
@@ -204,6 +223,7 @@ public class userprofile22 extends javax.swing.JFrame {
                     int nofollowing = 0;
                     
                     while (rs6.next()) {
+                        
                         if (usernameorigin.equals(rs6.getString("username"))) {
                             nofollowing++;
                         }
@@ -218,6 +238,8 @@ public class userprofile22 extends javax.swing.JFrame {
                     ResultSet rs7 = st7.executeQuery(sql7);
                     int nofollower = 0;
                     while (rs7.next()) {
+                        
+                        
                         if (usernameorigin.equals(rs7.getString("username"))) {
                             nofollower++;
                         }
@@ -245,11 +267,181 @@ public class userprofile22 extends javax.swing.JFrame {
        
        
         JLabel l=new JLabel();
-        l.setBounds(15, 15, 300,220); //size.width, size.height);
+        l.setBounds(15, 15, 290,220); //size.width, size.height);
         
-         //*********************** change scale for icon to fit the label:
          
-             
+                
+ //*******************************************************************************************
+ //*******************************************************************************************
+ //*******************************************************************************************
+ //*******************************************************************************************
+ //*******************************************************************************************
+ 
+ 
+       //**********************content display ************************
+       if(content != null && !content.equals("")){
+           System.out.println("content");
+           
+           
+        int type = (content.length()-3);
+        String subtype = content.substring(type);
+        System.out.println(subtype); 
+        
+        if(subtype.toLowerCase().equals("mp4")){
+        //***************display video**********************
+        
+        
+        
+        try{
+           
+    final JFXPanel VFXPanel = new JFXPanel();
+    File video_source = new File(content);
+    Media m = new Media(video_source.toURI().toString());
+    Platform.setImplicitExit(false);
+    
+    
+        player = new MediaPlayer(m);
+        onSeekComplete(player);
+        player.stop();
+        
+       
+    //player.play();
+    //player.setAutoPlay(true);
+    //player.setCycleCount(MediaPlayer.INDEFINITE);
+        player.setVolume(50);
+   
+    
+    
+    MediaView viewer = new MediaView(player);
+    StackPane root = new StackPane();
+    Scene scene = new Scene(root);
+
+   
+    // center video position
+    javafx.geometry.Rectangle2D screen = Screen.getPrimary().getVisualBounds();
+    viewer.setX((screen.getWidth() - l.getWidth()) / 2);
+    viewer.setY((screen.getHeight() - l.getHeight()) / 2);
+
+    // resize video based on screen size
+    DoubleProperty width = viewer.fitWidthProperty();
+    DoubleProperty height = viewer.fitHeightProperty();
+    width.bind(Bindings.selectDouble(viewer.sceneProperty(), "width"));
+    height.bind(Bindings.selectDouble(viewer.sceneProperty(), "height"));
+    viewer.setPreserveRatio(true);
+
+    // add video to stackpane
+    root.getChildren().add(viewer);
+
+    VFXPanel.setScene(scene);
+    //player.play();
+    l.setLayout(new BorderLayout());
+    l.add(VFXPanel, BorderLayout.CENTER);
+    l.setName(idpost);
+ 
+    
+    
+    //****************video control***************
+   
+    //************************************************************play icon
+        JLabel b=new JLabel();
+        b.setBounds(18, 210, 30,30);
+        b.setBackground(Color.red);
+        b.setName(idpost);
+        //*********************** change scale for icon to fit the label:
+        Icon icon=new ImageIcon(getClass().getResource("images0/addc.png"));
+        ImageIcon imgicon=new ImageIcon(getClass().getResource("images0/addc.png"));
+        Image img=imgicon.getImage();
+        Image imgscale=img.getScaledInstance(b.getWidth(), b.getHeight(), Image.SCALE_SMOOTH);
+        ImageIcon scaledIcon=new ImageIcon(imgscale);
+        b.setIcon(scaledIcon);
+        b.setOpaque(true);
+        
+        
+        /////////////////////////////////////////////////////////
+        b.addMouseListener(new MouseAdapter() {
+              public void mouseClicked(MouseEvent e) {
+                  
+                  String idpost = ((JLabel) e.getSource()).getName();
+                  System.out.println("content  "+idpost);
+                  
+                  player.play();
+                  
+              }});
+        /////////////////////////////////////////////////////////
+        jhh.add(b);
+    
+        
+        
+    //************************************************************stop icon
+        JLabel b1=new JLabel();
+        b1.setBounds(50, 210, 30,30);
+        b1.setBackground(Color.red);
+        b1.setName(idpost);
+        //*********************** change scale for icon to fit the label:
+        Icon icon1=new ImageIcon(getClass().getResource("images0/addc.png"));
+        ImageIcon imgicon1=new ImageIcon(getClass().getResource("images0/addc.png"));
+        Image img1=imgicon1.getImage();
+        Image imgscale1=img1.getScaledInstance(b1.getWidth(), b1.getHeight(), Image.SCALE_SMOOTH);
+        ImageIcon scaledIcon1=new ImageIcon(imgscale1);
+        b1.setIcon(scaledIcon1);
+        b1.setOpaque(true);
+        
+        
+        /////////////////////////////////////////////////////////
+        b1.addMouseListener(new MouseAdapter() {
+              public void mouseClicked(MouseEvent e) {
+                  player.stop();
+              }});
+        /////////////////////////////////////////////////////////
+        jhh.add(b1);
+    
+    
+    
+    
+    //************************************************************mute icon
+        JLabel b2=new JLabel();
+        b2.setBounds(82, 210, 30,30);
+        b2.setBackground(Color.red);
+        b2.setName(idpost);
+        //*********************** change scale for icon to fit the label:
+        Icon icon2=new ImageIcon(getClass().getResource("images0/addc.png"));
+        ImageIcon imgicon2=new ImageIcon(getClass().getResource("images0/addc.png"));
+        Image img2=imgicon2.getImage();
+        Image imgscale2=img2.getScaledInstance(b2.getWidth(), b2.getHeight(), Image.SCALE_SMOOTH);
+        ImageIcon scaledIcon2=new ImageIcon(imgscale2);
+        b2.setIcon(scaledIcon2);
+        b2.setOpaque(true);
+        
+        
+        /////////////////////////////////////////////////////////
+        b2.addMouseListener(new MouseAdapter() {
+              public void mouseClicked(MouseEvent e) {
+                  player.setMute(true);
+              }});
+        /////////////////////////////////////////////////////////
+        jhh.add(b2);
+    
+    
+           jhh.add(l);
+           
+    player.stop();
+          
+ 
+          
+        } 
+       catch(Exception eee){
+           JOptionPane.showMessageDialog(null, eee);
+       }
+        
+    
+    
+    
+    
+    
+        }
+        else{
+               
+        //*********************** change scale for icon to fit the label:
         Icon icon=new ImageIcon(content);
         ImageIcon imgicon=new ImageIcon(content);
         Image img=imgicon.getImage();
@@ -258,18 +450,64 @@ public class userprofile22 extends javax.swing.JFrame {
         l.setIcon(scaledIcon);
         l.setOpaque(true);
         l.setBackground(new java.awt.Color(250,250,250));
+        
+        
+        
+        jhh.add( l );
+        }
+        
+        
+       }
+       else{
+           System.out.println("no content");
+           //*********************** change scale for icon to fit the label:
+        Icon icon=new ImageIcon(getClass().getResource("images0/addc.png"));;
+        ImageIcon imgicon=new ImageIcon(getClass().getResource("images0/addc.png"));;
+        Image img=imgicon.getImage();
+        Image imgscale=img.getScaledInstance(l.getWidth(), l.getHeight(), Image.SCALE_SMOOTH);
+        ImageIcon scaledIcon=new ImageIcon(imgscale);
+        l.setIcon(scaledIcon);
+        l.setOpaque(true);
+        l.setBackground(new java.awt.Color(250,250,250));
+        l.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        
+        
+        /////////////////////////////////////////////////////////
+        l.addMouseListener(new MouseAdapter() {
+              public void mouseClicked(MouseEvent e) {
+                  String idpost = ((JLabel) e.getSource()).getName();
+                  edit22 editobj = new edit22();
+                  editobj.my_update(idpost, usernameorigin);//Execute the method my_update to pass str
+	          editobj.setVisible(true); // Open the Second.java window
+	          dispose();
+              
+              }});
+        /////////////////////////////////////////////////////////
+        
         jhh.add( l );
         
+           
+       }
+           
+       
         
+                
+ //*******************************************************************************************
+ //*******************************************************************************************
+ //*******************************************************************************************
+ //*******************************************************************************************
+ //*******************************************************************************************
         
         
         
         
         //**************************the description display*************************
         //JLabel des=new JLabel();
-        JTextArea des = new JTextArea();
-        des.setLineWrap(true);
-        des.setWrapStyleWord(true);
+        JTextPane des = new JTextPane();
+       //   JTextArea des = new JTextArea();
+
+        //des.setLineWrap(true);
+        //des.setWrapStyleWord(true);
         des.setBounds(330, 20, 380, 140);//330, 240, 300,210); //x, y, width, height);
         des.setBackground(new java.awt.Color(255,255,255));//200,200,200));
         
@@ -311,6 +549,7 @@ public class userprofile22 extends javax.swing.JFrame {
         like.setOpaque(true);
         like.setBackground(new java.awt.Color(255,255,255));
         like.setToolTipText("Like.");
+        like.setCursor(new Cursor(Cursor.HAND_CURSOR));
         
         
         jhh.add(like);
@@ -363,6 +602,7 @@ public class userprofile22 extends javax.swing.JFrame {
         comm.setOpaque(true);
         comm.setBackground(new java.awt.Color(250,250,250));
         comm.setToolTipText("Comment.");
+        comm.setCursor(new Cursor(Cursor.HAND_CURSOR));
         
         
         jhh.add(comm);
@@ -398,23 +638,32 @@ public class userprofile22 extends javax.swing.JFrame {
         
         
         //**************************the delete button*************************
-        JButton jbuttondelete=new JButton("Delete");
-        jbuttondelete.setForeground(new java.awt.Color(255,255,255));//text color
+       // JButton jbuttondelete=new JButton("Delete");
+        JLabel jbuttondelete = new JLabel();
+        
         jbuttondelete.setFont(new java.awt.Font("iCiel Baliho Script", 0, 18));//text type
         
         jbuttondelete.setName(idpost);
-        jbuttondelete.setBounds(610,200, 100,29);//buttom size
+        jbuttondelete.setBounds(670,165, 70,70);//buttom size
         jbuttondelete.setBackground(new java.awt.Color(172,49,48));//button color
-        jbuttondelete.setContentAreaFilled(false);
-        jbuttondelete.setBorderPainted(false);
-        jbuttondelete.setOpaque(true);
         
         jbuttondelete.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        
+        //*********************** change scale for icon to fit the label:
+        //Icon icon2=new ImageIcon(getClass().getResource("images0/heart.png"));
+        ImageIcon imgicon11=new ImageIcon(getClass().getResource("images0/deletepo.png"));
+        Image img11=imgicon11.getImage();
+        Image imgscale11=img11.getScaledInstance(jbuttondelete.getWidth(), jbuttondelete.getHeight(), Image.SCALE_SMOOTH);
+        ImageIcon scaledIcon11=new ImageIcon(imgscale11);
+        jbuttondelete.setIcon(scaledIcon11);
+        jbuttondelete.setOpaque(true);
+        jbuttondelete.setBackground(new java.awt.Color(250,250,250));
+        jbuttondelete.setToolTipText("delete post.");
         
         /////////////////////////////////////////////////////////
         jbuttondelete.addMouseListener(new MouseAdapter() {
               public void mouseClicked(MouseEvent e) {
-                  String idpost = ((JButton) e.getSource()).getName();
+                  String idpost = ((JLabel) e.getSource()).getName();
                   deletepost(idpost);}});
         /////////////////////////////////////////////////////////
         
@@ -424,23 +673,35 @@ public class userprofile22 extends javax.swing.JFrame {
         
         
         //**************************the edit button///////////////////////////////////////////////////////////////////////////
-        JButton jbuttonedit=new JButton("Edit");
-        jbuttonedit.setForeground(new java.awt.Color(255,255,255));//text color
+        //JButton jbuttonedit=new JButton("Edit");
+        JLabel jbuttonedit = new JLabel();
+        
         jbuttonedit.setFont(new java.awt.Font("iCiel Baliho Script", 0, 18));//text type
         
         jbuttonedit.setName(idpost);
-        jbuttonedit.setBounds(610,165,100,29);//buttom size
+        jbuttonedit.setBounds(600,165,70,70);//buttom size
         jbuttonedit.setBackground(new java.awt.Color(18,33,139));//button color
-        jbuttonedit.setContentAreaFilled(false);
-        jbuttonedit.setBorderPainted(false);
+        
         jbuttonedit.setOpaque(true);
         
         jbuttonedit.setCursor(new Cursor(Cursor.HAND_CURSOR));
         
+        //*********************** change scale for icon to fit the label:
+        //Icon icon2=new ImageIcon(getClass().getResource("images0/heart.png"));
+        ImageIcon imgicon22=new ImageIcon(getClass().getResource("images0/editpo.png"));
+        Image img22=imgicon22.getImage();
+        Image imgscale22=img22.getScaledInstance(jbuttonedit.getWidth(), jbuttonedit.getHeight(), Image.SCALE_SMOOTH);
+        ImageIcon scaledIcon22=new ImageIcon(imgscale22);
+        jbuttonedit.setIcon(scaledIcon22);
+        jbuttonedit.setOpaque(true);
+        jbuttonedit.setBackground(new java.awt.Color(250,250,250));
+        jbuttonedit.setToolTipText("edit post.");
+        
+        
         /////////////////////////////////////////////////////////
         jbuttonedit.addMouseListener(new MouseAdapter() {
         public void mouseClicked(MouseEvent e) {
-            String idpost = ((JButton) e.getSource()).getName();
+            String idpost = ((JLabel) e.getSource()).getName();
             edit22 editobj = new edit22();
             editobj.my_update(idpost, usernameorigin);//Execute the method my_update to pass str
 	    editobj.setVisible(true); // Open the Second.java window
@@ -529,10 +790,10 @@ public class userprofile22 extends javax.swing.JFrame {
         }
     }//end function
     
-    
-    
-    
-    
+   
+public void onSeekComplete(final MediaPlayer mp) {
+    player = mp;
+}
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -551,30 +812,26 @@ public class userprofile22 extends javax.swing.JFrame {
         jPanel8 = new javax.swing.JPanel();
         jPanel9 = new javax.swing.JPanel();
         jPanel10 = new javax.swing.JPanel();
-        jPanel11 = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
         jPanel12 = new javax.swing.JPanel();
-        jPanel13 = new javax.swing.JPanel();
-        jPanel14 = new javax.swing.JPanel();
+        jSeparator1 = new javax.swing.JSeparator();
         userimage = new rounded.JLabelRound();
+        name = new javax.swing.JLabel();
+        bio = new javax.swing.JLabel();
+        following = new javax.swing.JLabel();
+        fer = new javax.swing.JLabel();
+        ercount = new javax.swing.JLabel();
+        followers = new javax.swing.JLabel();
+        ingcount = new javax.swing.JLabel();
         out = new javax.swing.JLabel();
         contact = new javax.swing.JLabel();
         explore = new javax.swing.JLabel();
-        edit = new javax.swing.JLabel();
-        jSeparator2 = new javax.swing.JSeparator();
-        name = new javax.swing.JLabel();
-        bio = new javax.swing.JLabel();
         addpost = new javax.swing.JLabel();
-        followers = new javax.swing.JLabel();
-        following = new javax.swing.JLabel();
-        fing = new javax.swing.JLabel();
-        fer = new javax.swing.JLabel();
-        ercount = new javax.swing.JLabel();
-        ingcount = new javax.swing.JLabel();
-        jPanel15 = new javax.swing.JPanel();
         saved = new javax.swing.JLabel();
-        jSeparator1 = new javax.swing.JSeparator();
+        edit = new javax.swing.JLabel();
+        jSeparator3 = new javax.swing.JSeparator();
+        fing = new javax.swing.JLabel();
         scrollPane1 = new java.awt.ScrollPane();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -620,71 +877,9 @@ public class userprofile22 extends javax.swing.JFrame {
 
         jPanel10.setBackground(new java.awt.Color(255, 255, 255));
 
-        jPanel11.setBackground(new java.awt.Color(255, 255, 255));
-
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/mainpage.jpeg"))); // NOI18N
-
-        javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
-        jPanel11.setLayout(jPanel11Layout);
-        jPanel11Layout.setHorizontalGroup(
-            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel11Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-        jPanel11Layout.setVerticalGroup(
-            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel11Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
         jPanel12.setBackground(new java.awt.Color(255, 255, 255));
 
-        jPanel13.setBackground(new java.awt.Color(255, 255, 255));
-
-        jPanel14.setBackground(new java.awt.Color(255, 255, 255));
-
         userimage.setBackground(new java.awt.Color(250, 250, 250));
-
-        javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
-        jPanel14.setLayout(jPanel14Layout);
-        jPanel14Layout.setHorizontalGroup(
-            jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel14Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(userimage, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-        jPanel14Layout.setVerticalGroup(
-            jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel14Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(userimage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-
-        out.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        out.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                outMouseClicked(evt);
-            }
-        });
-
-        contact.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        contact.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-
-        explore.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        explore.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-
-        edit.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        edit.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        edit.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                editMouseClicked(evt);
-            }
-        });
 
         name.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         name.setForeground(new java.awt.Color(18, 33, 139));
@@ -701,19 +896,6 @@ public class userprofile22 extends javax.swing.JFrame {
         bio.setText(" bio");
         bio.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
-        addpost.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        addpost.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        addpost.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                addpostMouseClicked(evt);
-            }
-        });
-
-        followers.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        followers.setForeground(new java.awt.Color(18, 33, 139));
-        followers.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        followers.setText("following");
-
         following.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         following.setForeground(new java.awt.Color(18, 33, 139));
         following.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -724,21 +906,34 @@ public class userprofile22 extends javax.swing.JFrame {
         ercount.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         ercount.setText("count");
 
+        followers.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        followers.setForeground(new java.awt.Color(18, 33, 139));
+        followers.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        followers.setText("following");
+
         ingcount.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         ingcount.setText("count");
 
-        jPanel15.setBackground(new java.awt.Color(255, 255, 255));
+        out.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        out.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                outMouseClicked(evt);
+            }
+        });
 
-        javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
-        jPanel15.setLayout(jPanel15Layout);
-        jPanel15Layout.setHorizontalGroup(
-            jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        jPanel15Layout.setVerticalGroup(
-            jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 75, Short.MAX_VALUE)
-        );
+        contact.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        contact.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
+        explore.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        explore.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
+        addpost.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        addpost.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        addpost.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                addpostMouseClicked(evt);
+            }
+        });
 
         saved.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         saved.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -748,123 +943,116 @@ public class userprofile22 extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
-        jPanel13.setLayout(jPanel13Layout);
-        jPanel13Layout.setHorizontalGroup(
-            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel13Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel13Layout.createSequentialGroup()
-                        .addComponent(name, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(saved, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(12, 12, 12)
-                        .addComponent(edit, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(addpost, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(explore, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(contact, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(out, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jSeparator2)
-                    .addGroup(jPanel13Layout.createSequentialGroup()
-                        .addComponent(bio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(following, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(ercount, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(fer, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(followers, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(fing, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(ingcount, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap())
-        );
-        jPanel13Layout.setVerticalGroup(
-            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel13Layout.createSequentialGroup()
-                .addComponent(jPanel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(jPanel13Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(out, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 58, Short.MAX_VALUE)
-                    .addComponent(contact, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(edit, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(explore, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(addpost, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(name, javax.swing.GroupLayout.DEFAULT_SIZE, 58, Short.MAX_VALUE)
-                    .addComponent(saved, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(bio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel13Layout.createSequentialGroup()
-                        .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(following, javax.swing.GroupLayout.DEFAULT_SIZE, 19, Short.MAX_VALUE)
-                            .addComponent(followers, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(fer, javax.swing.GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE)
-                            .addComponent(fing, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(ingcount, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(ercount, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
-        );
+        edit.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        edit.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        edit.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                editMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
         jPanel12.setLayout(jPanel12Layout);
         jPanel12Layout.setHorizontalGroup(
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel12Layout.createSequentialGroup()
+            .addComponent(jSeparator1)
+            .addGroup(jPanel12Layout.createSequentialGroup()
+                .addComponent(userimage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel12Layout.createSequentialGroup()
+                        .addComponent(name, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(77, 77, 77)
+                        .addComponent(saved, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(explore, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(addpost, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(edit, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(contact, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(out, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 693, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel12Layout.createSequentialGroup()
+                        .addComponent(bio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(following, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(fer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(ercount, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(followers, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(fing, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(ingcount, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(24, 24, 24))))
+            .addGroup(jPanel12Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(scrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel13, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(scrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel12Layout.setVerticalGroup(
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel12Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(userimage, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel12Layout.createSequentialGroup()
+                        .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(name, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(out, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 55, Short.MAX_VALUE)
+                                .addComponent(contact, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(edit, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(addpost, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(explore, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(saved, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel12Layout.createSequentialGroup()
+                                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(followers)
+                                    .addComponent(following))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(fer, javax.swing.GroupLayout.DEFAULT_SIZE, 53, Short.MAX_VALUE)
+                                    .addComponent(fing, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(ingcount, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(ercount, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+                            .addComponent(bio, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(scrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(scrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 553, Short.MAX_VALUE))
         );
+
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/mainpage.jpeg"))); // NOI18N
+        jLabel3.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
         jPanel10Layout.setHorizontalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel10Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel10Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel10Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jPanel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 760, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -1050,62 +1238,69 @@ public class userprofile22 extends javax.swing.JFrame {
     private void closeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeMouseClicked
         // TODO add your handling code here:
         // close
+        this.player.stop();
         this.dispose();
     }//GEN-LAST:event_closeMouseClicked
 
     private void minMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_minMouseClicked
         // TODO add your handling code here:
         // min
+        this.player.stop();
         this.setExtendedState(JFrame.ICONIFIED);
     }//GEN-LAST:event_minMouseClicked
 
     private void backMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backMouseClicked
         // TODO add your handling code here:
-        
+        this.pack();
+        this.player.stop();
         new mainpage22().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_backMouseClicked
 
-    private void outMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_outMouseClicked
-        // TODO add your handling code here:
-        // close
-        this.dispose();
-    }//GEN-LAST:event_outMouseClicked
-
     private void editMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editMouseClicked
         // TODO add your handling code here:
         // close
-       // this.dispose();
-      
-            userinfo22 editobj = new userinfo22();
-            editobj.info(usernameorigin);//Execute the method my_update to pass str
-	    editobj.setVisible(true);
-       
-            this.dispose();
+        // this.dispose();
+
+        this.player.stop();
        // new userinfo22().setVisible(true);
-       // new addpost22().setVisible(true);
+        userinfo22 editobj = new userinfo22();
+        editobj.info(usernameorigin);//Execute the method my_update to pass str
+        editobj.setVisible(true);
+
+        this.dispose();
+        // new userinfo22().setVisible(true);
+        // new addpost22().setVisible(true);
     }//GEN-LAST:event_editMouseClicked
 
-    private void nameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nameMouseClicked
+    private void savedMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_savedMouseClicked
         // TODO add your handling code here:
-        
-        new userprofile22().setVisible(true);
+        this.player.stop();
+        new saved22().setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_nameMouseClicked
+    }//GEN-LAST:event_savedMouseClicked
 
     private void addpostMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addpostMouseClicked
         // TODO add your handling code here:
         // close
-        
+        this.player.stop();
         new addpost22().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_addpostMouseClicked
 
-    private void savedMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_savedMouseClicked
+    private void outMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_outMouseClicked
         // TODO add your handling code here:
-        new saved22().setVisible(true);
+        // close
+        this.player.stop();
         this.dispose();
-    }//GEN-LAST:event_savedMouseClicked
+    }//GEN-LAST:event_outMouseClicked
+
+    private void nameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nameMouseClicked
+        // TODO add your handling code here:
+        this.player.stop();
+        new userprofile22().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_nameMouseClicked
 
     /**
      * @param args the command line arguments
@@ -1159,11 +1354,7 @@ public class userprofile22 extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
-    private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;
-    private javax.swing.JPanel jPanel13;
-    private javax.swing.JPanel jPanel14;
-    private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -1173,7 +1364,7 @@ public class userprofile22 extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JSeparator jSeparator3;
     private javax.swing.JLabel min;
     private javax.swing.JLabel name;
     private javax.swing.JLabel out;
