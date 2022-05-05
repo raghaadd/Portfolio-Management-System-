@@ -350,11 +350,36 @@ public class mainpage22 extends javax.swing.JFrame {
                             //  like.addMouseListener(mouseListener);
 
                             jhh.add(like);
+                            //********************************view likeeee
+                            JLabel viewlike = new JLabel(idpost);
+                            viewlike.setBounds(90, 375, 70, 70);
+                            viewlike.setOpaque(true);
 
+                            viewlike.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+                            viewlike.setHorizontalAlignment(SwingConstants.CENTER);
+                            viewlike.setVerticalAlignment(SwingConstants.CENTER);
+                            ImageIcon imgicon4= new ImageIcon(getClass().getResource("/images0/emptyh.png"));
+                            Image img4 = imgicon4.getImage();
+                            Image imgscale4 = img4.getScaledInstance(viewlike.getWidth(), viewlike.getHeight(), Image.SCALE_SMOOTH);
+                            ImageIcon scaledIcon4 = new ImageIcon(imgscale4);
+                            viewlike.setIcon(scaledIcon4);
+                            viewlike.setOpaque(true);
+                            viewlike.setBackground(new java.awt.Color(255, 255, 255));
+                            viewlike.setToolTipText("view Like.");
+                            //******************** add mouse listner in order to like the post:
+                          viewlike.addMouseListener(new MouseAdapter() {
+                                public void mouseClicked(MouseEvent e) {
+                                    //   String idpost = ((JButton) e.getSource()).getName();
+                                    new Likes(idpost).setVisible(true);
+                                    
+                                }
+                            });
+
+                            jhh.add(viewlike);
                             //**********************************************************************************************
                             //********************* create add comment button:
                             JLabel comm = new JLabel();
-                            comm.setBounds(90, 375, 70, 70);
+                            comm.setBounds(170, 375, 70, 70);
                             comm.setOpaque(true);
 
                             comm.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -371,6 +396,13 @@ public class mainpage22 extends javax.swing.JFrame {
                             comm.setOpaque(true);
                             comm.setBackground(new java.awt.Color(250, 250, 250));
                             comm.setToolTipText("Comment.");
+                            comm.addMouseListener(new MouseAdapter() {
+                                public void mouseClicked(MouseEvent e) {
+                                    //   String idpost = ((JButton) e.getSource()).getName();
+                                    new Comments(idpost,usernameorigin).setVisible(true);
+                                    
+                                }
+                            });
                             //  comm.addMouseListener(mouseListener);
 
                             jhh.add(comm);
@@ -519,11 +551,11 @@ public class mainpage22 extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, ex.getMessage());
                     System.err.println(ex);
                 }
-            }
+            }//end if
+  
         }
     };
-    
-    
+
     /////////////////////////*********************************///////////////////////////////////
     MouseListener mouseListenersave = new MouseAdapter() {
 
@@ -540,7 +572,7 @@ public class mainpage22 extends javax.swing.JFrame {
 
                     //******************* open connection with mysql:
                     Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sys", "root", "123456");
-               
+
                     //********************* open save table verfiy if user like this post or not:
                     String sql6 = "select * from savepost";
 
@@ -550,17 +582,17 @@ public class mainpage22 extends javax.swing.JFrame {
                     while (rs6.next()) {
                         if (String.valueOf(rs6.getInt("idpost")).equals(idpost)) {
                             if (rs6.getString("username").equals(usernameorigin)) {
-                               
-                                    System.out.println("well here we go222...");
-                                    //************** delete save:
-                                    String query = "delete from savepost where username = ? AND idpost=?";
-                                    PreparedStatement preparedStmt = conn.prepareStatement(query);
-                                    preparedStmt.setString(1, usernameorigin);
-                                    preparedStmt.setString(2, idpost);
-                                    preparedStmt.execute();
-                                    imgicon1 = new ImageIcon(getClass().getResource("/images0/unsaved.png"));
-                                    saveflag = true;
-                                
+
+                                System.out.println("well here we go222...");
+                                //************** delete save:
+                                String query = "delete from savepost where username = ? AND idpost=?";
+                                PreparedStatement preparedStmt = conn.prepareStatement(query);
+                                preparedStmt.setString(1, usernameorigin);
+                                preparedStmt.setString(2, idpost);
+                                preparedStmt.execute();
+                                imgicon1 = new ImageIcon(getClass().getResource("/images0/unsaved.png"));
+                                saveflag = true;
+
                             }
                         }
 
@@ -577,7 +609,6 @@ public class mainpage22 extends javax.swing.JFrame {
                     Image imgscale1 = img1.getScaledInstance(save.getWidth(), save.getHeight(), Image.SCALE_SMOOTH);
                     ImageIcon scaledIcon1 = new ImageIcon(imgscale1);
                     save.setIcon(scaledIcon1);
-
 
                 } catch (SQLException ex) {
                     JOptionPane.showMessageDialog(null, ex.getMessage());

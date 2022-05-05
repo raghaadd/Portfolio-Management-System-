@@ -43,6 +43,7 @@ public class userprofile22 extends javax.swing.JFrame {
 
     JPanel postbase = new JPanel();
     String usernameorigin = "saja123";
+    String idpost = "";
 
     /**
      * Creates new form userprofile22
@@ -98,7 +99,6 @@ public class userprofile22 extends javax.swing.JFrame {
         ResultSet rs = null;
         PreparedStatement ps = null;
         String usenamepost = null;
-        String idpost;
 
         try {
             conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sys", "root", "123456");
@@ -179,6 +179,23 @@ public class userprofile22 extends javax.swing.JFrame {
                     //******************tooltip:
                     fing.setToolTipText("followingcount");
                     fer.setToolTipText("followerscount");
+                    fer.setCursor(new Cursor(Cursor.HAND_CURSOR));
+                    fing.setCursor(new Cursor(Cursor.HAND_CURSOR));
+                    //************************** add mouse listner to open list of follwing and follower:
+                    fing.addMouseListener(new MouseAdapter() {
+                        public void mouseClicked(MouseEvent e) {
+                            //   String idpost = ((JButton) e.getSource()).getName();
+                            new Following(usernameorigin).setVisible(true);
+
+                        }
+                    });
+                    fer.addMouseListener(new MouseAdapter() {
+                        public void mouseClicked(MouseEvent e) {
+                            //   String idpost = ((JButton) e.getSource()).getName();
+                            new Followers1(usernameorigin).setVisible(true);
+
+                        }
+                    });
 
                     //*****************follow count**************************   
                     //*******************get the following and followers count from data base:
@@ -296,8 +313,8 @@ public class userprofile22 extends javax.swing.JFrame {
                     jhh.add(likeinfo);
 
                     //**************************comment icon*************************
-                    JLabel comm = new JLabel();
-                    comm.setText(null);
+                    JLabel comm = new JLabel(idpost);
+                    //comm.setText(null);
                     //comm.setOpaque(true);
                     // comm.setBackground(Color.red);
                     comm.setBounds(400, 165, 50, 50);
@@ -314,6 +331,15 @@ public class userprofile22 extends javax.swing.JFrame {
                     comm.setOpaque(true);
                     comm.setBackground(new java.awt.Color(250, 250, 250));
                     comm.setToolTipText("Comment.");
+                    comm.addMouseListener(new MouseAdapter() {
+                        public void mouseClicked(MouseEvent e) {
+                             String idpostt = ((JLabel) e.getSource()).getText();
+                            System.out.println("pooostt  "+idpostt);
+                            System.out.println("userrr  "+usernameorigin);
+                            new Commentsforprofileuser(idpostt, usernameorigin).setVisible(true);
+
+                        }
+                    });
 
                     jhh.add(comm);
 

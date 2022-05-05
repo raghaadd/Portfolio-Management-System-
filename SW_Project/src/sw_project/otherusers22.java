@@ -106,7 +106,7 @@ public class otherusers22 extends javax.swing.JFrame {
 
     public otherusers22(String user) {
         initComponents();
-
+        usernamevisit=user;
         this.setLocationRelativeTo(null);
 
         close.setIcon(new ImageIcon(getClass().getResource("/images0/x1.png")));
