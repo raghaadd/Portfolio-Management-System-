@@ -56,14 +56,61 @@ import javax.swing.text.View;
 public class userprofile22 extends javax.swing.JFrame{
 
     JPanel postbase = new JPanel();
-    String usernameorigin ="asma";
+    static String usernameorigin ;///="asma";
     String id = null;
+    
     @FXML
     MediaPlayer player = null;
     
     public userprofile22() {
         initComponents();
-       // @FXML
+       
+        player = null;
+        
+      //  this.setLocationRelativeTo(null);
+        
+        close.setIcon(new ImageIcon(getClass().getResource("images0/x1.png")));
+        close.setToolTipText("Exit.");
+        
+        min.setIcon(new ImageIcon(getClass().getResource("images0/min1.png")));
+        min.setToolTipText("Minimize.");
+        
+        back.setIcon(new ImageIcon(getClass().getResource("images0/back3.png")));
+        back.setToolTipText("Go back.");
+        
+        addpost.setIcon(new ImageIcon(getClass().getResource("images0/add3.png")));
+        addpost.setToolTipText("To add post page.");
+        
+        explore.setIcon(new ImageIcon(getClass().getResource("images0/explore0.png")));
+        explore.setToolTipText("To explore page.");
+        
+        contact.setIcon(new ImageIcon(getClass().getResource("images0/contact.png")));
+        contact.setToolTipText("Contact us.");
+        
+        out.setIcon(new ImageIcon(getClass().getResource("images0/out.png")));
+        out.setToolTipText("Sign out.");
+        
+        edit.setIcon(new ImageIcon(getClass().getResource("images0/edit.png")));
+        edit.setToolTipText("Settings.");
+        
+        fing.setIcon(new ImageIcon(getClass().getResource("images0/fing.png")));
+        
+        fer.setIcon(new ImageIcon(getClass().getResource("images0/fer.png")));
+        
+        saved.setIcon(new ImageIcon(getClass().getResource("images0/saved.png")));
+        saved.setToolTipText("saved.");
+        
+        scrollPane1.add(postbase);
+       // String usenamepost = "asma";
+        setResizable(false);
+      //  makepanel();
+    }
+
+    public userprofile22(String usernameorigin) {
+        this.usernameorigin = usernameorigin;
+        // System.out.println("no "+usernameorigin);
+        initComponents();
+       
         player = null;
         
         this.setLocationRelativeTo(null);
@@ -97,19 +144,20 @@ public class userprofile22 extends javax.swing.JFrame{
         fer.setIcon(new ImageIcon(getClass().getResource("images0/fer.png")));
         
         saved.setIcon(new ImageIcon(getClass().getResource("images0/saved.png")));
+        saved.setToolTipText("saved.");
         
         scrollPane1.add(postbase);
        // String usenamepost = "asma";
         setResizable(false);
         makepanel();
+        
     }
-
-    
     
     
 //////////////////////////////////////////////////////////////////////////////////////////////////
     public void makepanel(){
         pack();
+        System.out.println("no "+usernameorigin);
         
         JPanel jhh =new JPanel(); 
         postbase.setLayout(new BoxLayout(postbase, BoxLayout.Y_AXIS));  
@@ -125,34 +173,12 @@ public class userprofile22 extends javax.swing.JFrame{
         
            try{
            conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/softwareproject","root","iNEEDtostudy@202");
-           String sql1="select * from post ORDER BY date DESC";
-           Statement st1=conn.createStatement();
-           ResultSet rs1=st1.executeQuery(sql1);
-           Boolean flag=true;
            
            
-           while(rs1.next())
-           {
-               
-               usenamepost=rs1.getString("username");
-             //  System.out.println("user::: "+usenamepost);
-               //name.setText(usenamepost);
-               name.setText(usernameorigin);
-               idpost=rs1.getString("idpost");
-               
-             
-               if(usenamepost.equals(usernameorigin))
-               {
-                   String content=rs1.getString("content");
-                   
-                  // System.out.println("content::: "+content);
-                   
-                  
            
-               
-               
-               //***********************getbio and photo******************************
-               String sql5="select * from appuser where username='"+usenamepost+"'";
+           
+            //***********************getbio and photo******************************
+               String sql5="select * from appuser where username='"+usernameorigin+"'";
                Statement st5=conn.createStatement();
                ResultSet rs5=st5.executeQuery(sql5);
                if(rs5.next()){
@@ -165,6 +191,12 @@ public class userprofile22 extends javax.swing.JFrame{
                    else
                       this.bio.setText("Write a bio");
                    
+                   usenamepost=rs5.getString("username");
+                // System.out.println("user::: "+usenamepost);
+                // name.setText(usenamepost);
+                    name.setText(usernameorigin);
+                   
+                   
                    //*******photo
                    String mail = rs5.getString("email");
                    String sql6="select * from person where email='"+mail+"'";
@@ -174,7 +206,7 @@ public class userprofile22 extends javax.swing.JFrame{
                     if(rs6.next()){//there is photo
                        String image = rs6.getString("image");
                        
-                       if((!image.equals("")) &&(!image.equals(null))){// image!=null){
+                       if((!image.equals("")) &&(!image.equals(null)) && (!image.equals("Image path,"))){// image!=null){
                            //************display image************
                            //*********************** change scale for icon to fit the label:
                            //Icon icon6=new ImageIcon(content);
@@ -186,7 +218,7 @@ public class userprofile22 extends javax.swing.JFrame{
                             userimage.setOpaque(true);
                             userimage.setBackground(new java.awt.Color(250,250,250));
                            
-                           // System.out.println("user::: you have come here? havent you! ");
+                            System.out.println("user::: you have come here? havent you! profile ");
                        }
                        else{
                            //************display noimage icon********
@@ -197,7 +229,7 @@ public class userprofile22 extends javax.swing.JFrame{
                             userimage.setIcon(scaledIcon6);
                             userimage.setOpaque(true);
                             userimage.setBackground(new java.awt.Color(250,250,250));
-                         //  System.out.println("user::: guess not");
+                           System.out.println("user::: guess not profile");
                        }
                       
                       
@@ -208,11 +240,59 @@ public class userprofile22 extends javax.swing.JFrame{
                    
                }//bio if
                else{/*there is no user*/}
+           
+           
+           String sql1="select * from post where username ='"+usernameorigin+"' ORDER BY date DESC";
+           Statement st1=conn.createStatement();
+           ResultSet rs1=st1.executeQuery(sql1);
+           Boolean flag=true;
+           while(rs1.next())
+               
+           {
+               
+               
+               idpost=rs1.getString("idpost");
+             
+               if(usenamepost.equals(usernameorigin))
+               {
+                   String content=rs1.getString("content");
+                   
+                  // System.out.println("content::: "+content);
+                   
+                  
+           
+               
+               
+              
                
                
                //******************tooltip:
                     fing.setToolTipText("followingcount");
                     fer.setToolTipText("followerscount");
+                    fer.setCursor(new Cursor(Cursor.HAND_CURSOR));
+                    fing.setCursor(new Cursor(Cursor.HAND_CURSOR));
+                    
+                    
+                    //************************** add mouse listner to open list of follwing and follower:
+                    fing.addMouseListener(new MouseAdapter() {
+                        public void mouseClicked(MouseEvent e) {
+                            //   String idpost = ((JButton) e.getSource()).getName();
+                            new Following(usernameorigin).setVisible(true);
+
+                        }
+                    });
+                    fer.addMouseListener(new MouseAdapter() {
+                        public void mouseClicked(MouseEvent e) {
+                            //   String idpost = ((JButton) e.getSource()).getName();
+                            new Followers1(usernameorigin).setVisible(true);
+
+                        }
+                    });
+                    
+                    
+                    
+                    
+                    
                
                //*****************follow count**************************   
                //*******************get the following and followers count from data base:
@@ -264,7 +344,7 @@ public class userprofile22 extends javax.swing.JFrame{
             postbase.add(jhh);  
          
             
-       
+       System.out.println("no "+usernameorigin);
        
         JLabel l=new JLabel();
         l.setBounds(15, 15, 290,220); //size.width, size.height);
@@ -285,7 +365,7 @@ public class userprofile22 extends javax.swing.JFrame{
            
         int type = (content.length()-3);
         String subtype = content.substring(type);
-        System.out.println(subtype); 
+       // System.out.println(subtype); 
         
         if(subtype.toLowerCase().equals("mp4")){
         //***************display video**********************
@@ -603,6 +683,17 @@ public class userprofile22 extends javax.swing.JFrame{
         comm.setBackground(new java.awt.Color(250,250,250));
         comm.setToolTipText("Comment.");
         comm.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        comm.setName(idpost);
+        
+        comm.addMouseListener(new MouseAdapter() {
+                        public void mouseClicked(MouseEvent e) {
+                            String idpost = ((JLabel) e.getSource()).getName();
+                            //System.out.println("pooostt  "+idpost);
+                            //System.out.println("userrr  "+usernameorigin);
+                            new Commentsforprofileuser(idpost, usernameorigin).setVisible(true);
+
+                        }
+                    });
         
         
         jhh.add(comm);
@@ -783,7 +874,7 @@ public class userprofile22 extends javax.swing.JFrame{
             con.commit();
             con.close();
             
-            new userprofile22().setVisible(true);
+            new userprofile22(usernameorigin).setVisible(true);
             this.dispose();
         }catch(Exception e){
             JOptionPane.showMessageDialog(null, e);
@@ -957,7 +1048,7 @@ public void onSeekComplete(final MediaPlayer mp) {
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jSeparator1)
             .addGroup(jPanel12Layout.createSequentialGroup()
-                .addComponent(userimage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(userimage, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel12Layout.createSequentialGroup()
@@ -997,7 +1088,6 @@ public void onSeekComplete(final MediaPlayer mp) {
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel12Layout.createSequentialGroup()
                 .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(userimage, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel12Layout.createSequentialGroup()
                         .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(name, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1024,7 +1114,10 @@ public void onSeekComplete(final MediaPlayer mp) {
                                 .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(ingcount, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(ercount, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
-                            .addComponent(bio, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(bio, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel12Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(userimage, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1238,23 +1331,42 @@ public void onSeekComplete(final MediaPlayer mp) {
     private void closeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeMouseClicked
         // TODO add your handling code here:
         // close
-        this.player.stop();
-        this.dispose();
+        if(player == null){
+            
+            this.dispose();
+        }
+        else{
+            this.player.stop();
+            this.dispose();}
+        
     }//GEN-LAST:event_closeMouseClicked
 
     private void minMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_minMouseClicked
         // TODO add your handling code here:
         // min
-        this.player.stop();
-        this.setExtendedState(JFrame.ICONIFIED);
+        if(player == null)
+            this.setExtendedState(JFrame.ICONIFIED);
+        else{
+            this.player.stop();
+            this.setExtendedState(JFrame.ICONIFIED);
+        
+        }
+        
     }//GEN-LAST:event_minMouseClicked
 
     private void backMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backMouseClicked
         // TODO add your handling code here:
-        this.pack();
-        this.player.stop();
-        new mainpage22().setVisible(true);
-        this.dispose();
+        if(player == null){
+            new mainpage22(usernameorigin).setVisible(true);
+            this.dispose();
+        }
+        else{
+            this.pack();
+            this.player.stop();
+            new mainpage22(usernameorigin).setVisible(true);
+            this.dispose();
+        }
+        
     }//GEN-LAST:event_backMouseClicked
 
     private void editMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editMouseClicked
@@ -1262,44 +1374,81 @@ public void onSeekComplete(final MediaPlayer mp) {
         // close
         // this.dispose();
 
-        this.player.stop();
-       // new userinfo22().setVisible(true);
-        userinfo22 editobj = new userinfo22();
-        editobj.info(usernameorigin);//Execute the method my_update to pass str
-        editobj.setVisible(true);
+        if(player == null){
+            userinfo22 editobj = new userinfo22();
+            editobj.info(usernameorigin);//Execute the method my_update to pass str
+            editobj.setVisible(true);
 
-        this.dispose();
+            this.dispose();
+        }
+        else{
+           this.player.stop();
+       // new userinfo22().setVisible(true);
+           userinfo22 editobj = new userinfo22();
+           editobj.info(usernameorigin);//Execute the method my_update to pass str
+           editobj.setVisible(true);
+
+           this.dispose(); 
+        }
+        
         // new userinfo22().setVisible(true);
         // new addpost22().setVisible(true);
     }//GEN-LAST:event_editMouseClicked
 
     private void savedMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_savedMouseClicked
         // TODO add your handling code here:
-        this.player.stop();
-        new saved22().setVisible(true);
-        this.dispose();
+        if(player == null){
+            new saved22(usernameorigin).setVisible(true);
+            this.dispose();
+            }
+        else{
+            this.player.stop();
+            new saved22(usernameorigin).setVisible(true);
+            this.dispose();}
     }//GEN-LAST:event_savedMouseClicked
 
     private void addpostMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addpostMouseClicked
         // TODO add your handling code here:
         // close
-        this.player.stop();
-        new addpost22().setVisible(true);
-        this.dispose();
+        if(player == null){
+            new addpost22().setVisible(true);
+            this.dispose();
+        }
+        else{
+            this.player.stop();
+            new addpost22().setVisible(true);
+            this.dispose();
+        }
+        
     }//GEN-LAST:event_addpostMouseClicked
 
     private void outMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_outMouseClicked
         // TODO add your handling code here:
         // close
-        this.player.stop();
-        this.dispose();
+        if(player == null){
+            new loginForm().setVisible(true);
+            this.dispose();
+        }
+        else{
+            this.player.stop();
+            new loginForm().setVisible(true);
+            this.dispose();
+        }
+        
     }//GEN-LAST:event_outMouseClicked
 
     private void nameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nameMouseClicked
         // TODO add your handling code here:
-        this.player.stop();
-        new userprofile22().setVisible(true);
-        this.dispose();
+        if(player == null){
+            new userprofile22(usernameorigin).setVisible(true);
+            this.dispose();
+        }
+        else{
+            this.player.stop();
+            new userprofile22(usernameorigin).setVisible(true);
+            this.dispose();
+        }
+        
     }//GEN-LAST:event_nameMouseClicked
 
     /**
@@ -1332,7 +1481,7 @@ public void onSeekComplete(final MediaPlayer mp) {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new userprofile22().setVisible(true);
+                new userprofile22(usernameorigin).setVisible(true);
             }
         });
     }

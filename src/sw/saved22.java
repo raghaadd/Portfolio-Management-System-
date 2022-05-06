@@ -31,7 +31,7 @@ public class saved22 extends javax.swing.JFrame {
 
     
     JPanel postbase = new JPanel();
-    String usernameorigin ="asma";
+    static String usernameorigin ;//="asma";
     
     
     public saved22() {
@@ -49,7 +49,30 @@ public class saved22 extends javax.swing.JFrame {
         back.setToolTipText("Go back.");
         
         scrollPane1.add(postbase);
-       // String usenamepost = "asma";
+        String usenamepost = "asma";
+        setResizable(false);
+        makepanel();
+        
+    }
+    
+    public saved22(String usernameorigin) {
+        this.usernameorigin = usernameorigin;
+       
+        initComponents();
+        
+        this.setLocationRelativeTo(null);
+        
+        close.setIcon(new ImageIcon(getClass().getResource("images0/x1.png")));
+        close.setToolTipText("Exit.");
+        
+        min.setIcon(new ImageIcon(getClass().getResource("images0/min1.png")));
+        min.setToolTipText("Minimize.");
+        
+        back.setIcon(new ImageIcon(getClass().getResource("images0/back3.png")));
+        back.setToolTipText("Go back.");
+        
+        scrollPane1.add(postbase);
+        String usenamepost = "asma";
         setResizable(false);
         makepanel();
         
@@ -58,6 +81,7 @@ public class saved22 extends javax.swing.JFrame {
     //////////////////////////////////////////////////////////////////////////////////////////////////
    public void makepanel() {
         
+       
         JPanel jhh = new JPanel();
         postbase.setLayout(new BoxLayout(postbase, BoxLayout.Y_AXIS));
         Connection conn = null;
@@ -82,7 +106,7 @@ public class saved22 extends javax.swing.JFrame {
                     
                     //***********************open post table and bring posts 
                     String savedposts = rs1.getString("username");
-                    String sql2 = "select * from post where username = '"+savedposts+"'";
+                    String sql2 = "select * from post where username = '"+usernameorigin+"'";
                    // String savedposts = rs1.getString("idpost");
                    // String sql2 = "select * from post where idpost = '"+savedposts+"'";
                     
@@ -233,7 +257,7 @@ public class saved22 extends javax.swing.JFrame {
                             JTextArea textarea1 = new JTextArea(description + "\n" + keyword);
                             textarea1.setLineWrap(true);
                             textarea1.setWrapStyleWord(true);
-                            textarea1.setBounds(365, 70, 330, 300);//******(left/right, up/down, width,height)
+                            textarea1.setBounds(365, 70, 370, 300);//******(left/right, up/down, width,height)
                             textarea1.setOpaque(true);
                             textarea1.setBackground(new java.awt.Color(255, 255, 255));
                             textarea1.setEditable(false);
@@ -605,7 +629,7 @@ public class saved22 extends javax.swing.JFrame {
 
     private void backMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backMouseClicked
         // TODO add your handling code here:
-        new userprofile22().setVisible(true);
+        new userprofile22(usernameorigin).setVisible(true);
         this.dispose();
     }//GEN-LAST:event_backMouseClicked
 
@@ -639,7 +663,7 @@ public class saved22 extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new saved22().setVisible(true);
+                new saved22(usernameorigin).setVisible(true);
             }
         });
     }

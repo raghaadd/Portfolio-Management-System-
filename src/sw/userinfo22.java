@@ -36,6 +36,7 @@ public class userinfo22 extends javax.swing.JFrame {
     /**
      * Creates new form userinfo22
      */
+    static String usernameorigin;
     Border text_border = BorderFactory.createMatteBorder(0, 0, 2, 0, Color.black);
     String filename="";
     public userinfo22() {
@@ -50,7 +51,26 @@ public class userinfo22 extends javax.swing.JFrame {
         newimage.setIcon(new ImageIcon(getClass().getResource("images0/addimage.png")));
         
         firstnametext.setBorder(text_border);
-        lastnametext.setBorder(text_border);
+        emailtext.setBorder(text_border);
+        usernametext.setBorder(text_border);
+        biotext.setBorder(text_border);
+        
+
+      //  info("asma");
+    }
+    public userinfo22(String usernameorigin) {
+        this.usernameorigin = usernameorigin;
+        initComponents();
+        
+        this.setLocationRelativeTo(null);
+        
+        close.setIcon(new ImageIcon(getClass().getResource("images0/x1.png")));
+        min.setIcon(new ImageIcon(getClass().getResource("images0/min1.png")));
+      //  main.setIcon(new ImageIcon(getClass().getResource("images0/mainpage.jpeg")));
+        back.setIcon(new ImageIcon(getClass().getResource("images0/back3.png")));
+        newimage.setIcon(new ImageIcon(getClass().getResource("images0/addimage.png")));
+        
+        firstnametext.setBorder(text_border);
         emailtext.setBorder(text_border);
         usernametext.setBorder(text_border);
         biotext.setBorder(text_border);
@@ -88,15 +108,15 @@ public class userinfo22 extends javax.swing.JFrame {
                     
                     
                     if(set.next()){
-                        this.firstnametext.setText(set.getString("firstname"));
-                        this.lastnametext.setText(set.getString("lastname"));
+                        this.firstnametext.setText(set.getString("fullname"));
+                        
                         this.emailtext.setText(set.getString("email"));
                       
                         //get the image 
                         String image = set.getString("image");
                         filename = image;
                       
-                        if((!image.equals("")) && image!=null){
+                        if((!image.equals("")) &&(!image.equals(null)) && (!image.equals("Image path,"))){//(!image.equals("")) && image!=null && !image.equals("Image path,")){
                            //************display image************
                            //*********************** change scale for icon to fit the label:
                            //Icon icon6=new ImageIcon(content);
@@ -159,8 +179,6 @@ public class userinfo22 extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         firstnametext = new javax.swing.JTextField();
-        lastnametext = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
         emailtext = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -228,17 +246,11 @@ public class userinfo22 extends javax.swing.JFrame {
         jLabel1.setText("Username:");
         jLabel1.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
 
-        jLabel2.setText("First Name:");
+        jLabel2.setText("Name");
         jLabel2.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
 
         firstnametext.setBackground(new java.awt.Color(48, 171, 172));
         firstnametext.setBorder(null);
-
-        lastnametext.setBackground(new java.awt.Color(48, 171, 172));
-        lastnametext.setBorder(null);
-
-        jLabel3.setText("Last Name:");
-        jLabel3.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
 
         emailtext.setEditable(false);
         emailtext.setBackground(new java.awt.Color(48, 171, 172));
@@ -277,6 +289,7 @@ public class userinfo22 extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setBackground(new java.awt.Color(244, 216, 19));
         jButton1.setText("cancel");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -284,6 +297,7 @@ public class userinfo22 extends javax.swing.JFrame {
             }
         });
 
+        jButton2.setBackground(new java.awt.Color(244, 216, 19));
         jButton2.setText("update");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -308,14 +322,12 @@ public class userinfo22 extends javax.swing.JFrame {
                                     .addGroup(jPanel9Layout.createSequentialGroup()
                                         .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                             .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                             .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE)
                                             .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                             .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                             .addComponent(emailtext, javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(lastnametext, javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)
                                             .addComponent(firstnametext, javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(usernametext, javax.swing.GroupLayout.Alignment.LEADING)))))
@@ -350,14 +362,10 @@ public class userinfo22 extends javax.swing.JFrame {
                             .addComponent(firstnametext, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(lastnametext, javax.swing.GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(emailtext, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(18, 18, 18)
+                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(emailtext, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(20, 20, 20)
                         .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                             .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 68, Short.MAX_VALUE))))
@@ -547,7 +555,7 @@ public class userinfo22 extends javax.swing.JFrame {
     private void backMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backMouseClicked
         // TODO add your handling code here:
         this.dispose();
-        new userprofile22().setVisible(true);
+        new userprofile22(usernameorigin).setVisible(true);
     }//GEN-LAST:event_backMouseClicked
 
     private void newimageMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_newimageMouseClicked
@@ -584,7 +592,7 @@ public class userinfo22 extends javax.swing.JFrame {
                 
                 String username = this.usernametext.getText();
                 
-            String sql1="update person set image =?,firstname='"+this.firstnametext.getText()+"',lastname='"+this.lastnametext.getText()+"' where email ='"+mail+"'";
+            String sql1="update person set image =?,firstname='"+this.firstnametext.getText()+"' where email ='"+mail+"'";
             PreparedStatement pstmt1=conn.prepareStatement(sql1);
             pstmt1.setString(1, filename);
             pstmt1.executeUpdate();
@@ -603,9 +611,11 @@ public class userinfo22 extends javax.swing.JFrame {
         //******************** close addpost frame then close connection:
         conn.close();
             //pack();
-	    dispose(); // Close 
-            new userprofile22().setVisible(true);
-            
+	    
+            dispose();
+        new userprofile22(usernameorigin).setVisible(true);
+           // new userprofile22().setVisible(true);
+          //  dispose(); // Close 
        // this.dispose();
        // new userprofile22().setVisible(true);
 
@@ -621,7 +631,9 @@ public class userinfo22 extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
             dispose(); // Close 
-            new userprofile22().setVisible(true);
+            new userprofile22(this.usernameorigin).setVisible(true);
+       
+            
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -654,7 +666,7 @@ public class userinfo22 extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new userinfo22().setVisible(true);
+                new userinfo22(usernameorigin).setVisible(true);
             }
         });
     }
@@ -669,7 +681,6 @@ public class userinfo22 extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -684,7 +695,6 @@ public class userinfo22 extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField lastnametext;
     private javax.swing.JLabel min;
     private javax.swing.JLabel newimage;
     private rounded.JLabelRound userimage;

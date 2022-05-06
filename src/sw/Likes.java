@@ -5,6 +5,8 @@
  */
 package sw;
 
+import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
@@ -13,56 +15,58 @@ import java.sql.*;
 import javax.swing.BoxLayout;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
+import javax.swing.SwingConstants;
 import rounded.JLabelRound;
 
 /**
  *
  * @author Dell E7280 Pro
  */
-public class Following extends javax.swing.JFrame {
+public class Likes extends javax.swing.JFrame {
 
     /**
-     * Creates new form Following
+     * Creates new form Likes
      */
+    int idpost = 0;
     JPanel postbase = new JPanel();
-    String username = "";
 
-    public Following() {
+    public Likes() {
         initComponents();
+        //getusername();
     }
 
-    public Following(String username) {
+    public Likes(String idpost) {
         initComponents();
         super.pack();
         super.setLocationRelativeTo(null);
         scrollPane1.add(postbase);
-        this.username = username;
-        giveFollowing();
+        this.idpost = Integer.parseInt(idpost);
+        getusername();
 
     }
 
-    public void giveFollowing() {
+    public void getusername() {
         JPanel jhh = new JPanel();
         postbase.setLayout(new BoxLayout(postbase, BoxLayout.Y_AXIS));
         Connection conn = null;
         ResultSet rs = null;
         Boolean flag = true;
-        //go to like TABLE
-        //WHELE WE HAVE NEXT
         try {
             conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/softwareproject","root","iNEEDtostudy@202");
-            String sql1 = "select * from Following";
+            String sql1 = "select * from Likes";
             Statement st1 = conn.createStatement();
             ResultSet rs1 = st1.executeQuery(sql1);
             while (rs1.next()) {
-                // i need to compare data id post in data base and whta data i have 
-                if (rs1.getString("username").equals(username)) {
-                    System.out.println("following" + rs1.getString("username"));
+
+                if (idpost == rs1.getInt("idpost")) {
                     jhh.setLayout(null);//new FlowLayout());
                     //**********************add the jpanel
-                    jhh.setPreferredSize(new Dimension(100, 100));
+                    jhh.setPreferredSize(new Dimension(100, 50));
                     jhh.setBackground(new java.awt.Color(255, 255, 255));//18, 33, 139));//blue
                     postbase.add(jhh);
                     JLabelRound rondlabel = new JLabelRound();
@@ -76,7 +80,8 @@ public class Following extends javax.swing.JFrame {
                     Statement st2 = conn.createStatement();
                     ResultSet rs2 = st2.executeQuery(sql2);
                     while (rs2.next()) {
-                        if (rs1.getString("following").equals(rs2.getString("username"))) {
+                        if (rs1.getString("userlike").equals(rs2.getString("username"))) {
+                            System.out.println("hiii222 like  " + rs1.getString("userlike"));
                             String sql3 = "select * from person";
                             Statement st3 = conn.createStatement();
                             ResultSet rs3 = st3.executeQuery(sql3);
@@ -99,8 +104,8 @@ public class Following extends javax.swing.JFrame {
                     jhh.add(rondlabel);
 
                     //********************create jlabel to display username post:
-                    String following= rs1.getString("following");
-                    JLabel label2 = new JLabel(rs1.getString("following"));
+                    String userlike = rs1.getString("userlike");
+                    JLabel label2 = new JLabel(rs1.getString("userlike"));
                     label2.setBounds(80, 15, 100, 30);//******(left/right, up/down, width,height)
                     label2.setOpaque(true);
                     label2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -111,7 +116,7 @@ public class Following extends javax.swing.JFrame {
                     /////////////////////////////////////////////////////////
                     label2.addMouseListener(new MouseAdapter() {
                         public void mouseClicked(MouseEvent e) {
-                            new otherusers22(following).setVisible(true);
+                            new otherusers22(userlike).setVisible(true);
                             dispose();
                             firstpage22.mainpage.dispose();//this is an object declare in firstpage22.java
                         }
@@ -130,19 +135,18 @@ public class Following extends javax.swing.JFrame {
                     if (!flag) {
                         flag = true;
                         jhh.setBackground(new java.awt.Color(240, 240, 240));
-                        jhh.setPreferredSize(new Dimension(10, 5));
+                        jhh.setPreferredSize(new Dimension(10, 15));
                         postbase.add(jhh);
                         jhh = new JPanel();
                         jhh.setVisible(true);
-                    }//{if idpost=postid)
+                    }//inner if
                 }
 
-            }//while1
-
+            }//while
         } catch (SQLException ex) {
-            //Logger.getLogger(MainPage.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+            System.err.println(ex);
         }
-
     }
 
     /**
@@ -163,7 +167,6 @@ public class Following extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
-        setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(244, 216, 19));
 
@@ -173,8 +176,9 @@ public class Following extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Goudy Old Style", 0, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Following List");
+        jLabel2.setText("Likes");
 
+        jButton1.setBackground(new java.awt.Color(26, 162, 163));
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw/images0/previous.png"))); // NOI18N
         jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -188,28 +192,26 @@ public class Following extends javax.swing.JFrame {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(scrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 374, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addContainerGap(386, Short.MAX_VALUE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(scrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(jLabel2)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(152, 152, 152)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(17, 17, 17)
+                .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(scrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 338, Short.MAX_VALUE)
+                .addComponent(scrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 268, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButton1)
                 .addContainerGap())
         );
 
@@ -275,6 +277,7 @@ public class Following extends javax.swing.JFrame {
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
+
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -283,20 +286,25 @@ public class Following extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Following.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Likes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Following.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Likes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Following.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Likes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Following.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Likes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+
+        //COMPAR RS GET INT ID POST 
+        //IF WAS EQUL GET USER LIKE 
+        //IN PANEL WE HAVE TO SHOW USER LIKE 
+        //TO GIVE HIS PHOT INEED TO OPEN APPUSER  AND KNOW RS GETSTRING GIVE EMAIL THEN FROM PERSON TABLE WE CAN GET USER PHTO
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Following().setVisible(true);
+                new Likes().setVisible(true);
             }
         });
     }

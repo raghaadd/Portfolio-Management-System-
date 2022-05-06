@@ -9,11 +9,20 @@ import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.sql.*;
+import java.awt.event.MouseListener;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.BoxLayout;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import rounded.JLabelRound;
 
@@ -21,48 +30,55 @@ import rounded.JLabelRound;
  *
  * @author Dell E7280 Pro
  */
-public class Following extends javax.swing.JFrame {
+public class Commentsforprofileuser extends javax.swing.JFrame {
 
     /**
-     * Creates new form Following
+     * Creates new form Comments
      */
+    int idpost = 0;
+    String usernameorigin = "";//name of user who want to add comment
+    String usernamepost = "";// name of user who own the post
     JPanel postbase = new JPanel();
-    String username = "";
 
-    public Following() {
+    String myid= null;
+    
+    public Commentsforprofileuser() {
         initComponents();
+
     }
 
-    public Following(String username) {
+    public Commentsforprofileuser(String idpost, String username) {
         initComponents();
         super.pack();
+        
         super.setLocationRelativeTo(null);
         scrollPane1.add(postbase);
-        this.username = username;
-        giveFollowing();
+        this.idpost = Integer.parseInt(idpost);
+        this.myid = idpost;
+        this.usernameorigin = username;
+        getusername();
 
     }
 
-    public void giveFollowing() {
+    public void getusername() {
         JPanel jhh = new JPanel();
         postbase.setLayout(new BoxLayout(postbase, BoxLayout.Y_AXIS));
         Connection conn = null;
         ResultSet rs = null;
         Boolean flag = true;
-        //go to like TABLE
-        //WHELE WE HAVE NEXT
         try {
             conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/softwareproject","root","iNEEDtostudy@202");
-            String sql1 = "select * from Following";
+            String sql1 = "select * from comments where idpost = '"+ myid+"'";
             Statement st1 = conn.createStatement();
             ResultSet rs1 = st1.executeQuery(sql1);
             while (rs1.next()) {
-                // i need to compare data id post in data base and whta data i have 
-                if (rs1.getString("username").equals(username)) {
-                    System.out.println("following" + rs1.getString("username"));
+
+                if (idpost == rs1.getInt("idpost")) {
+                    usernamepost = rs1.getString("username");
                     jhh.setLayout(null);//new FlowLayout());
                     //**********************add the jpanel
-                    jhh.setPreferredSize(new Dimension(100, 100));
+                    System.out.println("commennttts " + idpost);
+                    jhh.setPreferredSize(new Dimension(100, 150));
                     jhh.setBackground(new java.awt.Color(255, 255, 255));//18, 33, 139));//blue
                     postbase.add(jhh);
                     JLabelRound rondlabel = new JLabelRound();
@@ -76,7 +92,8 @@ public class Following extends javax.swing.JFrame {
                     Statement st2 = conn.createStatement();
                     ResultSet rs2 = st2.executeQuery(sql2);
                     while (rs2.next()) {
-                        if (rs1.getString("following").equals(rs2.getString("username"))) {
+                        if (rs1.getString("usercomment").equals(rs2.getString("username"))) {
+                            System.out.println("commennttts " + rs1.getString("usercomment"));
                             String sql3 = "select * from person";
                             Statement st3 = conn.createStatement();
                             ResultSet rs3 = st3.executeQuery(sql3);
@@ -89,6 +106,8 @@ public class Following extends javax.swing.JFrame {
                                     Image imgscale2 = img2.getScaledInstance(rondlabel.getWidth(), rondlabel.getHeight(), Image.SCALE_SMOOTH);
                                     ImageIcon scaledIcon2 = new ImageIcon(imgscale2);
                                     rondlabel.setIcon(scaledIcon2);
+                                    
+                                    jhh.add(rondlabel);
 
                                 }
                             }//while (person table)
@@ -99,8 +118,8 @@ public class Following extends javax.swing.JFrame {
                     jhh.add(rondlabel);
 
                     //********************create jlabel to display username post:
-                    String following= rs1.getString("following");
-                    JLabel label2 = new JLabel(rs1.getString("following"));
+                    String usercomment = rs1.getString("usercomment");
+                    JLabel label2 = new JLabel(rs1.getString("usercomment"));
                     label2.setBounds(80, 15, 100, 30);//******(left/right, up/down, width,height)
                     label2.setOpaque(true);
                     label2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -111,15 +130,36 @@ public class Following extends javax.swing.JFrame {
                     /////////////////////////////////////////////////////////
                     label2.addMouseListener(new MouseAdapter() {
                         public void mouseClicked(MouseEvent e) {
-                            new otherusers22(following).setVisible(true);
+                            new otherusers22(usercomment).setVisible(true);
                             dispose();
                             firstpage22.mainpage.dispose();//this is an object declare in firstpage22.java
                         }
                     });
+                    //********************create jlabel to display username post:
+                    JLabel label3 = new JLabel(rs1.getString("content"));
+                    label3.setBounds(30, 80, 100, 30);//******(left/right, up/down, width,height)
+                    label3.setOpaque(true);
+                    label3.setBackground(new java.awt.Color(255, 255, 255));
+                    label3.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+                    label3.setForeground(new java.awt.Color(26, 162, 163));
                     /////////////////////////////////////////////////////////
-                    scrollPane1.add(postbase);
 
                     jhh.add(label2);
+                    jhh.add(label3);
+
+                    JLabel label4 = new JLabel(rs1.getString("idcomments"));
+                    label4.setIcon(new ImageIcon(getClass().getResource("images0/x1.png")));
+                    label4.setToolTipText("Hide this comment.");
+                    label4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+                    label4.setBounds(200, 15, 100, 30);//******(left/right, up/down, width,height)
+                    label4.setOpaque(true);
+                    label4.setBackground(new java.awt.Color(255, 255, 255));
+                    label4.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+                    label4.setForeground(new java.awt.Color(26, 162, 163));
+                    /////////////////////////////////////////////////////////
+                    //*********** add mouse listner for deleting comments:
+                    label4.addMouseListener(mouseListener);
+                    jhh.add(label4);
                     jhh.setVisible(true);
                     postbase.add(jhh);
 
@@ -130,19 +170,19 @@ public class Following extends javax.swing.JFrame {
                     if (!flag) {
                         flag = true;
                         jhh.setBackground(new java.awt.Color(240, 240, 240));
-                        jhh.setPreferredSize(new Dimension(10, 5));
+                        jhh.setPreferredSize(new Dimension(10, 15));
                         postbase.add(jhh);
                         jhh = new JPanel();
                         jhh.setVisible(true);
-                    }//{if idpost=postid)
+                    }//inner if
                 }
 
-            }//while1
-
+            }//while
         } catch (SQLException ex) {
-            //Logger.getLogger(MainPage.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+            System.err.println(ex);
+           
         }
-
     }
 
     /**
@@ -150,6 +190,26 @@ public class Following extends javax.swing.JFrame {
      * WARNING: Do NOT modify this code. The content of this method is always
      * regenerated by the Form Editor.
      */
+    MouseListener mouseListener = new MouseAdapter() {
+
+        @Override
+        public void mouseClicked(MouseEvent e) {
+            try {
+                Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/softwareproject","root","iNEEDtostudy@202");
+                String idcomm = ((JLabel) e.getSource()).getText();
+                Statement t = conn.createStatement();
+                String sql2 = "delete from comments where idcomments ='" + Integer.parseInt(idcomm) + "'";
+                t.executeUpdate(sql2);
+                conn.setAutoCommit(false);
+                conn.commit();
+                conn.close();
+
+            } catch (SQLException ex) {
+                Logger.getLogger(Commentsforprofileuser.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    };
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -158,12 +218,14 @@ public class Following extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        jButtonsend = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
+        jButtonback = new javax.swing.JButton();
         scrollPane1 = new java.awt.ScrollPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
-        setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(244, 216, 19));
 
@@ -171,15 +233,30 @@ public class Following extends javax.swing.JFrame {
 
         jPanel3.setBackground(new java.awt.Color(26, 162, 163));
 
+        jLabel2.setBackground(new java.awt.Color(255, 255, 255));
         jLabel2.setFont(new java.awt.Font("Goudy Old Style", 0, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Following List");
+        jLabel2.setText("Comments");
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw/images0/previous.png"))); // NOI18N
-        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jButtonsend.setFont(new java.awt.Font("Goudy Old Style", 0, 12)); // NOI18N
+        jButtonsend.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw/images0/send.png"))); // NOI18N
+        jButtonsend.setActionCommand("send");
+        jButtonsend.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButtonsend.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jButtonsendActionPerformed(evt);
+            }
+        });
+
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jScrollPane1.setViewportView(jTextArea1);
+
+        jButtonback.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw/images0/previous.png"))); // NOI18N
+        jButtonback.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButtonback.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonbackActionPerformed(evt);
             }
         });
 
@@ -187,29 +264,40 @@ public class Following extends javax.swing.JFrame {
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addContainerGap(386, Short.MAX_VALUE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButtonback, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(scrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(scrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jButtonsend, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10)
+                        .addComponent(jScrollPane1)))
                 .addContainerGap())
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(152, 152, 152)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(201, 201, 201)
+                .addComponent(jLabel2)
+                .addContainerGap(253, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel2)
+                .addGap(8, 8, 8)
+                .addComponent(scrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(scrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 338, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jButtonsend, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 94, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButtonback, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -217,7 +305,7 @@ public class Following extends javax.swing.JFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -261,10 +349,33 @@ public class Following extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jButtonbackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonbackActionPerformed
         // TODO add your handling code here:
         this.dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jButtonbackActionPerformed
+
+    private void jButtonsendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonsendActionPerformed
+        // TODO add your handling code here:
+        try {
+            //******************* open connection with mysql:
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/softwareproject","root","iNEEDtostudy@202");
+
+            //********************* insert data into post table:
+            String sql1 = "insert into comments set username=?, content=?,idpost=?,usercomment=? ";
+            PreparedStatement pstmt1 = conn.prepareStatement(sql1);
+            pstmt1.setString(1, usernameorigin);//usernamepost);
+            pstmt1.setString(2, jTextArea1.getText());
+            pstmt1.setInt(3, idpost);
+            pstmt1.setString(4, usernameorigin);
+            pstmt1.executeUpdate();
+            jTextArea1.setText("");
+            getusername();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(Commentsforprofileuser.class
+                    .getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButtonsendActionPerformed
 
     /**
      * @param args the command line arguments
@@ -280,33 +391,42 @@ public class Following extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
+
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Following.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Commentsforprofileuser.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Following.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Commentsforprofileuser.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Following.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Commentsforprofileuser.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Following.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Commentsforprofileuser.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Following().setVisible(true);
+                new Commentsforprofileuser().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButtonback;
+    private javax.swing.JButton jButtonsend;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextArea jTextArea1;
     private java.awt.ScrollPane scrollPane1;
     // End of variables declaration//GEN-END:variables
 }

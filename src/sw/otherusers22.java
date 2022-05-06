@@ -61,13 +61,7 @@ public class otherusers22 extends javax.swing.JFrame {
         back.setToolTipText("Go back.");
         
         explore.setIcon(new ImageIcon(getClass().getResource("images0/ex.png")));
-        contact.setToolTipText("explore.");
-       
-        contact.setIcon(new ImageIcon(getClass().getResource("images0/contact.png")));
-        contact.setToolTipText("Contact us.");
         
-        out.setIcon(new ImageIcon(getClass().getResource("images0/out.png")));
-        out.setToolTipText("Sign out.");
         
         
         fing.setIcon(new ImageIcon(getClass().getResource("images0/fing.png")));
@@ -99,13 +93,6 @@ public class otherusers22 extends javax.swing.JFrame {
         back.setToolTipText("Go back.");
         
         explore.setIcon(new ImageIcon(getClass().getResource("images0/ex.png")));
-        contact.setToolTipText("explore.");
-       
-        contact.setIcon(new ImageIcon(getClass().getResource("images0/contact.png")));
-        contact.setToolTipText("Contact us.");
-        
-        out.setIcon(new ImageIcon(getClass().getResource("images0/out.png")));
-        out.setToolTipText("Sign out.");
         
         
         fing.setIcon(new ImageIcon(getClass().getResource("images0/fing.png")));
@@ -437,8 +424,6 @@ public class otherusers22 extends javax.swing.JFrame {
         jPanel13 = new javax.swing.JPanel();
         jPanel14 = new javax.swing.JPanel();
         userimage = new rounded.JLabelRound();
-        out = new javax.swing.JLabel();
-        contact = new javax.swing.JLabel();
         explore = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
         name = new javax.swing.JLabel();
@@ -543,16 +528,6 @@ public class otherusers22 extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        out.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        out.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                outMouseClicked(evt);
-            }
-        });
-
-        contact.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        contact.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-
         explore.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         explore.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
@@ -615,14 +590,10 @@ public class otherusers22 extends javax.swing.JFrame {
                 .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel13Layout.createSequentialGroup()
                         .addComponent(name, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(97, 97, 97)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 252, Short.MAX_VALUE)
                         .addComponent(follow, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(explore, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(contact, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(out, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(explore, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jSeparator2)
                     .addGroup(jPanel13Layout.createSequentialGroup()
                         .addComponent(bio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -647,8 +618,6 @@ public class otherusers22 extends javax.swing.JFrame {
             .addGroup(jPanel13Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(out, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(contact, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(explore, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(name, javax.swing.GroupLayout.DEFAULT_SIZE, 58, Short.MAX_VALUE)
                     .addComponent(follow, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -913,12 +882,6 @@ public class otherusers22 extends javax.swing.JFrame {
         new mainpage22().setVisible(true);
     }//GEN-LAST:event_backMouseClicked
 
-    private void outMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_outMouseClicked
-        // TODO add your handling code here:
-        // close
-        this.dispose();
-    }//GEN-LAST:event_outMouseClicked
-
     private void nameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nameMouseClicked
         // TODO add your handling code here:
         this.dispose();
@@ -964,7 +927,6 @@ public class otherusers22 extends javax.swing.JFrame {
     private javax.swing.JLabel back;
     private javax.swing.JLabel bio;
     private javax.swing.JLabel close;
-    private javax.swing.JLabel contact;
     private javax.swing.JLabel ercount;
     private javax.swing.JLabel explore;
     private javax.swing.JLabel fer;
@@ -993,7 +955,6 @@ public class otherusers22 extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JLabel min;
     private javax.swing.JLabel name;
-    private javax.swing.JLabel out;
     private java.awt.ScrollPane scrollPane1;
     private rounded.JLabelRound userimage;
     // End of variables declaration//GEN-END:variables

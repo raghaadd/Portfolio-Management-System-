@@ -17,6 +17,10 @@ public class firstpage22 extends javax.swing.JFrame {
     /**
      * Creates new form firstpage22
      */
+    
+    
+    static mainpage22 mainpage;
+    
     public firstpage22() {
         initComponents();
         this.setLocationRelativeTo(null);

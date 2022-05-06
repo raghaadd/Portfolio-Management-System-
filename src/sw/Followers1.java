@@ -14,6 +14,7 @@ import javax.swing.BoxLayout;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import rounded.JLabelRound;
 
@@ -21,45 +22,47 @@ import rounded.JLabelRound;
  *
  * @author Dell E7280 Pro
  */
-public class Following extends javax.swing.JFrame {
+public class Followers1 extends javax.swing.JFrame {
 
     /**
-     * Creates new form Following
+     * Creates new form Followers1
      */
     JPanel postbase = new JPanel();
     String username = "";
 
-    public Following() {
+    public Followers1() {
         initComponents();
+
     }
 
-    public Following(String username) {
+    public Followers1(String username) {
         initComponents();
         super.pack();
         super.setLocationRelativeTo(null);
         scrollPane1.add(postbase);
         this.username = username;
-        giveFollowing();
+        giveFollower();
 
     }
 
-    public void giveFollowing() {
+    public void giveFollower() {
         JPanel jhh = new JPanel();
         postbase.setLayout(new BoxLayout(postbase, BoxLayout.Y_AXIS));
         Connection conn = null;
         ResultSet rs = null;
         Boolean flag = true;
+
         //go to like TABLE
         //WHELE WE HAVE NEXT
         try {
             conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/softwareproject","root","iNEEDtostudy@202");
-            String sql1 = "select * from Following";
+            String sql1 = "select * from Follower";
             Statement st1 = conn.createStatement();
             ResultSet rs1 = st1.executeQuery(sql1);
             while (rs1.next()) {
                 // i need to compare data id post in data base and whta data i have 
                 if (rs1.getString("username").equals(username)) {
-                    System.out.println("following" + rs1.getString("username"));
+                    System.out.println("follower   " + rs1.getString("username"));
                     jhh.setLayout(null);//new FlowLayout());
                     //**********************add the jpanel
                     jhh.setPreferredSize(new Dimension(100, 100));
@@ -76,7 +79,7 @@ public class Following extends javax.swing.JFrame {
                     Statement st2 = conn.createStatement();
                     ResultSet rs2 = st2.executeQuery(sql2);
                     while (rs2.next()) {
-                        if (rs1.getString("following").equals(rs2.getString("username"))) {
+                        if (rs1.getString("follower").equals(rs2.getString("username"))) {
                             String sql3 = "select * from person";
                             Statement st3 = conn.createStatement();
                             ResultSet rs3 = st3.executeQuery(sql3);
@@ -99,8 +102,8 @@ public class Following extends javax.swing.JFrame {
                     jhh.add(rondlabel);
 
                     //********************create jlabel to display username post:
-                    String following= rs1.getString("following");
-                    JLabel label2 = new JLabel(rs1.getString("following"));
+                    String follower = rs1.getString("follower");
+                    JLabel label2 = new JLabel(rs1.getString("follower"));
                     label2.setBounds(80, 15, 100, 30);//******(left/right, up/down, width,height)
                     label2.setOpaque(true);
                     label2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -111,7 +114,7 @@ public class Following extends javax.swing.JFrame {
                     /////////////////////////////////////////////////////////
                     label2.addMouseListener(new MouseAdapter() {
                         public void mouseClicked(MouseEvent e) {
-                            new otherusers22(following).setVisible(true);
+                            new otherusers22(follower).setVisible(true);
                             dispose();
                             firstpage22.mainpage.dispose();//this is an object declare in firstpage22.java
                         }
@@ -130,12 +133,12 @@ public class Following extends javax.swing.JFrame {
                     if (!flag) {
                         flag = true;
                         jhh.setBackground(new java.awt.Color(240, 240, 240));
-                        jhh.setPreferredSize(new Dimension(10, 5));
+                        jhh.setPreferredSize(new Dimension(10, 15));
                         postbase.add(jhh);
                         jhh = new JPanel();
                         jhh.setVisible(true);
-                    }//{if idpost=postid)
-                }
+                    }//inner if
+                }//{if idpost=postid)
 
             }//while1
 
@@ -173,7 +176,7 @@ public class Following extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Goudy Old Style", 0, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Following List");
+        jLabel2.setText("Followers List");
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sw/images0/previous.png"))); // NOI18N
         jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -188,28 +191,29 @@ public class Following extends javax.swing.JFrame {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addContainerGap(386, Short.MAX_VALUE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(scrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap())
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(152, 152, 152)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 346, Short.MAX_VALUE)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addComponent(scrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(94, 94, 94))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(23, 23, 23)
+                .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(scrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 338, Short.MAX_VALUE)
+                .addComponent(scrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 288, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -267,6 +271,7 @@ public class Following extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
+     *
      * @param args the command line arguments
      */
     public static void main(String args[]) {
@@ -283,20 +288,20 @@ public class Following extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Following.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Followers1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Following.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Followers1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Following.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Followers1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Following.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Followers1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Following().setVisible(true);
+                new Followers1().setVisible(true);
             }
         });
     }
