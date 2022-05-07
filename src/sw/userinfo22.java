@@ -26,6 +26,7 @@ import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.Border;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  *
@@ -37,8 +38,11 @@ public class userinfo22 extends javax.swing.JFrame {
      * Creates new form userinfo22
      */
     static String usernameorigin;
+    
     Border text_border = BorderFactory.createMatteBorder(0, 0, 2, 0, Color.black);
     String filename="";
+    
+    
     public userinfo22() {
         initComponents();
         
@@ -560,20 +564,23 @@ public class userinfo22 extends javax.swing.JFrame {
 
     private void newimageMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_newimageMouseClicked
         // TODO add your handling code here:
-        // TODO add your handling code here:
         JFileChooser chooser=new JFileChooser();
+        
+        chooser.addChoosableFileFilter(new FileNameExtensionFilter("Images","jpg", "png","mp4"));
         chooser.showOpenDialog(null);
         File file=chooser.getSelectedFile();
+        
+        if(!(file==null)){
         filename=file.getAbsolutePath();
         System.out.println("file path: "+filename);
-        userimage.setText("");
+       // userimage.setText("");
         //*********************** change scale for icon to fit the label:
         Icon icon=new ImageIcon(filename);
         ImageIcon imgicon=new ImageIcon(filename);
         Image img=imgicon.getImage();
         Image imgscale=img.getScaledInstance(userimage.getWidth(), userimage.getHeight(), Image.SCALE_SMOOTH);
         ImageIcon scaledIcon=new ImageIcon(imgscale);
-        userimage.setIcon(scaledIcon);
+        userimage.setIcon(scaledIcon);}
         
     }//GEN-LAST:event_newimageMouseClicked
 
@@ -584,7 +591,7 @@ public class userinfo22 extends javax.swing.JFrame {
             Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/softwareproject","root","iNEEDtostudy@202");
 
             //********************* insert data into pearson table:
-            System.out.println("filepath new:: "+filename);
+           // System.out.println("filepath new:: "+filename);
             
             String mail = this.emailtext.getText();
             

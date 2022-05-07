@@ -47,6 +47,7 @@ public class contactForm extends javax.swing.JFrame {
         btnSubmit = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
+        btnSubmit1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -82,6 +83,14 @@ public class contactForm extends javax.swing.JFrame {
         jLabel7.setFont(new java.awt.Font("Georgia", 3, 14)); // NOI18N
         jLabel7.setText("Message");
 
+        btnSubmit1.setFont(new java.awt.Font("Georgia", 3, 12)); // NOI18N
+        btnSubmit1.setText("cancel");
+        btnSubmit1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSubmit1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -101,6 +110,8 @@ public class contactForm extends javax.swing.JFrame {
                             .addComponent(jTextName)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnSubmit1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnSubmit)))
                 .addContainerGap())
         );
@@ -120,7 +131,9 @@ public class contactForm extends javax.swing.JFrame {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7))
                 .addGap(18, 18, 18)
-                .addComponent(btnSubmit)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnSubmit)
+                    .addComponent(btnSubmit1))
                 .addContainerGap(59, Short.MAX_VALUE))
         );
 
@@ -154,6 +167,12 @@ public class contactForm extends javax.swing.JFrame {
                 jTextEmail.setText("");
                 jTextAreaMessage.setText("");
     }//GEN-LAST:event_btnSubmitActionPerformed
+
+    private void btnSubmit1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmit1ActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+        new mainpage22(usernameorigin).setVisible(true);
+    }//GEN-LAST:event_btnSubmit1ActionPerformed
 
     /**
      * 
@@ -194,6 +213,7 @@ public class contactForm extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSubmit;
+    private javax.swing.JButton btnSubmit1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel5;

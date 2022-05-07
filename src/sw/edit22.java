@@ -26,6 +26,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  *
@@ -36,7 +37,9 @@ public class edit22 extends javax.swing.JFrame {
     /**
      * Creates new form edit22
      */
+    static String usernameorigin;
     String filename="";
+    
     public edit22() {
         initComponents();
         
@@ -46,6 +49,21 @@ public class edit22 extends javax.swing.JFrame {
         min.setIcon(new ImageIcon(getClass().getResource("images0/min1.png")));
       //  main.setIcon(new ImageIcon(getClass().getResource("images0/mainpage.jpeg")));
         back.setIcon(new ImageIcon(getClass().getResource("images0/back3.png")));
+        pp.setIcon(new ImageIcon(getClass().getResource("images0/f1.png")));
+      //  my_update("1", "asma");
+    }
+    
+    public edit22(String usernameorigin) {
+        this.usernameorigin = usernameorigin;
+        initComponents();
+        
+        this.setLocationRelativeTo(null);
+        
+        close.setIcon(new ImageIcon(getClass().getResource("images0/x1.png")));
+        min.setIcon(new ImageIcon(getClass().getResource("images0/min1.png")));
+      //  main.setIcon(new ImageIcon(getClass().getResource("images0/mainpage.jpeg")));
+        back.setIcon(new ImageIcon(getClass().getResource("images0/back3.png")));
+        pp.setIcon(new ImageIcon(getClass().getResource("images0/f1.png")));
       //  my_update("1", "asma");
     }
 
@@ -68,10 +86,11 @@ public class edit22 extends javax.swing.JFrame {
             Statement st8 = conn.createStatement();
             ResultSet rs8 = st8.executeQuery(sql8);
             if(rs8.next()){
+                
             String postcontent = rs8.getString("content");
             filename = postcontent;
             
-            if((!postcontent.equals("")) && postcontent!=null){
+                        if((!postcontent.equals("")) && postcontent!=null){
                            //************display image************
                            //*********************** change scale for icon to fit the label:
                            //Icon icon6=new ImageIcon(content);
@@ -83,7 +102,7 @@ public class edit22 extends javax.swing.JFrame {
                             jLabelsefile.setOpaque(true);
                             jLabelsefile.setBackground(new java.awt.Color(250,250,250));
                            
-                            System.out.println("user::: image found");
+                           // System.out.println("user::: image found");
                        }
                        else{
                            //************display noimage icon********
@@ -94,7 +113,7 @@ public class edit22 extends javax.swing.JFrame {
                             jLabelsefile.setIcon(scaledIcon6);
                             jLabelsefile.setOpaque(true);
                             jLabelsefile.setBackground(new java.awt.Color(250,250,250));
-                           System.out.println("user::: no image set one");
+                         //  System.out.println("user::: no image set one");
                        }
             
             
@@ -103,6 +122,7 @@ public class edit22 extends javax.swing.JFrame {
             this.jTextAreadesc.setText(postdescription);
            // String posthashtag = rs8.getString("username");
             }
+            
             //jTextFieldhashtag.setText();
            // jTextAreadesc.setText(postdescription);
        
@@ -161,6 +181,7 @@ public class edit22 extends javax.swing.JFrame {
         jPanel10 = new javax.swing.JPanel();
         jLabelsefile = new javax.swing.JLabel();
         jLabelchoosefile = new javax.swing.JLabel();
+        pp = new javax.swing.JLabel();
         jPanel11 = new javax.swing.JPanel();
         jTextFieldhashtag = new javax.swing.JTextField();
         jButtonupload = new javax.swing.JButton();
@@ -212,7 +233,7 @@ public class edit22 extends javax.swing.JFrame {
 
         jPanel8.setBackground(new java.awt.Color(48, 171, 172));
 
-        jPanel9.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel9.setBackground(new java.awt.Color(18, 33, 139));
         jPanel9.setPreferredSize(new java.awt.Dimension(680, 206));
 
         jLabelsefile.setBackground(new java.awt.Color(255, 255, 255));
@@ -222,7 +243,7 @@ public class edit22 extends javax.swing.JFrame {
         jPanel10.setLayout(jPanel10Layout);
         jPanel10Layout.setHorizontalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabelsefile, javax.swing.GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE)
+            .addComponent(jLabelsefile, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -234,10 +255,20 @@ public class edit22 extends javax.swing.JFrame {
         jLabelchoosefile.setForeground(new java.awt.Color(18, 33, 139));
         jLabelchoosefile.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelchoosefile.setText("Click here to add new file");
+        jLabelchoosefile.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabelchoosefile.setOpaque(true);
         jLabelchoosefile.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabelchoosefileMouseClicked(evt);
+            }
+        });
+
+        pp.setBackground(new java.awt.Color(255, 255, 255));
+        pp.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        pp.setOpaque(true);
+        pp.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ppMouseClicked(evt);
             }
         });
 
@@ -249,8 +280,10 @@ public class edit22 extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabelchoosefile, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jLabelchoosefile, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pp, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -258,7 +291,8 @@ public class edit22 extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabelchoosefile, javax.swing.GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
-                    .addComponent(jPanel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -330,18 +364,19 @@ public class edit22 extends javax.swing.JFrame {
         jPanel8Layout.setHorizontalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel11, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 604, Short.MAX_VALUE)
-                    .addComponent(jPanel9, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 604, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1))
-                .addContainerGap())
-            .addGroup(jPanel8Layout.createSequentialGroup()
-                .addGap(101, 101, 101)
-                .addComponent(jButtoncancel, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(64, 64, 64)
-                .addComponent(jButtonupload, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel8Layout.createSequentialGroup()
+                        .addGap(155, 155, 155)
+                        .addComponent(jButtoncancel, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(77, 77, 77)
+                        .addComponent(jButtonupload, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel8Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jScrollPane1)
+                            .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, 698, Short.MAX_VALUE)
+                            .addComponent(jPanel11, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 698, Short.MAX_VALUE))))
+                .addGap(15, 15, 15))
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -351,7 +386,7 @@ public class edit22 extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 382, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtoncancel, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -370,8 +405,8 @@ public class edit22 extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -379,8 +414,8 @@ public class edit22 extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 753, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
@@ -494,7 +529,7 @@ public class edit22 extends javax.swing.JFrame {
                         .addComponent(fake2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(fake, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 549, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(min, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(close, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -545,7 +580,7 @@ public class edit22 extends javax.swing.JFrame {
     private void backMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backMouseClicked
         // TODO add your handling code here:
         this.dispose();
-        new userprofile22().setVisible(true);
+        new userprofile22(usernameorigin).setVisible(true);
     }//GEN-LAST:event_backMouseClicked
 
     private void jButtonuploadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonuploadActionPerformed
@@ -576,6 +611,7 @@ public class edit22 extends javax.swing.JFrame {
             ResultSet rs1=st1.executeQuery(sql3);
             String idpost=null;
             while(rs1.next()){
+                
                 idpost=String.valueOf(rs1.getInt("idpost"));
             }
 
@@ -598,7 +634,7 @@ public class edit22 extends javax.swing.JFrame {
         //******************** close addpost frame then close connection:
         conn.close();
         this.dispose();
-        new userprofile22().setVisible(true);
+        new userprofile22(usernameorigin).setVisible(true);
 
         }catch(Exception e)
         {
@@ -613,7 +649,7 @@ public class edit22 extends javax.swing.JFrame {
         // TODO add your handling code here:
         // close
         this.dispose();
-        new userprofile22().setVisible(true);
+        new userprofile22(usernameorigin).setVisible(true);
     }//GEN-LAST:event_jButtoncancelActionPerformed
 
     private void jTextAreadescFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextAreadescFocusGained
@@ -630,13 +666,16 @@ public class edit22 extends javax.swing.JFrame {
 
     private void jLabelchoosefileMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelchoosefileMouseClicked
         // TODO add your handling code here:
-        // TODO add your handling code here:
         JFileChooser chooser=new JFileChooser();
+        
+        chooser.addChoosableFileFilter(new FileNameExtensionFilter("Images","jpg", "png","mp4"));
         chooser.showOpenDialog(null);
         File file=chooser.getSelectedFile();
+        
+        if(!(file==null)){
         filename=file.getAbsolutePath();
         System.out.println("file path: "+filename);
-        jLabelchoosefile.setText("");
+       // jLabelchoosefile.setText("");
         //*********************** change scale for icon to fit the label:
         Icon icon=new ImageIcon(filename);
         ImageIcon imgicon=new ImageIcon(filename);
@@ -644,6 +683,12 @@ public class edit22 extends javax.swing.JFrame {
         Image imgscale=img.getScaledInstance(jLabelsefile.getWidth(), jLabelsefile.getHeight(), Image.SCALE_SMOOTH);
         ImageIcon scaledIcon=new ImageIcon(imgscale);
         jLabelsefile.setIcon(scaledIcon);
+        jLabelchoosefile.setText("Click here to add new file");
+        jLabelchoosefile.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        jLabelchoosefile.setForeground(new java.awt.Color(18, 33, 139));
+        }
+        
+        
     }//GEN-LAST:event_jLabelchoosefileMouseClicked
 
     private void jTextFieldhashtagFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldhashtagFocusGained
@@ -660,6 +705,33 @@ public class edit22 extends javax.swing.JFrame {
         if(jTextFieldhashtag.getText().trim().equals(""))
             jTextFieldhashtag.setText("#Hashtag");
     }//GEN-LAST:event_jTextFieldhashtagFocusLost
+
+    private void ppMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ppMouseClicked
+        // TODO add your handling code here:
+        JFileChooser chooser=new JFileChooser();
+        
+        chooser.addChoosableFileFilter(new FileNameExtensionFilter("Images","jpg", "png"));
+        chooser.showOpenDialog(null);
+        File file=chooser.getSelectedFile();
+        
+        if(!(file==null)){
+        filename=file.getAbsolutePath();
+        System.out.println("file path: "+filename);
+        jLabelchoosefile.setText("");
+        //*********************** change scale for icon to fit the label:
+        Icon icon=new ImageIcon(filename);
+        ImageIcon imgicon=new ImageIcon(filename);
+        Image img=imgicon.getImage();
+        Image imgscale=img.getScaledInstance(jLabelsefile.getWidth(), jLabelsefile.getHeight(), Image.SCALE_SMOOTH);
+        ImageIcon scaledIcon=new ImageIcon(imgscale);
+        jLabelsefile.setIcon(scaledIcon);
+        jLabelchoosefile.setText("Click here to add new file");
+        jLabelchoosefile.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        jLabelchoosefile.setForeground(new java.awt.Color(18, 33, 139));
+        }
+        
+        
+    }//GEN-LAST:event_ppMouseClicked
 
     /**
      * @param args the command line arguments
@@ -691,7 +763,7 @@ public class edit22 extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new edit22().setVisible(true);
+                new edit22(usernameorigin).setVisible(true);
             }
         });
     }
@@ -721,5 +793,6 @@ public class edit22 extends javax.swing.JFrame {
     private javax.swing.JTextArea jTextAreadesc;
     private javax.swing.JTextField jTextFieldhashtag;
     private javax.swing.JLabel min;
+    private javax.swing.JLabel pp;
     // End of variables declaration//GEN-END:variables
 }

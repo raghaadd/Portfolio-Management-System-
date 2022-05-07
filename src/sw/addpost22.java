@@ -22,6 +22,7 @@ import java.util.logging.Logger;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
@@ -36,6 +37,7 @@ public class addpost22 extends javax.swing.JFrame {
     /**
      * Creates new form addpost22
      */
+    static String usernameorigin;
     String filename=null;
     public addpost22() {
         initComponents();
@@ -53,6 +55,21 @@ public class addpost22 extends javax.swing.JFrame {
     }
 
  
+    public addpost22(String usernameorigin) {
+        this.usernameorigin = usernameorigin;
+        initComponents();
+       // super.pack();
+        this.setLocationRelativeTo(null);
+        
+
+        close.setIcon(new ImageIcon(getClass().getResource("images0/x1.png")));
+        min.setIcon(new ImageIcon(getClass().getResource("images0/min1.png")));
+        main.setIcon(new ImageIcon(getClass().getResource("images0/mainpage.jpeg")));
+        back.setIcon(new ImageIcon(getClass().getResource("images0/back3.png")));
+        pp.setIcon(new ImageIcon(getClass().getResource("images0/f1.png")));
+        jLabelsefile.setIcon(new ImageIcon(getClass().getResource("images0/p1.png")));
+        
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -550,7 +567,7 @@ public class addpost22 extends javax.swing.JFrame {
             PreparedStatement pstmt1=conn.prepareStatement(sql1);
             pstmt1.setString(1, filename);
             pstmt1.setString(2, jTextAreadesc.getText());
-            pstmt1.setString(3, "asma");//"saja123");
+            pstmt1.setString(3, usernameorigin);//"asma");//"saja123");
             pstmt1.executeUpdate();
     
             
@@ -592,7 +609,7 @@ public class addpost22 extends javax.swing.JFrame {
         //******************** close addpost frame then close connection:
         conn.close();
         
-        new userprofile22().setVisible(true);
+        new userprofile22(usernameorigin).setVisible(true);
         this.dispose();
 
         }catch(Exception e)
@@ -606,8 +623,12 @@ public class addpost22 extends javax.swing.JFrame {
     private void jLabelchoosefileMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelchoosefileMouseClicked
         // TODO add your handling code here:
         JFileChooser chooser=new JFileChooser();
+        
+        chooser.addChoosableFileFilter(new FileNameExtensionFilter("Images","jpg", "png","mp4"));
         chooser.showOpenDialog(null);
         File file=chooser.getSelectedFile();
+        
+        if(!(file==null)){
         filename=file.getAbsolutePath();
         System.out.println("file path: "+filename);
         jLabelchoosefile.setText("");
@@ -621,12 +642,9 @@ public class addpost22 extends javax.swing.JFrame {
         jLabelchoosefile.setText("Click here to add new file");
         jLabelchoosefile.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         jLabelchoosefile.setForeground(new java.awt.Color(18, 33, 139));
-        
-        if(getFileExtension(filename).equals("pptx"))
-        {
-            //*************get photo for ppt
         }
-        System.out.println(getFileExtension(filename));
+        
+        
     }//GEN-LAST:event_jLabelchoosefileMouseClicked
 
     //******************** to know the extension for aploaded file
@@ -653,20 +671,24 @@ public class addpost22 extends javax.swing.JFrame {
         // TODO add your handling code here:
         // close
         this.dispose();
-        new mainpage22().setVisible(true);
+        new mainpage22(usernameorigin).setVisible(true);
     }//GEN-LAST:event_jButtoncancelActionPerformed
 
     private void backMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backMouseClicked
         // TODO add your handling code here:
         this.dispose();
-        new mainpage22().setVisible(true);
+        new mainpage22(usernameorigin).setVisible(true);
     }//GEN-LAST:event_backMouseClicked
 
     private void ppMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ppMouseClicked
         // TODO add your handling code here:
         JFileChooser chooser=new JFileChooser();
+        
+        chooser.addChoosableFileFilter(new FileNameExtensionFilter("Images","jpg", "png","mp4"));
         chooser.showOpenDialog(null);
         File file=chooser.getSelectedFile();
+        
+        if(!(file==null)){
         filename=file.getAbsolutePath();
         System.out.println("file path: "+filename);
         jLabelchoosefile.setText("");
@@ -677,6 +699,12 @@ public class addpost22 extends javax.swing.JFrame {
         Image imgscale=img.getScaledInstance(jLabelsefile.getWidth(), jLabelsefile.getHeight(), Image.SCALE_SMOOTH);
         ImageIcon scaledIcon=new ImageIcon(imgscale);
         jLabelsefile.setIcon(scaledIcon);
+        jLabelchoosefile.setText("Click here to add new file");
+        jLabelchoosefile.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        jLabelchoosefile.setForeground(new java.awt.Color(18, 33, 139));
+        }
+        
+        
     }//GEN-LAST:event_ppMouseClicked
 
     /**
@@ -713,7 +741,7 @@ public class addpost22 extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new addpost22().setVisible(true);
+                new addpost22(usernameorigin).setVisible(true);
             }
         });
     }
