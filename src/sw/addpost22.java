@@ -39,21 +39,7 @@ public class addpost22 extends javax.swing.JFrame {
      */
     static String usernameorigin;
     String filename=null;
-    public addpost22() {
-        initComponents();
-       // super.pack();
-        this.setLocationRelativeTo(null);
-        
-
-        close.setIcon(new ImageIcon(getClass().getResource("images0/x1.png")));
-        min.setIcon(new ImageIcon(getClass().getResource("images0/min1.png")));
-        main.setIcon(new ImageIcon(getClass().getResource("images0/mainpage.jpeg")));
-        back.setIcon(new ImageIcon(getClass().getResource("images0/back3.png")));
-        pp.setIcon(new ImageIcon(getClass().getResource("images0/f1.png")));
-        jLabelsefile.setIcon(new ImageIcon(getClass().getResource("images0/p1.png")));
-        
-    }
-
+    
  
     public addpost22(String usernameorigin) {
         this.usernameorigin = usernameorigin;

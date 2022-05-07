@@ -40,18 +40,7 @@ public class edit22 extends javax.swing.JFrame {
     static String usernameorigin;
     String filename="";
     
-    public edit22() {
-        initComponents();
-        
-        this.setLocationRelativeTo(null);
-        
-        close.setIcon(new ImageIcon(getClass().getResource("images0/x1.png")));
-        min.setIcon(new ImageIcon(getClass().getResource("images0/min1.png")));
-      //  main.setIcon(new ImageIcon(getClass().getResource("images0/mainpage.jpeg")));
-        back.setIcon(new ImageIcon(getClass().getResource("images0/back3.png")));
-        pp.setIcon(new ImageIcon(getClass().getResource("images0/f1.png")));
-      //  my_update("1", "asma");
-    }
+    
     
     public edit22(String usernameorigin) {
         this.usernameorigin = usernameorigin;
@@ -69,7 +58,7 @@ public class edit22 extends javax.swing.JFrame {
 
     
     public void my_update(String postid, String name) {
-		
+		this.usernameorigin = name;
             //    jTextFieldhashtag.setText();
              //   jTextAreadesc.setText(pdescription);
                
@@ -90,7 +79,8 @@ public class edit22 extends javax.swing.JFrame {
             String postcontent = rs8.getString("content");
             filename = postcontent;
             
-                        if((!postcontent.equals("")) && postcontent!=null){
+                        if(postcontent!=null)
+                        if((!postcontent.equals(""))){
                            //************display image************
                            //*********************** change scale for icon to fit the label:
                            //Icon icon6=new ImageIcon(content);
@@ -590,7 +580,7 @@ public class edit22 extends javax.swing.JFrame {
             Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/softwareproject","root","iNEEDtostudy@202");
 
             //********************* insert data into post table:
-            System.out.println("filepath new:: "+filename);
+           // System.out.println("filepath new:: "+filename);
             String id = fake.getText();
             String sql1="update post set content =?,description='"+jTextAreadesc.getText()+"',username='asma' where idpost ='"+id+"'";
             PreparedStatement pstmt1=conn.prepareStatement(sql1);

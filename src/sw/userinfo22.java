@@ -43,25 +43,7 @@ public class userinfo22 extends javax.swing.JFrame {
     String filename="";
     
     
-    public userinfo22() {
-        initComponents();
-        
-        this.setLocationRelativeTo(null);
-        
-        close.setIcon(new ImageIcon(getClass().getResource("images0/x1.png")));
-        min.setIcon(new ImageIcon(getClass().getResource("images0/min1.png")));
-      //  main.setIcon(new ImageIcon(getClass().getResource("images0/mainpage.jpeg")));
-        back.setIcon(new ImageIcon(getClass().getResource("images0/back3.png")));
-        newimage.setIcon(new ImageIcon(getClass().getResource("images0/addimage.png")));
-        
-        firstnametext.setBorder(text_border);
-        emailtext.setBorder(text_border);
-        usernametext.setBorder(text_border);
-        biotext.setBorder(text_border);
-        
-
-      //  info("asma");
-    }
+   
     public userinfo22(String usernameorigin) {
         this.usernameorigin = usernameorigin;
         initComponents();
@@ -84,7 +66,7 @@ public class userinfo22 extends javax.swing.JFrame {
     }
     
     public void info(String name){
-        
+        this.usernameorigin = name;
         
         
         try {
@@ -120,7 +102,8 @@ public class userinfo22 extends javax.swing.JFrame {
                         String image = set.getString("image");
                         filename = image;
                       
-                        if((!image.equals("")) &&(!image.equals(null)) && (!image.equals("Image path,"))){//(!image.equals("")) && image!=null && !image.equals("Image path,")){
+                        if(image != null)
+                        if((!image.equals("")) && (!image.equals("Image path,"))){//(!image.equals("")) && image!=null && !image.equals("Image path,")){
                            //************display image************
                            //*********************** change scale for icon to fit the label:
                            //Icon icon6=new ImageIcon(content);
@@ -599,7 +582,7 @@ public class userinfo22 extends javax.swing.JFrame {
                 
                 String username = this.usernametext.getText();
                 
-            String sql1="update person set image =?,firstname='"+this.firstnametext.getText()+"' where email ='"+mail+"'";
+            String sql1="update person set image =?,fullname='"+this.firstnametext.getText()+"' where email ='"+mail+"'";
             PreparedStatement pstmt1=conn.prepareStatement(sql1);
             pstmt1.setString(1, filename);
             pstmt1.executeUpdate();
@@ -607,7 +590,7 @@ public class userinfo22 extends javax.swing.JFrame {
             
             
             //********************* insert data into appuser table
-            String sql5="update appuser set username = '"+username+"',bio='"+this.biotext.getText()+"'";
+            String sql5="update appuser set bio='"+this.biotext.getText()+"'where username = '"+username+"'";
             PreparedStatement pstmt3=conn.prepareStatement(sql5);
             pstmt3.executeUpdate();
             

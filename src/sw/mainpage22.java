@@ -68,35 +68,14 @@ public class mainpage22 extends javax.swing.JFrame {
     
     JPanel postbase = new JPanel();
     static String usernameorigin ;//= "asma";//"saja123"; //get this value from login page
+    
     boolean likeflag = false;//*************** to know if the user has been liked the post or not
     boolean saveflag = false;//*************** to know if the user has been saved the post or not
+    
     @FXML
     MediaPlayer player = null;
 
 
-    public mainpage22() {
-        initComponents();
-        player = null;
-        // photo.setIcon(new ImageIcon(getClass().getResource("/image/wa0.jpeg")));
-        scrollPane1.add(postbase);
-        setResizable(false);
-        personalphoto();
-        makepanel();
-        this.setLocationRelativeTo(null);
-        
-        
-        
-        close.setIcon(new ImageIcon(getClass().getResource("images0/x1.png")));
-        min.setIcon(new ImageIcon(getClass().getResource("images0/min1.png")));
-        back.setIcon(new ImageIcon(getClass().getResource("images0/back3.png")));
-        addpost.setIcon(new ImageIcon(getClass().getResource("images0/add3.png")));
-        explore.setIcon(new ImageIcon(getClass().getResource("images0/explore0.png")));
-        contact.setIcon(new ImageIcon(getClass().getResource("images0/contact.png")));
-        out.setIcon(new ImageIcon(getClass().getResource("images0/out.png")));
-        profile.setIcon(new ImageIcon(getClass().getResource("images0/pro.png")));
-        //   main.setIcon(new ImageIcon(getClass().getResource("images0/mainpage.jpeg")));
-    }
-    
     public mainpage22(String usernameorigin) {
         this.usernameorigin = usernameorigin;
         
@@ -166,7 +145,7 @@ public class mainpage22 extends javax.swing.JFrame {
                             jLabelRound1.setOpaque(true);
                             jLabelRound1.setBackground(new java.awt.Color(250,250,250));
                            
-                            System.out.println("user::: you have come here? havent you! ");
+                          //  System.out.println("user::: you have come here? havent you! ");
                        }
                        else{
                            //************display noimage icon********
@@ -177,7 +156,7 @@ public class mainpage22 extends javax.swing.JFrame {
                             jLabelRound1.setIcon(scaledIcon6);
                             jLabelRound1.setOpaque(true);
                             jLabelRound1.setBackground(new java.awt.Color(250,250,250));
-                           System.out.println("user::: guess not");
+                         //  System.out.println("user::: guess not");
                        }
                       
                       
@@ -219,12 +198,65 @@ public class mainpage22 extends javax.swing.JFrame {
             Boolean flag = true;
             
             
+            
+            if (rs1.next() == false){
+                
+                
+                System.out.println("user::: no?");
+                //we will display a text telling the user to follow people
+                    //post from people you follow will be displayed here
+                    jhh.setLayout(null);//new FlowLayout());
+                    //**********************add the jpanel in which the post will be displayed on
+                            jhh.setPreferredSize(new Dimension(this.scrollPane1.getWidth(),this.scrollPane1.getHeight()));
+                            jhh.setBackground(new java.awt.Color(255,255,255));//18, 33, 139));//blue
+                            postbase.add(jhh);
+                            
+                            
+                            
+                    //************label that have the photo 
+                    JLabel nofo = new JLabel();
+                    nofo.setBounds(160, 200, 100, 100);
+                    //nofo.setBackground(Color.red);
+                    //nofo.setOpaque(true);
+                    
+                    Icon icon=new ImageIcon(getClass().getResource("images0/nofo.png"));
+                    ImageIcon imgicon=new ImageIcon(getClass().getResource("images0/nofo.png"));
+                    Image img=imgicon.getImage();
+                    Image imgscale=img.getScaledInstance(nofo.getWidth(), nofo.getHeight(), Image.SCALE_SMOOTH);
+                    ImageIcon scaledIcon=new ImageIcon(imgscale);
+                    nofo.setIcon(scaledIcon);
+                    nofo.setOpaque(true);
+                    nofo.setBackground(new java.awt.Color(250,250,250));
+                    
+                    
+                    jhh.add(nofo);
+                    
+                    //************label that tell the user "no posts to show you have not followed anyone yet"
+                    JLabel nofotext = new JLabel();
+                    nofotext.setBounds(160, 300, 800, 100);
+                    nofotext.setText("no posts to show you have not followed anyone yet");
+                    //nofotext.setBackground(Color.YELLOW);
+                    nofotext.setFont(new java.awt.Font("Times New Roman", 0, 20)); // NOI18N
+                    nofotext.setForeground(new java.awt.Color(18, 33, 139));
+                    nofotext.setBackground(Color.white);
+                    nofotext.setOpaque(true);
+                    
+                    jhh.add(nofotext);
+                   
+               }
+            else{
+          //  System.out.println("user::: yes?");
+             sql1 = "select * from following where username = '"+usernameorigin+"'";
+             st1 = conn.createStatement();
+             rs1 = st1.executeQuery(sql1);
+             flag = true;
             while (rs1.next()) {
+              //  System.out.println("user::: yes while?");
                 String foll = rs1.getString("following");
                 //***********************************************************************
                 //if user is following people
-                if(foll != null){
-                    System.out.println("user::: not null happy?");
+               // if(foll != null)
+                   // System.out.println("user::: not null happy?");
                       
                 usenamefollowing = rs1.getString("username");
                 if (usenamefollowing.equals(usernameorigin)) {
@@ -361,19 +393,18 @@ public class mainpage22 extends javax.swing.JFrame {
  //*******************************************************************************************
  //*******************************************************************************************
  //*******************************************************************************************
-                            //********************display content:
+        //********************display content:                   
+        //*********new**************
                             
-                            //*********new**************
-                            
-                            JLabel l = new JLabel(idpost);
-                            l.setBounds(10, 70, 350, 300); //size.width, size.height);//******(left/right, up/down, width,height)
+        JLabel l = new JLabel(idpost);
+        l.setBounds(10, 70, 350, 300); //size.width, size.height);//******(left/right, up/down, width,height)
                             
                             
  
  
        //**********************content display ************************
        if(content != null && !content.equals("")){
-           System.out.println("content");
+          // System.out.println("content");
            
            
         int type = (content.length()-3);
@@ -454,8 +485,8 @@ public class mainpage22 extends javax.swing.JFrame {
         b.addMouseListener(new MouseAdapter() {
               public void mouseClicked(MouseEvent e) {
                   
-                  String idpost = ((JLabel) e.getSource()).getName();
-                  System.out.println("content  "+idpost);
+                 // String idpost = ((JLabel) e.getSource()).getName();
+                 // System.out.println("content  "+idpost);
                   
                   player.play();
                   
@@ -513,24 +544,14 @@ public class mainpage22 extends javax.swing.JFrame {
               }});
         /////////////////////////////////////////////////////////
         jhh.add(b2);
-    
-    
-           jhh.add(l);
-           
-    player.stop();
-          
- 
+        jhh.add(l);
+        player.stop();
           
         } 
        catch(Exception eee){
            JOptionPane.showMessageDialog(null, eee);
        }
         
-    
-    
-    
-    
-    
         }
         else{
                
@@ -544,15 +565,12 @@ public class mainpage22 extends javax.swing.JFrame {
         l.setOpaque(true);
         l.setBackground(new java.awt.Color(250,250,250));
         
-        
-        
         jhh.add( l );
         }
         
-        
        }
        else{
-           System.out.println("no content");
+          // System.out.println("no content");
            //*********************** change scale for icon to fit the label:
         Icon icon=new ImageIcon(getClass().getResource("images0/addc.png"));;
         ImageIcon imgicon=new ImageIcon(getClass().getResource("images0/addc.png"));;
@@ -569,7 +587,7 @@ public class mainpage22 extends javax.swing.JFrame {
         l.addMouseListener(new MouseAdapter() {
               public void mouseClicked(MouseEvent e) {
                   String idpost = ((JLabel) e.getSource()).getName();
-                  edit22 editobj = new edit22();
+                  edit22 editobj = new edit22(usernameorigin);
                   editobj.my_update(idpost, usernameorigin);//Execute the method my_update to pass str
 	          editobj.setVisible(true); // Open the Second.java window
 	          dispose();
@@ -639,7 +657,7 @@ public class mainpage22 extends javax.swing.JFrame {
                                 
                                     if (rs6.getString("username").equals(following)) {
                                         if (rs6.getString("userlike").equals(usernameorigin)) {
-                                            System.out.println("well here we go..."+idpost);
+                                           // System.out.println("well here we go..."+idpost);
                                             imgicon1 = new ImageIcon(getClass().getResource("images0/like.png"));
                                             likeflag = true;
                                         }
@@ -730,9 +748,6 @@ public class mainpage22 extends javax.swing.JFrame {
                             
                             
                             
-                          
-                            
-                            
        //**********************************************************************************************
                             //********************* create save button:
                             JLabel save = new JLabel(idpost);
@@ -755,7 +770,7 @@ public class mainpage22 extends javax.swing.JFrame {
                             while (rs7.next()) {
                                 if (String.valueOf(rs7.getInt("idpost")).equals(idpost)) {
                                     if (rs7.getString("username").equals(usernameorigin)) {
-                                        System.out.println("well here we go22...");
+                                       // System.out.println("well here we go22...");
                                         imgicon3 = new ImageIcon(getClass().getResource("images0/saved.png"));
                                         saveflag = true;
 
@@ -796,26 +811,13 @@ public class mainpage22 extends javax.swing.JFrame {
 
                 }//if user have followers and the followers belong to usernameorigin
                     
-                    
-                }//if user have no followers
-                else{
-                    System.out.println("user::: null happy?");
-                    
-                    //we will display a text telling the user to follow people
-                    //post from people you follow will be displayed here
-                    jhh.setLayout(null);//new FlowLayout());
-                            
-                            
-                            
-                            //**********************add the jpanel in which the post will be displayed on
-                            jhh.setPreferredSize(new Dimension(this.scrollPane1.getWidth(),this.scrollPane1.getHeight()));
-                            jhh.setBackground(new java.awt.Color(255,255,255));//18, 33, 139));//blue
-                            postbase.add(jhh);
-                    
-                }
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////   
+    
+                
                 
               
             }//while
+       }//else 
             
             conn.close();
         } catch (Exception ex) {
@@ -1466,7 +1468,7 @@ public class mainpage22 extends javax.swing.JFrame {
         // TODO add your handling code here:
         // close
         if(player == null){
-            new addpost22().setVisible(true);
+            new addpost22(usernameorigin).setVisible(true);
             this.dispose();
         }
         else{

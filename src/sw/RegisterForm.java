@@ -322,9 +322,9 @@ public class RegisterForm extends javax.swing.JFrame {
          Operations operations = new Operations();
         try{
             Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/softwareproject","root","iNEEDtostudy@202");
-            String sql1 = "insert into following (username) values ('"+usernameorigin+"')";
-            Statement st1 = conn.createStatement();
-            ResultSet rs1 = st1.executeQuery(sql1);
+           // String sql1 = "insert into following (username) values ('"+usernameorigin+"')";
+           // Statement st1 = conn.createStatement();
+           // ResultSet rs1 = st1.executeQuery(sql1);
             
         String RusernameStr = jTextUsername.getText();
         String RpasswordStr = String.valueOf(jPassword.getPassword());

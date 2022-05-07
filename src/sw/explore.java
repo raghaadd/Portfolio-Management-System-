@@ -334,7 +334,7 @@ public class explore extends javax.swing.JFrame {
     private void backMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backMouseClicked
         // TODO add your handling code here:
         this.dispose();
-       // new mainpage22().setVisible(true);
+       // new mainpage22(usernameorigin).setVisible(true);
     }//GEN-LAST:event_backMouseClicked
 
     /**

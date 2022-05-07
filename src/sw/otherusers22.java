@@ -42,42 +42,13 @@ import javax.swing.SwingConstants;
 public class otherusers22 extends javax.swing.JFrame {
 
     JPanel postbase = new JPanel();
-    String usernameorigin ="asma";
+   static String usernameorigin ;//="asma";
     
     String userprofile22;
-    public otherusers22() {
-        initComponents();
-        
-        
-        this.setLocationRelativeTo(null);
-        
-        close.setIcon(new ImageIcon(getClass().getResource("images0/x1.png")));
-        close.setToolTipText("Exit.");
-        
-        min.setIcon(new ImageIcon(getClass().getResource("images0/min1.png")));
-        min.setToolTipText("Minimize.");
-        
-        back.setIcon(new ImageIcon(getClass().getResource("images0/back3.png")));
-        back.setToolTipText("Go back.");
-        
-        explore.setIcon(new ImageIcon(getClass().getResource("images0/ex.png")));
-        
-        
-        
-        fing.setIcon(new ImageIcon(getClass().getResource("images0/fing.png")));
-        
-        fer.setIcon(new ImageIcon(getClass().getResource("images0/fer.png")));
-        
-        follow.setIcon(new ImageIcon(getClass().getResource("images0/unfollow.png")));
-        
-        scrollPane1.add(postbase);
-       // String usenamepost = "asma";
-        setResizable(false);
-        makepanel();
-        //dbconnect();
-    }
+    
 
-    public otherusers22(String user){
+    public otherusers22(String usernameorigin){
+        this.usernameorigin = usernameorigin;
         initComponents();
         
         
@@ -879,13 +850,13 @@ public class otherusers22 extends javax.swing.JFrame {
     private void backMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backMouseClicked
         // TODO add your handling code here:
         this.dispose();
-        new mainpage22().setVisible(true);
+        new mainpage22(usernameorigin).setVisible(true);
     }//GEN-LAST:event_backMouseClicked
 
     private void nameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nameMouseClicked
         // TODO add your handling code here:
         this.dispose();
-        new userprofile22().setVisible(true);
+        new userprofile22(usernameorigin).setVisible(true);
     }//GEN-LAST:event_nameMouseClicked
 
     /**
@@ -918,7 +889,7 @@ public class otherusers22 extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new otherusers22().setVisible(true);
+                new otherusers22(usernameorigin).setVisible(true);
             }
         });
     }

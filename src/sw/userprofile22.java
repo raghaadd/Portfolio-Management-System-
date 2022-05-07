@@ -56,56 +56,23 @@ import static sw.mainpage22.usernameorigin;
  */
 public class userprofile22 extends javax.swing.JFrame{
 
+    
+    
+    
     JPanel postbase = new JPanel();
     static String usernameorigin ;///="asma";
     String id = null;
     
+    boolean likeflag = false;//*************** to know if the user has been liked the post or not
+    boolean saveflag = false;//*************** to know if the user has been saved the post or not
+    
+    
     @FXML
     MediaPlayer player = null;
+   // String idpost;
+   
     
-    public userprofile22() {
-        initComponents();
-       
-        player = null;
-        
-      //  this.setLocationRelativeTo(null);
-        
-        close.setIcon(new ImageIcon(getClass().getResource("images0/x1.png")));
-        close.setToolTipText("Exit.");
-        
-        min.setIcon(new ImageIcon(getClass().getResource("images0/min1.png")));
-        min.setToolTipText("Minimize.");
-        
-        back.setIcon(new ImageIcon(getClass().getResource("images0/back3.png")));
-        back.setToolTipText("Go back.");
-        
-        addpost.setIcon(new ImageIcon(getClass().getResource("images0/add3.png")));
-        addpost.setToolTipText("To add post page.");
-        
-        explore.setIcon(new ImageIcon(getClass().getResource("images0/explore0.png")));
-        explore.setToolTipText("To explore page.");
-        
-        contact.setIcon(new ImageIcon(getClass().getResource("images0/contact.png")));
-        contact.setToolTipText("Contact us.");
-        
-        out.setIcon(new ImageIcon(getClass().getResource("images0/out.png")));
-        out.setToolTipText("Sign out.");
-        
-        edit.setIcon(new ImageIcon(getClass().getResource("images0/edit.png")));
-        edit.setToolTipText("Settings.");
-        
-        fing.setIcon(new ImageIcon(getClass().getResource("images0/fing.png")));
-        
-        fer.setIcon(new ImageIcon(getClass().getResource("images0/fer.png")));
-        
-        saved.setIcon(new ImageIcon(getClass().getResource("images0/saved.png")));
-        saved.setToolTipText("saved.");
-        
-        scrollPane1.add(postbase);
-       // String usenamepost = "asma";
-        setResizable(false);
-      //  makepanel();
-    }
+    
 
     public userprofile22(String usernameorigin) {
         this.usernameorigin = usernameorigin;
@@ -158,7 +125,7 @@ public class userprofile22 extends javax.swing.JFrame{
 //////////////////////////////////////////////////////////////////////////////////////////////////
     public void makepanel(){
         pack();
-        System.out.println("no "+usernameorigin);
+       // System.out.println("no "+usernameorigin);
         
         JPanel jhh =new JPanel(); 
         postbase.setLayout(new BoxLayout(postbase, BoxLayout.Y_AXIS));  
@@ -168,7 +135,7 @@ public class userprofile22 extends javax.swing.JFrame{
          ResultSet rs = null;
          PreparedStatement ps = null;
          String usenamepost=null;
-         String idpost;
+         
         
         
         
@@ -219,7 +186,7 @@ public class userprofile22 extends javax.swing.JFrame{
                             userimage.setOpaque(true);
                             userimage.setBackground(new java.awt.Color(250,250,250));
                            
-                            System.out.println("user::: you have come here? havent you! profile ");
+                           // System.out.println("user::: you have come here? havent you! profile ");
                        }
                        else{
                            //************display noimage icon********
@@ -230,7 +197,7 @@ public class userprofile22 extends javax.swing.JFrame{
                             userimage.setIcon(scaledIcon6);
                             userimage.setOpaque(true);
                             userimage.setBackground(new java.awt.Color(250,250,250));
-                           System.out.println("user::: guess not profile");
+                         //  System.out.println("user::: guess not profile");
                        }
                       
                       
@@ -241,30 +208,6 @@ public class userprofile22 extends javax.swing.JFrame{
                    
                }//bio if
                else{/*there is no user*/}
-           
-           
-           String sql1="select * from post where username ='"+usernameorigin+"' ORDER BY date DESC";
-           Statement st1=conn.createStatement();
-           ResultSet rs1=st1.executeQuery(sql1);
-           Boolean flag=true;
-           while(rs1.next())
-               
-           {
-               
-               
-               idpost=rs1.getString("idpost");
-             
-               if(usenamepost.equals(usernameorigin))
-               {
-                   String content=rs1.getString("content");
-                   
-                  // System.out.println("content::: "+content);
-                   
-                  
-           
-               
-               
-              
                
                
                //******************tooltip:
@@ -291,45 +234,107 @@ public class userprofile22 extends javax.swing.JFrame{
                     });
                     
                     
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////          
+         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+          ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+           ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+           String sql1="select * from post where username ='"+usernameorigin+"' ORDER BY date DESC";
+           Statement st1=conn.createStatement();
+           ResultSet rs1=st1.executeQuery(sql1);
+           
+           Boolean flag=true;
+           
+           if (rs1.next() == false){
+                 //if user have no post 
+                 //we will display a text telling the user to follow people
+                    //post from people you follow will be displayed here
+                    jhh.setLayout(null);//new FlowLayout());
+                    //**********************add the jpanel in which the post will be displayed on
+                            jhh.setPreferredSize(new Dimension(this.scrollPane1.getWidth(),this.scrollPane1.getHeight()));
+                            jhh.setBackground(new java.awt.Color(255,255,255));//18, 33, 139));//blue
+                            postbase.add(jhh);
+                            
+                            
+                            
+                    //************label that have the photo 
+                    JLabel nofo = new JLabel();
+                    nofo.setBounds(160, 200, 100, 100);
+                    //nofo.setBackground(Color.red);
+                    //nofo.setOpaque(true);
+                    
+                    Icon icon=new ImageIcon(getClass().getResource("images0/nofo.png"));
+                    ImageIcon imgicon=new ImageIcon(getClass().getResource("images0/nofo.png"));
+                    Image img=imgicon.getImage();
+                    Image imgscale=img.getScaledInstance(nofo.getWidth(), nofo.getHeight(), Image.SCALE_SMOOTH);
+                    ImageIcon scaledIcon=new ImageIcon(imgscale);
+                    nofo.setIcon(scaledIcon);
+                    nofo.setOpaque(true);
+                    nofo.setBackground(new java.awt.Color(250,250,250));
                     
                     
+                    jhh.add(nofo);
                     
+                    //************label that tell the user "no posts to show you have not followed anyone yet"
+                    JLabel nofotext = new JLabel();
+                    nofotext.setBounds(260, 200, 800, 100);
+                    nofotext.setText("no posts to show.");
+                    //nofotext.setBackground(Color.YELLOW);
+                    nofotext.setFont(new java.awt.Font("Times New Roman", 0, 20)); // NOI18N
+                    nofotext.setForeground(new java.awt.Color(18, 33, 139));
+                    nofotext.setBackground(Color.white);
+                    nofotext.setOpaque(true);
+                    
+                    jhh.add(nofotext);
                
-               //*****************follow count**************************   
-               //*******************get the following and followers count from data base:
-               //*******************in order to find out number of following we have to open following table and count how many time username repeated:
-                    String sql6 = "select * from following";
-                    Statement st6 = conn.createStatement();
-                    ResultSet rs6 = st6.executeQuery(sql6);
-                    int nofollowing = 0;
-                    
-                    while (rs6.next()) {
-                        
-                        if (usernameorigin.equals(rs6.getString("username"))) {
-                            nofollowing++;
-                        }
+           
+           }else{
+              sql1="select * from post where username ='"+usernameorigin+"' ORDER BY date DESC";
+              st1=conn.createStatement();
+              rs1=st1.executeQuery(sql1);
+              
+           
+              flag=true;
+           while(rs1.next()){
+               
+               String idpost = rs1.getString("idpost");
+             //  idpost=rs1.getString("idpost");
+             
+               if(usenamepost.equals(usernameorigin))
+               {
+                   String content=rs1.getString("content");
+                   
+                  // System.out.println("content::: "+content);
+                   
+                  
+                  //*************************hashtags work*******************************
+                  String keyword = "";
+                            
+                            
+                            //***********************open post_hashtag table then hashtag to get the keywords:
+                            String sql3 = "select * from post_hashtag where idpost = '"+idpost+"'";
+                            Statement st3 = conn.createStatement();
+                            ResultSet rs3 = st3.executeQuery(sql3);
+                            while (rs3.next()) {
+                                String idpost2 = rs3.getString("idpost");
+                                if (idpost.equals(idpost2)) {
+                                    String idhastag1 = String.valueOf(rs3.getInt("idhashtag"));
+                                    
+                                    
+                                    //*********open hashtag:
+                                    String sql4 = "select * from hashtag where idhashtag ='"+idhastag1+"'";
+                                    Statement st4 = conn.createStatement();
+                                    ResultSet rs4 = st4.executeQuery(sql4);
+                                    while (rs4.next()) {
+                                        String idhastag2 = String.valueOf(rs4.getInt("idhashtag"));
+                                        if (idhastag2.equals(idhastag1)) {
+                                            keyword = rs4.getString("keyword");
+                                        }//if idhashtag==idhashtag
+                                    }//while
+                                }//if (idpost==idpost
 
-                    }//while
-                    ingcount.setText(String.valueOf(nofollowing));
-                    
-                    
-                    //*******************in order to find out number of following we have to open follower table and count how many time username repeated:
-                    String sql7 = "select * from follower";
-                    Statement st7 = conn.createStatement();
-                    ResultSet rs7 = st7.executeQuery(sql7);
-                    int nofollower = 0;
-                    while (rs7.next()) {
-                        
-                        
-                        if (usernameorigin.equals(rs7.getString("username"))) {
-                            nofollower++;
-                        }
-
-                    }//while
-                    ercount.setText(String.valueOf(nofollower));
-                    ercount.setToolTipText(String.valueOf(nofollower));
-                    ingcount.setToolTipText(String.valueOf(nofollowing));
-                    //******************************************************************
+                            }//while
+           
+               //*************************hashtags work end*******************************
                
                
               
@@ -339,29 +344,28 @@ public class userprofile22 extends javax.swing.JFrame{
             //******************************************************************
             jhh.setLayout(null);//new FlowLayout());
             //add the jpanel in which the post will be displayed on
+            jhh.setSize(new Dimension(this.scrollPane1.getWidth(), 250));
+            
             jhh.setPreferredSize(new Dimension(this.scrollPane1.getWidth(), 250));
             jhh.setBackground(new java.awt.Color(255,255,255));//blue
          
             postbase.add(jhh);  
          
-            
-       System.out.println("no "+usernameorigin);
-       
-        JLabel l=new JLabel();
-        l.setBounds(15, 15, 290,220); //size.width, size.height);
-        
-         
-                
+             
  //*******************************************************************************************
  //*******************************************************************************************
  //*******************************************************************************************
  //*******************************************************************************************
  //*******************************************************************************************
  
+        JLabel l=new JLabel(idpost);
+        l.setName(idpost);
+        l.setBounds(15, 15, 290,220); //size.width, size.height);
+        
  
        //**********************content display ************************
        if(content != null && !content.equals("")){
-           System.out.println("content");
+          // System.out.println("content");
            
            
         int type = (content.length()-3);
@@ -425,12 +429,12 @@ public class userprofile22 extends javax.swing.JFrame{
    
     //************************************************************play icon
         JLabel b=new JLabel();
-        b.setBounds(18, 210, 30,30);
-        b.setBackground(Color.red);
+        b.setBounds(18, 10, 30,30);
+        b.setBackground(Color.WHITE);
         b.setName(idpost);
         //*********************** change scale for icon to fit the label:
         Icon icon=new ImageIcon(getClass().getResource("images0/addc.png"));
-        ImageIcon imgicon=new ImageIcon(getClass().getResource("images0/addc.png"));
+        ImageIcon imgicon=new ImageIcon(getClass().getResource("images0/play.png"));
         Image img=imgicon.getImage();
         Image imgscale=img.getScaledInstance(b.getWidth(), b.getHeight(), Image.SCALE_SMOOTH);
         ImageIcon scaledIcon=new ImageIcon(imgscale);
@@ -442,8 +446,8 @@ public class userprofile22 extends javax.swing.JFrame{
         b.addMouseListener(new MouseAdapter() {
               public void mouseClicked(MouseEvent e) {
                   
-                  String idpost = ((JLabel) e.getSource()).getName();
-                  System.out.println("content  "+idpost);
+                 // String idpost = ((JLabel) e.getSource()).getName();
+                 // System.out.println("content  "+idpost);
                   
                   player.play();
                   
@@ -455,12 +459,12 @@ public class userprofile22 extends javax.swing.JFrame{
         
     //************************************************************stop icon
         JLabel b1=new JLabel();
-        b1.setBounds(50, 210, 30,30);
-        b1.setBackground(Color.red);
+        b1.setBounds(50, 10, 30,30);
+        b1.setBackground(Color.WHITE);
         b1.setName(idpost);
         //*********************** change scale for icon to fit the label:
         Icon icon1=new ImageIcon(getClass().getResource("images0/addc.png"));
-        ImageIcon imgicon1=new ImageIcon(getClass().getResource("images0/addc.png"));
+        ImageIcon imgicon1=new ImageIcon(getClass().getResource("images0/stopplay.png"));
         Image img1=imgicon1.getImage();
         Image imgscale1=img1.getScaledInstance(b1.getWidth(), b1.getHeight(), Image.SCALE_SMOOTH);
         ImageIcon scaledIcon1=new ImageIcon(imgscale1);
@@ -481,12 +485,12 @@ public class userprofile22 extends javax.swing.JFrame{
     
     //************************************************************mute icon
         JLabel b2=new JLabel();
-        b2.setBounds(82, 210, 30,30);
-        b2.setBackground(Color.red);
+        b2.setBounds(82, 10, 30,30);
+        b2.setBackground(Color.WHITE);
         b2.setName(idpost);
         //*********************** change scale for icon to fit the label:
         Icon icon2=new ImageIcon(getClass().getResource("images0/addc.png"));
-        ImageIcon imgicon2=new ImageIcon(getClass().getResource("images0/addc.png"));
+        ImageIcon imgicon2=new ImageIcon(getClass().getResource("images0/muteplay.png"));
         Image img2=imgicon2.getImage();
         Image imgscale2=img2.getScaledInstance(b2.getWidth(), b2.getHeight(), Image.SCALE_SMOOTH);
         ImageIcon scaledIcon2=new ImageIcon(imgscale2);
@@ -516,12 +520,10 @@ public class userprofile22 extends javax.swing.JFrame{
         
     
     
-    
-    
-    
         }
         else{
-               
+            
+              //if the content is a photo 
         //*********************** change scale for icon to fit the label:
         Icon icon=new ImageIcon(content);
         ImageIcon imgicon=new ImageIcon(content);
@@ -540,6 +542,7 @@ public class userprofile22 extends javax.swing.JFrame{
         
        }
        else{
+           //if no content photo was found
            System.out.println("no content");
            //*********************** change scale for icon to fit the label:
         Icon icon=new ImageIcon(getClass().getResource("images0/addc.png"));;
@@ -557,7 +560,7 @@ public class userprofile22 extends javax.swing.JFrame{
         l.addMouseListener(new MouseAdapter() {
               public void mouseClicked(MouseEvent e) {
                   String idpost = ((JLabel) e.getSource()).getName();
-                  edit22 editobj = new edit22();
+                  edit22 editobj = new edit22(usernameorigin);
                   editobj.my_update(idpost, usernameorigin);//Execute the method my_update to pass str
 	          editobj.setVisible(true); // Open the Second.java window
 	          dispose();
@@ -568,11 +571,7 @@ public class userprofile22 extends javax.swing.JFrame{
         jhh.add( l );
         
            
-       }
-           
-       
-        
-                
+       } 
  //*******************************************************************************************
  //*******************************************************************************************
  //*******************************************************************************************
@@ -612,121 +611,125 @@ public class userprofile22 extends javax.swing.JFrame{
         
         
         
-        
+                            
+        //**********************************************************************************************
+        //********************* create view likes button:
         //**************************like icon*************************
-        JLabel like=new JLabel();
-        like.setText(null);
- 
-        like.setBounds(330, 165, 50, 50);
+        
+        JLabel like=new JLabel(idpost);
+        like.setBounds(330, 165, 70, 70);
+        like.setOpaque(true);
+        
+        like.setCursor(new Cursor(Cursor.HAND_CURSOR));
         like.setHorizontalAlignment(SwingConstants.CENTER);
         like.setVerticalAlignment(SwingConstants.CENTER);
         
         //*********************** change scale for icon to fit the label:
-        ImageIcon imgicon1=new ImageIcon(getClass().getResource("images0/emptyh.png"));
-        Image img1=imgicon1.getImage();
-        Image imgscale1=img1.getScaledInstance(like.getWidth(), like.getHeight(), Image.SCALE_SMOOTH);
-        ImageIcon scaledIcon1=new ImageIcon(imgscale1);
-        like.setIcon(scaledIcon1);
-        like.setOpaque(true);
-        like.setBackground(new java.awt.Color(255,255,255));
-        like.setToolTipText("Like.");
-        like.setCursor(new Cursor(Cursor.HAND_CURSOR));
         
-        
-        jhh.add(like);
-        
-        
-        //**************************like information*************************
-        JLabel likeinfo=new JLabel();
-        
-        //*************** we have to open likes table then search for username that we have then compare ifpost with idpost that dispaly:
-                    String sql8 = "select * from likes";
-                    Statement st8 = conn.createStatement();
-                    ResultSet rs8 = st8.executeQuery(sql8);
-                    int nolikes = 0;
-                    while (rs8.next()) {
-                        if (usernameorigin.equals(rs8.getString("username"))) {
-                            if (idpost.equals(String.valueOf(rs8.getInt("idpost")))) {
-                                nolikes++;
-                            }
-                        }
-                    }
-                    likeinfo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-                    likeinfo.setText(String.valueOf(nolikes));//this should be the number of likes this post has
-                    likeinfo.setToolTipText(String.valueOf(nolikes));//if the number is larger than the space to show it all show the full number in this
-        
-        
-        likeinfo.setBounds(330, 215, 65, 10);
-       // likeinfo.setOpaque(true);
-       // likeinfo.setBackground(Color.red);
-        
-        
-        jhh.add(likeinfo);
-        
-        
-        //**************************comment icon*************************
-        JLabel comm=new JLabel();
-        comm.setText(null);
-        //comm.setOpaque(true);
-       // comm.setBackground(Color.red);
-        comm.setBounds(400, 165, 50, 50);
-        comm.setHorizontalAlignment(SwingConstants.CENTER);
-        comm.setVerticalAlignment(SwingConstants.CENTER);
-        
-        //*********************** change scale for icon to fit the label:
-        //Icon icon2=new ImageIcon(getClass().getResource("images0/heart.png"));
-        ImageIcon imgicon2=new ImageIcon(getClass().getResource("images0/comm1.png"));
-        Image img2=imgicon2.getImage();
-        Image imgscale2=img2.getScaledInstance(like.getWidth(), like.getHeight(), Image.SCALE_SMOOTH);
-        ImageIcon scaledIcon2=new ImageIcon(imgscale2);
-        comm.setIcon(scaledIcon2);
-        comm.setOpaque(true);
-        comm.setBackground(new java.awt.Color(250,250,250));
-        comm.setToolTipText("Comment.");
-        comm.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        comm.setName(idpost);
-        
-        comm.addMouseListener(new MouseAdapter() {
-                        public void mouseClicked(MouseEvent e) {
-                            String idpost = ((JLabel) e.getSource()).getName();
-                            //System.out.println("pooostt  "+idpost);
-                            //System.out.println("userrr  "+usernameorigin);
-                            new Commentsforprofileuser(idpost, usernameorigin).setVisible(true);
+                          //********************* open likes table verfiy if user like this post or not:
+                            String sql66 = "select * from likes where idpost ='"+idpost+"'";
 
-                        }
-                    });
-        
-        
-        jhh.add(comm);
-        
-        //**************************comm information*************************
-        JLabel comminfo=new JLabel();
-        
-        //*************** we have to open likes table then search for username that we have then compare ifpost with idpost that dispaly:
-                    String sql9 = "select * from comments";
-                    Statement st9 = conn.createStatement();
-                    ResultSet rs9 = st9.executeQuery(sql9);
-                    int nocomments = 0;
-                    while (rs9.next()) {
-                        if (usernameorigin.equals(rs9.getString("username"))) {
-                            if (idpost.equals(String.valueOf(rs9.getInt("idpost")))) {
-                                nocomments++;
+                            Statement st66 = conn.createStatement();
+                            ResultSet rs66 = st66.executeQuery(sql66);
+                            ImageIcon imgicon66 = new ImageIcon(getClass().getResource("images0/emptyh.png"));
+                            while (rs66.next()) {
+                                
+                                    if (rs66.getString("username").equals(following)) {
+                                        if (rs66.getString("userlike").equals(usernameorigin)) {
+                                           // System.out.println("well here we go..."+idpost);
+                                            imgicon66 = new ImageIcon(getClass().getResource("images0/like.png"));
+                                            likeflag = true;
+                                        }
+                                    }
+                                
+
                             }
-                        }
-                    }
-                    comminfo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-                    comminfo.setText(String.valueOf(nocomments));//this should be the number of likes this post has
-                    comminfo.setToolTipText(String.valueOf(nocomments));//if the number is larger than the space to show it ill show the full number in this
+
+                          // ImageIcon imgicon1=new ImageIcon(getClass().getResource("images0/emptyh.png"));
+                            Image img1=imgicon66.getImage();
+                            Image imgscale66=img1.getScaledInstance(like.getWidth(), like.getHeight(), Image.SCALE_SMOOTH);
+                            ImageIcon scaledIcon66=new ImageIcon(imgscale66);
+                            like.setIcon(scaledIcon66);
+                            like.setOpaque(true);
+                            like.setBackground(new java.awt.Color(255,255,255));
+                            like.setToolTipText("Like.");
+                            
+                           //******************** add mouse listner in order to like the post:
+                           /////////////////////////////////////////////////////////
+                         
+                            like.addMouseListener(mouseListener);
+                          
+                            jhh.add(like);
+                            
+                            
+                            //********************************view likeeee
+                            JLabel viewlike = new JLabel(idpost);
+                            viewlike.setBounds(400, 165, 70, 70);
+                            viewlike.setOpaque(true);
+
+                            viewlike.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+                            viewlike.setHorizontalAlignment(SwingConstants.CENTER);
+                            viewlike.setVerticalAlignment(SwingConstants.CENTER);
+                            ImageIcon imgicon4= new ImageIcon(getClass().getResource("images0/see.png"));
+                            Image img4 = imgicon4.getImage();
+                            Image imgscale4 = img4.getScaledInstance(viewlike.getWidth(), viewlike.getHeight(), Image.SCALE_SMOOTH);
+                            ImageIcon scaledIcon4 = new ImageIcon(imgscale4);
+                            viewlike.setIcon(scaledIcon4);
+                            viewlike.setOpaque(true);
+                            viewlike.setBackground(new java.awt.Color(255, 255, 255));
+                            viewlike.setToolTipText("view Like.");
+                            //******************** add mouse listner in order to like the post:
+                             viewlike.addMouseListener(new MouseAdapter() {
+                                public void mouseClicked(MouseEvent e) {
+                                    //   String idpost = ((JButton) e.getSource()).getName();
+                                    new Likes(idpost).setVisible(true);
+                                    
+                                }
+                            });
+
+                            jhh.add(viewlike);
+                          
         
         
-        comminfo.setBounds(400, 215, 65, 10);
-       // comminfo.setOpaque(true);
-       // comminfo.setBackground(Color.red);
-        
-        
-        jhh.add(comminfo);
-        
-        
+       
+        //**************************comment icon*************************
+        //Commentsforprofileuser
+        //**********************************************************************************************
+                            //********************* create add comment button:
+                            JLabel comm = new JLabel(idpost);
+                            comm.setBounds(470, 165, 70, 70);
+                            comm.setOpaque(true);
+                            
+                            comm.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+                            comm.setHorizontalAlignment(SwingConstants.CENTER);
+                            comm.setVerticalAlignment(SwingConstants.CENTER);
+                          
+                          
+                          //*********************** change scale for icon to fit the label:
+                          //Icon icon2=new ImageIcon(getClass().getResource("images0/heart.png"));
+                            ImageIcon imgicon2=new ImageIcon(getClass().getResource("images0/comm1.png"));
+                            Image img2=imgicon2.getImage();
+                            Image imgscale2=img2.getScaledInstance(like.getWidth(), like.getHeight(), Image.SCALE_SMOOTH);
+                            ImageIcon scaledIcon2=new ImageIcon(imgscale2);
+                            comm.setIcon(scaledIcon2);
+                            comm.setOpaque(true);
+                            comm.setBackground(new java.awt.Color(255,255,255));
+                            comm.setToolTipText("Comment.");
+                          //  comm.addMouseListener(mouseListener);
+                          
+                            comm.addMouseListener(new MouseAdapter() {
+                                public void mouseClicked(MouseEvent e) {
+                                    //   String idpost = ((JButton) e.getSource()).getName();
+                                    new Commentsforprofileuser(idpost,usernameorigin).setVisible(true);
+                                    
+                                }
+                            });
+                          
+                            jhh.add(comm);
+                            
+                            
+                            
+       //**********************************************************************************************
         
         
         //**************************the delete button*************************
@@ -794,7 +797,7 @@ public class userprofile22 extends javax.swing.JFrame{
         jbuttonedit.addMouseListener(new MouseAdapter() {
         public void mouseClicked(MouseEvent e) {
             String idpost = ((JLabel) e.getSource()).getName();
-            edit22 editobj = new edit22();
+            edit22 editobj = new edit22(usernameorigin);
             editobj.my_update(idpost, usernameorigin);//Execute the method my_update to pass str
 	    editobj.setVisible(true); // Open the Second.java window
 	    dispose(); // Close 
@@ -831,6 +834,7 @@ public class userprofile22 extends javax.swing.JFrame{
                
                }//if
            }//while
+           }//end else 
            
           conn.close();
            }catch(Exception ex){
@@ -886,6 +890,87 @@ public class userprofile22 extends javax.swing.JFrame{
 public void onSeekComplete(final MediaPlayer mp) {
     player = mp;
 }
+
+
+    MouseListener mouseListener = new MouseAdapter() {
+
+        @Override
+        public void mouseClicked(MouseEvent e) {
+            
+            likeflag = false;
+            if (e.getClickCount() == 1) {
+                //******************** first we have to know which label makes the action:
+                String idpost = ((JLabel) e.getSource()).getText();
+                JLabel like = (JLabel) e.getSource();
+                System.out.println("idpostt:: " + idpost);
+               
+                //******************* Then we have to open likes table:(we have id post and username)
+                try {
+                    
+                    //******************* open connection with mysql:
+                    Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/softwareproject","root","iNEEDtostudy@202");
+                    String sql2 = "select * from post ";
+                    Statement st2 = conn.createStatement();
+                    ResultSet rs2 = st2.executeQuery(sql2);
+                    String userpost = "asma";
+                    while (rs2.next()) {
+                        if (idpost.equals("idpost")) {
+                            userpost = rs2.getString("username");
+                        }
+
+                    }
+                    
+                    //********************* open likes table verfiy if user like this post or not:
+                    String sql6 = "select * from likes";
+
+                    Statement st6 = conn.createStatement();
+                    ResultSet rs6 = st6.executeQuery(sql6);
+                    ImageIcon imgicon1 = new ImageIcon(getClass().getResource("images0/like.png"));
+                    while (rs6.next()) {
+                        if (rs6.getString("idpost").equals(idpost)) {
+                            if (rs6.getString("username").equals(userpost)) {
+                                if (rs6.getString("userlike").equals(usernameorigin)) {
+                                    System.out.println("well here we go...");
+                                    //************** delete like:
+                                    String query = "delete from likes where username = ? AND idpost=?";
+                                    PreparedStatement preparedStmt = conn.prepareStatement(query);
+                                    preparedStmt.setString(1, userpost);
+                                    preparedStmt.setString(2, idpost);
+                                    preparedStmt.execute();
+                                    imgicon1 = new ImageIcon(getClass().getResource("images0/emptyh.png"));
+                                    likeflag = true;
+                                }
+                            }
+                        }
+
+                    }
+                    
+                    if (!likeflag) {
+                    //********************* insert data into post table:
+                    String sql1 = "insert into likes (username,idpost,userlike) values (?,?,?)";
+                    PreparedStatement pstmt1 = conn.prepareStatement(sql1);
+                    pstmt1.setString(1, userpost);
+                    pstmt1.setString(2, idpost);
+                    pstmt1.setString(3, usernameorigin);
+                    pstmt1.executeUpdate();
+                    }//end if !like flag
+                    
+                    Image img1 = imgicon1.getImage();
+                    Image imgscale1 = img1.getScaledInstance(like.getWidth(), like.getHeight(), Image.SCALE_SMOOTH);
+                    ImageIcon scaledIcon1 = new ImageIcon(imgscale1);
+                    like.setIcon(scaledIcon1);
+                    //like.setOpaque(true);
+                    //like.setBackground(new java.awt.Color(255, 255, 255));
+                    //like.setToolTipText("Like.");
+                    
+                } catch (SQLException ex) {
+                    JOptionPane.showMessageDialog(null, ex.getMessage());
+                    System.err.println(ex);
+                }
+            }
+            
+        }
+    };
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -1381,7 +1466,7 @@ public void onSeekComplete(final MediaPlayer mp) {
         // this.dispose();
 
         if(player == null){
-            userinfo22 editobj = new userinfo22();
+            userinfo22 editobj = new userinfo22(usernameorigin);
             editobj.info(usernameorigin);//Execute the method my_update to pass str
             editobj.setVisible(true);
 
@@ -1390,7 +1475,7 @@ public void onSeekComplete(final MediaPlayer mp) {
         else{
            this.player.stop();
        // new userinfo22().setVisible(true);
-           userinfo22 editobj = new userinfo22();
+           userinfo22 editobj = new userinfo22(usernameorigin);
            editobj.info(usernameorigin);//Execute the method my_update to pass str
            editobj.setVisible(true);
 

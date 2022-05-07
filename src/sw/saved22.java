@@ -34,27 +34,7 @@ public class saved22 extends javax.swing.JFrame {
     static String usernameorigin ;//="asma";
     
     
-    public saved22() {
-        initComponents();
-        
-        this.setLocationRelativeTo(null);
-        
-        close.setIcon(new ImageIcon(getClass().getResource("images0/x1.png")));
-        close.setToolTipText("Exit.");
-        
-        min.setIcon(new ImageIcon(getClass().getResource("images0/min1.png")));
-        min.setToolTipText("Minimize.");
-        
-        back.setIcon(new ImageIcon(getClass().getResource("images0/back3.png")));
-        back.setToolTipText("Go back.");
-        
-        scrollPane1.add(postbase);
-        String usenamepost = "asma";
-        setResizable(false);
-        makepanel();
-        
-    }
-    
+   
     public saved22(String usernameorigin) {
         this.usernameorigin = usernameorigin;
        
