@@ -5,7 +5,9 @@
  */
 package sw;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Cursor;
 import javax.swing.Box;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -16,6 +18,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -24,6 +27,17 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Platform;
+import javafx.beans.binding.Bindings;
+import javafx.beans.property.DoubleProperty;
+import javafx.embed.swing.JFXPanel;
+import javafx.fxml.FXML;
+import javafx.scene.Scene;
+import javafx.scene.layout.StackPane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaView;
+import javafx.stage.Screen;
 import javax.swing.BoxLayout;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -36,7 +50,9 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import rounded.JLabelRound;
+import static sun.audio.AudioPlayer.player;
 import static sw.userinfo22.usernameorigin;
+import static sw.userprofile22.usernameorigin;
 
 /**
  *
@@ -54,10 +70,13 @@ public class mainpage22 extends javax.swing.JFrame {
     static String usernameorigin ;//= "asma";//"saja123"; //get this value from login page
     boolean likeflag = false;//*************** to know if the user has been liked the post or not
     boolean saveflag = false;//*************** to know if the user has been saved the post or not
+    @FXML
+    MediaPlayer player = null;
 
 
     public mainpage22() {
         initComponents();
+        player = null;
         // photo.setIcon(new ImageIcon(getClass().getResource("/image/wa0.jpeg")));
         scrollPane1.add(postbase);
         setResizable(false);
@@ -82,6 +101,7 @@ public class mainpage22 extends javax.swing.JFrame {
         this.usernameorigin = usernameorigin;
         
         initComponents();
+        player = null;
         // photo.setIcon(new ImageIcon(getClass().getResource("/image/wa0.jpeg")));
         scrollPane1.add(postbase);
         setResizable(false);
@@ -200,7 +220,12 @@ public class mainpage22 extends javax.swing.JFrame {
             
             
             while (rs1.next()) {
-                
+                String foll = rs1.getString("following");
+                //***********************************************************************
+                //if user is following people
+                if(foll != null){
+                    System.out.println("user::: not null happy?");
+                      
                 usenamefollowing = rs1.getString("username");
                 if (usenamefollowing.equals(usernameorigin)) {
                     
@@ -329,23 +354,243 @@ public class mainpage22 extends javax.swing.JFrame {
                             
      
        //**********************************************************************************************
+       
+       
+ //*******************************************************************************************
+ //*******************************************************************************************
+ //*******************************************************************************************
+ //*******************************************************************************************
+ //*******************************************************************************************
                             //********************display content:
-                            JLabel label1 = new JLabel(idpost);
-                            label1.setBounds(10, 70, 350, 300); //size.width, size.height);//******(left/right, up/down, width,height)
-                            //*********************** change scale for icon to fit the label:
-                            Icon icon = new ImageIcon(content);
-                            ImageIcon imgicon = new ImageIcon(content);
-                            Image img = imgicon.getImage();
-                            Image imgscale = img.getScaledInstance(label1.getWidth(), label1.getHeight(), Image.SCALE_SMOOTH);
-                            ImageIcon scaledIcon = new ImageIcon(imgscale);
-                            label1.setIcon(scaledIcon);
-                            label1.setOpaque(true);
-                            label1.setBackground(new java.awt.Color(250, 250, 250));
-                            label1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-                            jhh.add(label1);
                             
-                            //******************** add mouse listner in order to like the post:
-                            //////////label1.addMouseListener(mouseListener);
+                            //*********new**************
+                            
+                            JLabel l = new JLabel(idpost);
+                            l.setBounds(10, 70, 350, 300); //size.width, size.height);//******(left/right, up/down, width,height)
+                            
+                            
+ 
+ 
+       //**********************content display ************************
+       if(content != null && !content.equals("")){
+           System.out.println("content");
+           
+           
+        int type = (content.length()-3);
+        String subtype = content.substring(type);
+       // System.out.println(subtype); 
+        
+        if(subtype.toLowerCase().equals("mp4")){
+        //***************display video**********************
+        
+        
+        
+        try{
+           
+    final JFXPanel VFXPanel = new JFXPanel();
+    File video_source = new File(content);
+    Media m = new Media(video_source.toURI().toString());
+    Platform.setImplicitExit(false);
+    
+    
+        player = new MediaPlayer(m);
+        onSeekComplete(player);
+        player.stop();
+        
+       
+    //player.play();
+    //player.setAutoPlay(true);
+    //player.setCycleCount(MediaPlayer.INDEFINITE);
+        player.setVolume(50);
+   
+    
+    
+    MediaView viewer = new MediaView(player);
+    StackPane root = new StackPane();
+    Scene scene = new Scene(root);
+
+   
+    // center video position
+    javafx.geometry.Rectangle2D screen = Screen.getPrimary().getVisualBounds();
+    viewer.setX((screen.getWidth() - l.getWidth()) / 2);
+    viewer.setY((screen.getHeight() - l.getHeight()) / 2);
+
+    // resize video based on screen size
+    DoubleProperty width = viewer.fitWidthProperty();
+    DoubleProperty height = viewer.fitHeightProperty();
+    width.bind(Bindings.selectDouble(viewer.sceneProperty(), "width"));
+    height.bind(Bindings.selectDouble(viewer.sceneProperty(), "height"));
+    viewer.setPreserveRatio(true);
+
+    // add video to stackpane
+    root.getChildren().add(viewer);
+
+    VFXPanel.setScene(scene);
+    //player.play();
+    l.setLayout(new BorderLayout());
+    l.add(VFXPanel, BorderLayout.CENTER);
+    l.setName(idpost);
+ 
+    
+    
+    //****************video control***************
+   
+    //************************************************************play icon
+        JLabel b=new JLabel();
+        b.setBounds(18, 85, 30,30);
+        b.setBackground(Color.WHITE);
+        b.setName(idpost);
+        //*********************** change scale for icon to fit the label:
+        Icon icon=new ImageIcon(getClass().getResource("images0/play.png"));
+        ImageIcon imgicon=new ImageIcon(getClass().getResource("images0/play.png"));
+        Image img=imgicon.getImage();
+        Image imgscale=img.getScaledInstance(b.getWidth(), b.getHeight(), Image.SCALE_SMOOTH);
+        ImageIcon scaledIcon=new ImageIcon(imgscale);
+        b.setIcon(scaledIcon);
+        b.setOpaque(true);
+        
+        
+        /////////////////////////////////////////////////////////
+        b.addMouseListener(new MouseAdapter() {
+              public void mouseClicked(MouseEvent e) {
+                  
+                  String idpost = ((JLabel) e.getSource()).getName();
+                  System.out.println("content  "+idpost);
+                  
+                  player.play();
+                  
+              }});
+        /////////////////////////////////////////////////////////
+        jhh.add(b);
+    
+        
+        
+    //************************************************************stop icon
+        JLabel b1=new JLabel();
+        b1.setBounds(50, 85, 30,30);
+        b1.setBackground(Color.WHITE);
+        b1.setName(idpost);
+        //*********************** change scale for icon to fit the label:
+        Icon icon1=new ImageIcon(getClass().getResource("images0/stopplay.png"));
+        ImageIcon imgicon1=new ImageIcon(getClass().getResource("images0/stopplay.png"));
+        Image img1=imgicon1.getImage();
+        Image imgscale1=img1.getScaledInstance(b1.getWidth(), b1.getHeight(), Image.SCALE_SMOOTH);
+        ImageIcon scaledIcon1=new ImageIcon(imgscale1);
+        b1.setIcon(scaledIcon1);
+        b1.setOpaque(true);
+        
+        
+        /////////////////////////////////////////////////////////
+        b1.addMouseListener(new MouseAdapter() {
+              public void mouseClicked(MouseEvent e) {
+                  player.stop();
+              }});
+        /////////////////////////////////////////////////////////
+        jhh.add(b1);
+    
+    
+    
+    
+    //************************************************************mute icon
+        JLabel b2=new JLabel();
+        b2.setBounds(82, 85, 30,30);
+        b2.setBackground(Color.WHITE);
+        b2.setName(idpost);
+        //*********************** change scale for icon to fit the label:
+        Icon icon2=new ImageIcon(getClass().getResource("images0/muteplay.png"));
+        ImageIcon imgicon2=new ImageIcon(getClass().getResource("images0/muteplay.png"));
+        Image img2=imgicon2.getImage();
+        Image imgscale2=img2.getScaledInstance(b2.getWidth(), b2.getHeight(), Image.SCALE_SMOOTH);
+        ImageIcon scaledIcon2=new ImageIcon(imgscale2);
+        b2.setIcon(scaledIcon2);
+        b2.setOpaque(true);
+        
+        
+        /////////////////////////////////////////////////////////
+        b2.addMouseListener(new MouseAdapter() {
+              public void mouseClicked(MouseEvent e) {
+                  player.setMute(true);
+              }});
+        /////////////////////////////////////////////////////////
+        jhh.add(b2);
+    
+    
+           jhh.add(l);
+           
+    player.stop();
+          
+ 
+          
+        } 
+       catch(Exception eee){
+           JOptionPane.showMessageDialog(null, eee);
+       }
+        
+    
+    
+    
+    
+    
+        }
+        else{
+               
+        //*********************** change scale for icon to fit the label:
+        Icon icon=new ImageIcon(content);
+        ImageIcon imgicon=new ImageIcon(content);
+        Image img=imgicon.getImage();
+        Image imgscale=img.getScaledInstance(l.getWidth(), l.getHeight(), Image.SCALE_SMOOTH);
+        ImageIcon scaledIcon=new ImageIcon(imgscale);
+        l.setIcon(scaledIcon);
+        l.setOpaque(true);
+        l.setBackground(new java.awt.Color(250,250,250));
+        
+        
+        
+        jhh.add( l );
+        }
+        
+        
+       }
+       else{
+           System.out.println("no content");
+           //*********************** change scale for icon to fit the label:
+        Icon icon=new ImageIcon(getClass().getResource("images0/addc.png"));;
+        ImageIcon imgicon=new ImageIcon(getClass().getResource("images0/addc.png"));;
+        Image img=imgicon.getImage();
+        Image imgscale=img.getScaledInstance(l.getWidth(), l.getHeight(), Image.SCALE_SMOOTH);
+        ImageIcon scaledIcon=new ImageIcon(imgscale);
+        l.setIcon(scaledIcon);
+        l.setOpaque(true);
+        l.setBackground(new java.awt.Color(250,250,250));
+        l.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        
+        
+        /////////////////////////////////////////////////////////
+        l.addMouseListener(new MouseAdapter() {
+              public void mouseClicked(MouseEvent e) {
+                  String idpost = ((JLabel) e.getSource()).getName();
+                  edit22 editobj = new edit22();
+                  editobj.my_update(idpost, usernameorigin);//Execute the method my_update to pass str
+	          editobj.setVisible(true); // Open the Second.java window
+	          dispose();
+              
+              }});
+        /////////////////////////////////////////////////////////
+        
+        jhh.add( l );
+        
+           
+       }
+           
+       
+        
+                
+ //*******************************************************************************************
+ //*******************************************************************************************
+ //*******************************************************************************************
+ //*******************************************************************************************
+ //*******************************************************************************************
+        
 
                             
                             
@@ -549,7 +794,27 @@ public class mainpage22 extends javax.swing.JFrame {
 
                     }
 
-                }//if
+                }//if user have followers and the followers belong to usernameorigin
+                    
+                    
+                }//if user have no followers
+                else{
+                    System.out.println("user::: null happy?");
+                    
+                    //we will display a text telling the user to follow people
+                    //post from people you follow will be displayed here
+                    jhh.setLayout(null);//new FlowLayout());
+                            
+                            
+                            
+                            //**********************add the jpanel in which the post will be displayed on
+                            jhh.setPreferredSize(new Dimension(this.scrollPane1.getWidth(),this.scrollPane1.getHeight()));
+                            jhh.setBackground(new java.awt.Color(255,255,255));//18, 33, 139));//blue
+                            postbase.add(jhh);
+                    
+                }
+                
+              
             }//while
             
             conn.close();
@@ -728,6 +993,9 @@ public class mainpage22 extends javax.swing.JFrame {
 
     };
     
+    public void onSeekComplete(final MediaPlayer mp) {
+    player = mp;
+    }
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -1159,51 +1427,110 @@ public class mainpage22 extends javax.swing.JFrame {
     private void closeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeMouseClicked
         // TODO add your handling code here:
         // close
-        this.dispose();
+        if(player == null){
+            
+            this.dispose();
+        }
+        else{
+            this.player.stop();
+            this.dispose();}
     }//GEN-LAST:event_closeMouseClicked
 
     private void minMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_minMouseClicked
         // TODO add your handling code here:
         // min
-        this.setExtendedState(JFrame.ICONIFIED);
+        if(player == null)
+            this.setExtendedState(JFrame.ICONIFIED);
+        else{
+            this.player.stop();
+            this.setExtendedState(JFrame.ICONIFIED);
+        
+        }
     }//GEN-LAST:event_minMouseClicked
 
     private void outMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_outMouseClicked
         // TODO add your handling code here:
         // close
-        this.dispose();
+        if(player == null){
+            new loginForm().setVisible(true);
+            this.dispose();
+        }
+        else{
+            this.player.stop();
+            new loginForm().setVisible(true);
+            this.dispose();
+        }
     }//GEN-LAST:event_outMouseClicked
 
     private void addpostMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addpostMouseClicked
         // TODO add your handling code here:
         // close
-        this.dispose();
-        new addpost22().setVisible(true);
+        if(player == null){
+            new addpost22().setVisible(true);
+            this.dispose();
+        }
+        else{
+            this.player.stop();
+            new addpost22(usernameorigin).setVisible(true);
+            this.dispose();
+        }
     }//GEN-LAST:event_addpostMouseClicked
 
     private void jLabelusernameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelusernameMouseClicked
         // TODO add your handling code here:
-        this.dispose();
-        new userprofile22(usernameorigin).setVisible(true);
+        // TODO add your handling code here:
+        if(player == null){
+            new userprofile22(usernameorigin).setVisible(true);
+            this.dispose();
+        }
+        else{
+            this.player.stop();
+            new userprofile22(usernameorigin).setVisible(true);
+            this.dispose();
+        }
     }//GEN-LAST:event_jLabelusernameMouseClicked
 
     private void backMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backMouseClicked
         // TODO add your handling code here:
-        this.dispose();
-        new mainpage22(usernameorigin).setVisible(true);
+        if(player == null){
+            new mainpage22(usernameorigin).setVisible(true);
+            this.dispose();
+        }
+        else{
+            this.pack();
+            this.player.stop();
+            new mainpage22(usernameorigin).setVisible(true);
+            this.dispose();
+        }
     }//GEN-LAST:event_backMouseClicked
 
     private void profileMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_profileMouseClicked
         // TODO add your handling code here:
-            dispose(); // Close 
+            if(player == null){
             new userprofile22(usernameorigin).setVisible(true);
-            
+            this.dispose();
+        }
+        else{
+            this.pack();
+            this.player.stop();
+            new userprofile22(usernameorigin).setVisible(true);
+            this.dispose();
+        }
     }//GEN-LAST:event_profileMouseClicked
 
     private void contactMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_contactMouseClicked
         // TODO add your handling code here:
-        new contactForm(usernameorigin).setVisible(true);
-        this.dispose();
+        if(player == null){
+            new contactForm(usernameorigin).setVisible(true);
+            this.dispose();
+        }
+        else{
+            this.pack();
+            this.player.stop();
+            new contactForm(usernameorigin).setVisible(true);
+            this.dispose();
+        }
+        
     }//GEN-LAST:event_contactMouseClicked
 
     /**

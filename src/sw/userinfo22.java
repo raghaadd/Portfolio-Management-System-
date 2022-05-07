@@ -638,7 +638,7 @@ public class userinfo22 extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
             dispose(); // Close 
-            new userprofile22(this.usernameorigin).setVisible(true);
+            new userprofile22(usernameorigin).setVisible(true);
        
             
     }//GEN-LAST:event_jButton1ActionPerformed

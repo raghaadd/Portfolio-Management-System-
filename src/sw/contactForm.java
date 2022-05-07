@@ -22,7 +22,7 @@ public class contactForm extends javax.swing.JFrame {
      * Creates new form loginForm
      */
     static String usernameorigin;
-    public contactForm(String s) {
+    public contactForm(String usernameorigin) {
         this.usernameorigin = usernameorigin;
         initComponents();
         

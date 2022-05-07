@@ -48,6 +48,7 @@ import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import javafx.stage.Screen;
 import javax.swing.text.View;
+import static sw.mainpage22.usernameorigin;
 
 /**
  *
@@ -1014,6 +1015,11 @@ public void onSeekComplete(final MediaPlayer mp) {
 
         contact.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         contact.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        contact.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                contactMouseClicked(evt);
+            }
+        });
 
         explore.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         explore.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -1411,12 +1417,12 @@ public void onSeekComplete(final MediaPlayer mp) {
         // TODO add your handling code here:
         // close
         if(player == null){
-            new addpost22().setVisible(true);
+            new addpost22(usernameorigin).setVisible(true);
             this.dispose();
         }
         else{
             this.player.stop();
-            new addpost22().setVisible(true);
+            new addpost22(usernameorigin).setVisible(true);
             this.dispose();
         }
         
@@ -1450,6 +1456,20 @@ public void onSeekComplete(final MediaPlayer mp) {
         }
         
     }//GEN-LAST:event_nameMouseClicked
+
+    private void contactMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_contactMouseClicked
+        // TODO add your handling code here:
+        if(player == null){
+            new contactForm(usernameorigin).setVisible(true);
+            this.dispose();
+        }
+        else{
+            this.pack();
+            this.player.stop();
+            new contactForm(usernameorigin).setVisible(true);
+            this.dispose();
+        }
+    }//GEN-LAST:event_contactMouseClicked
 
     /**
      * @param args the command line arguments

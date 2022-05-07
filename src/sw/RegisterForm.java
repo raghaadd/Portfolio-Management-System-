@@ -5,9 +5,14 @@
  */
 package sw;
 import java.io.File;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import static sw.mainpage22.usernameorigin;
 
 /**
  *
@@ -316,6 +321,11 @@ public class RegisterForm extends javax.swing.JFrame {
         // TODO add your handling code here:
          Operations operations = new Operations();
         try{
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/softwareproject","root","iNEEDtostudy@202");
+            String sql1 = "insert into following (username) values ('"+usernameorigin+"')";
+            Statement st1 = conn.createStatement();
+            ResultSet rs1 = st1.executeQuery(sql1);
+            
         String RusernameStr = jTextUsername.getText();
         String RpasswordStr = String.valueOf(jPassword.getPassword());
         String RfullnameStr = jText_Fullname.getText();
