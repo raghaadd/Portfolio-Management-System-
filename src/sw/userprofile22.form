@@ -402,13 +402,11 @@
                                                                   <Group type="103" groupAlignment="1" max="-2" attributes="0">
                                                                       <Component id="following" max="32767" attributes="0"/>
                                                                       <Component id="fer" alignment="1" max="32767" attributes="0"/>
-                                                                      <Component id="ercount" alignment="1" max="32767" attributes="0"/>
                                                                   </Group>
                                                                   <EmptySpace max="-2" attributes="0"/>
                                                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                                                       <Component id="followers" max="32767" attributes="0"/>
                                                                       <Component id="fing" max="32767" attributes="0"/>
-                                                                      <Component id="ingcount" max="32767" attributes="0"/>
                                                                   </Group>
                                                                   <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
                                                               </Group>
@@ -451,11 +449,6 @@
                                                                               <Component id="fer" pref="53" max="32767" attributes="0"/>
                                                                               <Component id="fing" max="32767" attributes="0"/>
                                                                           </Group>
-                                                                          <EmptySpace max="-2" attributes="0"/>
-                                                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                                                              <Component id="ingcount" min="-2" pref="13" max="-2" attributes="0"/>
-                                                                              <Component id="ercount" pref="0" max="32767" attributes="0"/>
-                                                                          </Group>
                                                                       </Group>
                                                                       <Component id="bio" min="-2" pref="106" max="-2" attributes="0"/>
                                                                   </Group>
@@ -468,7 +461,7 @@
                                                           <EmptySpace max="-2" attributes="0"/>
                                                           <Component id="jSeparator1" min="-2" max="-2" attributes="0"/>
                                                           <EmptySpace max="-2" attributes="0"/>
-                                                          <Component id="scrollPane1" pref="553" max="32767" attributes="0"/>
+                                                          <Component id="scrollPane1" max="32767" attributes="0"/>
                                                       </Group>
                                                   </Group>
                                                 </DimensionLayout>
@@ -527,12 +520,6 @@
                                                     <Property name="verticalAlignment" type="int" value="1"/>
                                                   </Properties>
                                                 </Component>
-                                                <Component class="javax.swing.JLabel" name="ercount">
-                                                  <Properties>
-                                                    <Property name="horizontalAlignment" type="int" value="0"/>
-                                                    <Property name="text" type="java.lang.String" value="count"/>
-                                                  </Properties>
-                                                </Component>
                                                 <Component class="javax.swing.JLabel" name="followers">
                                                   <Properties>
                                                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -543,12 +530,6 @@
                                                     </Property>
                                                     <Property name="horizontalAlignment" type="int" value="0"/>
                                                     <Property name="text" type="java.lang.String" value="following"/>
-                                                  </Properties>
-                                                </Component>
-                                                <Component class="javax.swing.JLabel" name="ingcount">
-                                                  <Properties>
-                                                    <Property name="horizontalAlignment" type="int" value="0"/>
-                                                    <Property name="text" type="java.lang.String" value="count"/>
                                                   </Properties>
                                                 </Component>
                                                 <Component class="javax.swing.JLabel" name="out">

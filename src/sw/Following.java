@@ -5,6 +5,7 @@
  */
 package sw;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
@@ -16,6 +17,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import rounded.JLabelRound;
+import static sw.Followers1.usernameorigin;
 
 /**
  *
@@ -28,17 +30,17 @@ public class Following extends javax.swing.JFrame {
      */
     JPanel postbase = new JPanel();
     String username = "";
+    static String usernameorigin;//
 
-    public Following() {
-        initComponents();
-    }
+    
 
-    public Following(String username) {
+    public Following(String usernameorigin) {
+        this.usernameorigin = usernameorigin;
         initComponents();
         super.pack();
         super.setLocationRelativeTo(null);
         scrollPane1.add(postbase);
-        this.username = username;
+       // this.username = username;
         giveFollowing();
 
     }
@@ -49,17 +51,74 @@ public class Following extends javax.swing.JFrame {
         Connection conn = null;
         ResultSet rs = null;
         Boolean flag = true;
+        
+        
         //go to like TABLE
         //WHELE WE HAVE NEXT
+        int totalcomment = 0;
         try {
+            
             conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/softwareproject","root","iNEEDtostudy@202");
-            String sql1 = "select * from Following";
+            
+            
+            String sql1 = "select * from Following where username = '"+usernameorigin+"'";
             Statement st1 = conn.createStatement();
             ResultSet rs1 = st1.executeQuery(sql1);
+            
+            
+            if (rs1.next() == false){
+               // System.out.println("user::: no?");
+                //we will display a text telling the user to follow people
+                    //post from people you follow will be displayed here
+                    jhh.setLayout(null);//new FlowLayout());
+                    //**********************add the jpanel in which the post will be displayed on
+                            jhh.setPreferredSize(new Dimension(this.scrollPane1.getWidth(),this.scrollPane1.getHeight()));
+                            jhh.setBackground(new java.awt.Color(255,255,255));//18, 33, 139));//blue
+                            postbase.add(jhh);
+                            
+                            
+                            
+                    //************label that have the photo 
+                    JLabel nofo = new JLabel();
+                    nofo.setBounds(10, 50, 70, 70);
+                    //nofo.setBackground(Color.red);
+                    //nofo.setOpaque(true);
+                    
+                    Icon icon=new ImageIcon(getClass().getResource("images0/nofo.png"));
+                    ImageIcon imgicon=new ImageIcon(getClass().getResource("images0/nofo.png"));
+                    Image img=imgicon.getImage();
+                    Image imgscale=img.getScaledInstance(nofo.getWidth(), nofo.getHeight(), Image.SCALE_SMOOTH);
+                    ImageIcon scaledIcon=new ImageIcon(imgscale);
+                    nofo.setIcon(scaledIcon);
+                    nofo.setOpaque(true);
+                    nofo.setBackground(new java.awt.Color(250,250,250));
+                    
+                    
+                    jhh.add(nofo);
+                    
+                    //************label that tell the user "no posts to show you have not followed anyone yet"
+                    JLabel nofotext = new JLabel();
+                    nofotext.setBounds(10, 90, 300, 90);
+                    nofotext.setText("no comments. add one!");
+                    //nofotext.setBackground(Color.YELLOW);
+                    nofotext.setFont(new java.awt.Font("Times New Roman", 0, 20)); // NOI18N
+                    nofotext.setForeground(new java.awt.Color(18, 33, 139));
+                    nofotext.setBackground(Color.white);
+                    nofotext.setOpaque(true);
+                    
+                    jhh.add(nofotext);
+                
+                
+            }else{
+            sql1 = "select * from Following where username = '"+usernameorigin+"'";
+            st1 = conn.createStatement();
+            rs1 = st1.executeQuery(sql1);
+            
             while (rs1.next()) {
                 // i need to compare data id post in data base and whta data i have 
-                if (rs1.getString("username").equals(username)) {
-                    System.out.println("following" + rs1.getString("username"));
+                if (rs1.getString("username").equals(usernameorigin)) {
+                    totalcomment++;
+                  //  System.out.println("following" + rs1.getString("username"));
                     jhh.setLayout(null);//new FlowLayout());
                     //**********************add the jpanel
                     jhh.setPreferredSize(new Dimension(100, 100));
@@ -111,7 +170,7 @@ public class Following extends javax.swing.JFrame {
                     /////////////////////////////////////////////////////////
                     label2.addMouseListener(new MouseAdapter() {
                         public void mouseClicked(MouseEvent e) {
-                            new otherusers22(following).setVisible(true);
+                            new otherusers22(usernameorigin,following).setVisible(true);
                             dispose();
                             firstpage22.mainpage.dispose();//this is an object declare in firstpage22.java
                         }
@@ -138,6 +197,8 @@ public class Following extends javax.swing.JFrame {
                 }
 
             }//while1
+        }
+            count.setText(String.valueOf(totalcomment));
 
         } catch (SQLException ex) {
             //Logger.getLogger(MainPage.class.getName()).log(Level.SEVERE, null, ex);
@@ -160,6 +221,7 @@ public class Following extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         scrollPane1 = new java.awt.ScrollPane();
+        count = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -188,24 +250,27 @@ public class Following extends javax.swing.JFrame {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addContainerGap(386, Short.MAX_VALUE)
+                        .addGap(0, 341, Short.MAX_VALUE)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(scrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(scrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(152, 152, 152)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(count, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+                    .addComponent(count, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(scrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 338, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -296,12 +361,13 @@ public class Following extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Following().setVisible(true);
+               // new Following().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel count;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;

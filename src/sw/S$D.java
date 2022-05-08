@@ -278,7 +278,7 @@ public class S$D extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchActionPerformed
-       
+        int count=0;
         try{
             
            // Class.forName("mysql.jdbc,Drive");  
@@ -287,15 +287,23 @@ public class S$D extends javax.swing.JFrame {
               PreparedStatement pst=conn.prepareStatement(sql);
            pst.setString(1, un.getText());
              ResultSet rs=pst.executeQuery();
+             
+             String sql1=("Select * from follower where username=?");
+              PreparedStatement pst1=conn.prepareStatement(sql1);
+              pst1.setString(1, un.getText());
+              ResultSet rs1=pst1.executeQuery();
+              while(rs1.next())
+              {
+                  count++;
+              }
+              
              if(rs.next())
              {
                
                  em.setText(rs.getString("email"));
                   bio.setText(rs.getString("bio"));
-                  
-                 
-                  s = rs.getString("followercount");
-                  fc.setText(s);
+              
+                   fc.setText(String.valueOf(count));
                    
              }
             

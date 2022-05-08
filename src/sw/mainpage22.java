@@ -51,6 +51,8 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import rounded.JLabelRound;
 import static sun.audio.AudioPlayer.player;
+import static sw.otherusers22.usernameorigin;
+import static sw.saved22.usernameorigin;
 import static sw.userinfo22.usernameorigin;
 import static sw.userprofile22.usernameorigin;
 
@@ -234,7 +236,7 @@ public class mainpage22 extends javax.swing.JFrame {
                     //************label that tell the user "no posts to show you have not followed anyone yet"
                     JLabel nofotext = new JLabel();
                     nofotext.setBounds(160, 300, 800, 100);
-                    nofotext.setText("no posts to show you have not followed anyone yet");
+                    nofotext.setText("no posts to show you have not. followed anyone yet?");
                     //nofotext.setBackground(Color.YELLOW);
                     nofotext.setFont(new java.awt.Font("Times New Roman", 0, 20)); // NOI18N
                     nofotext.setForeground(new java.awt.Color(18, 33, 139));
@@ -265,7 +267,7 @@ public class mainpage22 extends javax.swing.JFrame {
                     
                     //***********************open post table and bring posts 
                     String following = rs1.getString("following");
-                    String sql2 = "select * from post where username = '"+following+"'ORDER BY date DESC";
+                    String sql2 = "select * from post where username ='"+following+"'ORDER BY date DESC";
                     Statement st2 = conn.createStatement();
                     ResultSet rs2 = st2.executeQuery(sql2);
                     
@@ -375,7 +377,7 @@ public class mainpage22 extends javax.swing.JFrame {
                          label2.addMouseListener(new MouseAdapter() {
                                public void mouseClicked(MouseEvent e) {
                                 //   String idpost = ((JButton) e.getSource()).getName();
-                                  new otherusers22(idpost).setVisible(true);
+                                  new otherusers22(usernameorigin, following).setVisible(true);
                                   dispose();
                                }
                          });
@@ -449,8 +451,10 @@ public class mainpage22 extends javax.swing.JFrame {
     // resize video based on screen size
     DoubleProperty width = viewer.fitWidthProperty();
     DoubleProperty height = viewer.fitHeightProperty();
-    width.bind(Bindings.selectDouble(viewer.sceneProperty(), "width"));
-    height.bind(Bindings.selectDouble(viewer.sceneProperty(), "height"));
+   // width.bind(Bindings.selectDouble(viewer.sceneProperty(), "width"));
+   // height.bind(Bindings.selectDouble(viewer.sceneProperty(), "height"));
+   width.setValue(500);
+   height.setValue(300);
     viewer.setPreserveRatio(true);
 
     // add video to stackpane
@@ -583,17 +587,7 @@ public class mainpage22 extends javax.swing.JFrame {
         l.setCursor(new Cursor(Cursor.HAND_CURSOR));
         
         
-        /////////////////////////////////////////////////////////
-        l.addMouseListener(new MouseAdapter() {
-              public void mouseClicked(MouseEvent e) {
-                  String idpost = ((JLabel) e.getSource()).getName();
-                  edit22 editobj = new edit22(usernameorigin);
-                  editobj.my_update(idpost, usernameorigin);//Execute the method my_update to pass str
-	          editobj.setVisible(true); // Open the Second.java window
-	          dispose();
-              
-              }});
-        /////////////////////////////////////////////////////////
+      
         
         jhh.add( l );
         
@@ -618,6 +612,7 @@ public class mainpage22 extends javax.swing.JFrame {
                             JTextArea textarea1 = new JTextArea(description + "\n" + keyword);
                             textarea1.setLineWrap(true);
                             textarea1.setWrapStyleWord(true);
+                            
                             textarea1.setBounds(365, 70, 370, 300);//******(left/right, up/down, width,height)
                             textarea1.setOpaque(true);
                             textarea1.setBackground(new java.awt.Color(255, 255, 255));
@@ -703,7 +698,7 @@ public class mainpage22 extends javax.swing.JFrame {
                              viewlike.addMouseListener(new MouseAdapter() {
                                 public void mouseClicked(MouseEvent e) {
                                     //   String idpost = ((JButton) e.getSource()).getName();
-                                    new Likes(idpost).setVisible(true);
+                                    new Likes(usernameorigin,idpost).setVisible(true);
                                     
                                 }
                             });

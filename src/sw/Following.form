@@ -102,21 +102,21 @@
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
+                          <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="1" attributes="0">
-                                  <EmptySpace pref="386" max="32767" attributes="0"/>
+                                  <EmptySpace min="0" pref="341" max="32767" attributes="0"/>
                                   <Component id="jButton1" min="-2" pref="30" max="-2" attributes="0"/>
                               </Group>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="scrollPane1" max="32767" attributes="0"/>
-                              </Group>
+                              <Component id="scrollPane1" alignment="0" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="152" max="-2" attributes="0"/>
                           <Component id="jLabel2" min="-2" pref="109" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="count" min="-2" pref="60" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
                       </Group>
                   </Group>
@@ -125,7 +125,10 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jLabel2" min="-2" pref="30" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="jLabel2" pref="30" max="32767" attributes="0"/>
+                              <Component id="count" max="32767" attributes="0"/>
+                          </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="scrollPane1" pref="338" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
@@ -164,6 +167,8 @@
 
                   <Layout class="org.netbeans.modules.form.compat2.layouts.support.ScrollPaneSupportLayout"/>
                 </Container>
+                <Component class="javax.swing.JLabel" name="count">
+                </Component>
               </SubComponents>
             </Container>
           </SubComponents>

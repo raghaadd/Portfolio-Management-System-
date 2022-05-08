@@ -22,6 +22,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
 import rounded.JLabelRound;
+import static sw.Followers1.usernameorigin;
 
 /**
  *
@@ -34,13 +35,11 @@ public class Likes extends javax.swing.JFrame {
      */
     int idpost = 0;
     JPanel postbase = new JPanel();
+    static String usernameorigin;//
 
-    public Likes() {
-        initComponents();
-        //getusername();
-    }
-
-    public Likes(String idpost) {
+   
+    public Likes(String usernameorigin, String idpost) {
+        this.usernameorigin = usernameorigin;
         initComponents();
         super.pack();
         super.setLocationRelativeTo(null);
@@ -51,19 +50,73 @@ public class Likes extends javax.swing.JFrame {
     }
 
     public void getusername() {
+        
         JPanel jhh = new JPanel();
         postbase.setLayout(new BoxLayout(postbase, BoxLayout.Y_AXIS));
         Connection conn = null;
         ResultSet rs = null;
         Boolean flag = true;
+        int totallikes=0;
+        
+        
         try {
             conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/softwareproject","root","iNEEDtostudy@202");
-            String sql1 = "select * from Likes";
+            String sql1 = "select * from Likes where idpost = '"+idpost+"'";
             Statement st1 = conn.createStatement();
             ResultSet rs1 = st1.executeQuery(sql1);
+            
+            if (rs1.next() == false){
+               // System.out.println("user::: no?");
+                //we will display a text telling the user to follow people
+                    //post from people you follow will be displayed here
+                    jhh.setLayout(null);//new FlowLayout());
+                    //**********************add the jpanel in which the post will be displayed on
+                            jhh.setPreferredSize(new Dimension(this.scrollPane1.getWidth(),this.scrollPane1.getHeight()));
+                            jhh.setBackground(new java.awt.Color(255,255,255));//18, 33, 139));//blue
+                            postbase.add(jhh);
+                            
+                            
+                            
+                    //************label that have the photo 
+                    JLabel nofo = new JLabel();
+                    nofo.setBounds(10, 50, 70, 70);
+                    //nofo.setBackground(Color.red);
+                    //nofo.setOpaque(true);
+                    
+                    Icon icon=new ImageIcon(getClass().getResource("images0/nofo.png"));
+                    ImageIcon imgicon=new ImageIcon(getClass().getResource("images0/nofo.png"));
+                    Image img=imgicon.getImage();
+                    Image imgscale=img.getScaledInstance(nofo.getWidth(), nofo.getHeight(), Image.SCALE_SMOOTH);
+                    ImageIcon scaledIcon=new ImageIcon(imgscale);
+                    nofo.setIcon(scaledIcon);
+                    nofo.setOpaque(true);
+                    nofo.setBackground(new java.awt.Color(250,250,250));
+                    
+                    
+                    jhh.add(nofo);
+                    
+                    //************label that tell the user "no posts to show you have not followed anyone yet"
+                    JLabel nofotext = new JLabel();
+                    nofotext.setBounds(10, 90, 300, 90);
+                    nofotext.setText("no comments. add one!");
+                    //nofotext.setBackground(Color.YELLOW);
+                    nofotext.setFont(new java.awt.Font("Times New Roman", 0, 20)); // NOI18N
+                    nofotext.setForeground(new java.awt.Color(18, 33, 139));
+                    nofotext.setBackground(Color.white);
+                    nofotext.setOpaque(true);
+                    
+                    jhh.add(nofotext);
+                
+                
+            }else{
+            sql1 = "select * from Likes where idpost = '"+idpost+"'";
+            st1 = conn.createStatement();
+            rs1 = st1.executeQuery(sql1);
+            
             while (rs1.next()) {
 
                 if (idpost == rs1.getInt("idpost")) {
+                    totallikes++;
                     jhh.setLayout(null);//new FlowLayout());
                     //**********************add the jpanel
                     jhh.setPreferredSize(new Dimension(100, 50));
@@ -116,7 +169,7 @@ public class Likes extends javax.swing.JFrame {
                     /////////////////////////////////////////////////////////
                     label2.addMouseListener(new MouseAdapter() {
                         public void mouseClicked(MouseEvent e) {
-                            new otherusers22(userlike).setVisible(true);
+                            new otherusers22(usernameorigin,userlike).setVisible(true);
                             dispose();
                             firstpage22.mainpage.dispose();//this is an object declare in firstpage22.java
                         }
@@ -143,6 +196,8 @@ public class Likes extends javax.swing.JFrame {
                 }
 
             }//while
+        }
+             count.setText(String.valueOf(totallikes));
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage());
             System.err.println(ex);
@@ -164,6 +219,7 @@ public class Likes extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         scrollPane1 = new java.awt.ScrollPane();
+        count = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -196,10 +252,12 @@ public class Likes extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(scrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 374, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(count, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -207,7 +265,9 @@ public class Likes extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(17, 17, 17)
-                .addComponent(jLabel2)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(count, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(scrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 268, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -304,12 +364,13 @@ public class Likes extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Likes().setVisible(true);
+               // new Likes().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel count;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;

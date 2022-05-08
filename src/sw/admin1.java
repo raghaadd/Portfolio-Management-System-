@@ -206,6 +206,7 @@ public class admin1 extends javax.swing.JFrame {
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         this.dispose();
+        new loginForm().setVisible(true);
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void minMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_minMouseClicked

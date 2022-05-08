@@ -47,8 +47,10 @@ import javafx.stage.Stage;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import javafx.stage.Screen;
+import javax.swing.JTextArea;
 import javax.swing.text.View;
 import static sw.mainpage22.usernameorigin;
+import static sw.saved22.usernameorigin;
 
 /**
  *
@@ -174,7 +176,8 @@ public class userprofile22 extends javax.swing.JFrame{
                     if(rs6.next()){//there is photo
                        String image = rs6.getString("image");
                        
-                       if((!image.equals("")) &&(!image.equals(null)) && (!image.equals("Image path,"))){// image!=null){
+                       if(image != null)
+                       if((!image.equals("")) && (!image.equals("Image path,"))){// image!=null){
                            //************display image************
                            //*********************** change scale for icon to fit the label:
                            //Icon icon6=new ImageIcon(content);
@@ -410,8 +413,10 @@ public class userprofile22 extends javax.swing.JFrame{
     // resize video based on screen size
     DoubleProperty width = viewer.fitWidthProperty();
     DoubleProperty height = viewer.fitHeightProperty();
-    width.bind(Bindings.selectDouble(viewer.sceneProperty(), "width"));
-    height.bind(Bindings.selectDouble(viewer.sceneProperty(), "height"));
+  //  width.bind(Bindings.selectDouble(viewer.sceneProperty(), "width"));
+  //  height.bind(Bindings.selectDouble(viewer.sceneProperty(), "height"));
+  width.setValue(350);
+   height.setValue(300);
     viewer.setPreserveRatio(true);
 
     // add video to stackpane
@@ -583,15 +588,17 @@ public class userprofile22 extends javax.swing.JFrame{
         
         //**************************the description display*************************
         //JLabel des=new JLabel();
-        JTextPane des = new JTextPane();
-       //   JTextArea des = new JTextArea();
+       // JTextPane des = new JTextPane();
+        String description=rs1.getString("description");
+        JTextArea des = new JTextArea(description + "\n" + keyword);
 
-        //des.setLineWrap(true);
-        //des.setWrapStyleWord(true);
+        des.setLineWrap(true);
+        des.setWrapStyleWord(true);
+        
         des.setBounds(330, 20, 380, 140);//330, 240, 300,210); //x, y, width, height);
         des.setBackground(new java.awt.Color(255,255,255));//200,200,200));
         
-        String description=rs1.getString("description");
+        
         des.setText(description);
         
        // JScrollPane scroll = new JScrollPane(des);
@@ -682,7 +689,7 @@ public class userprofile22 extends javax.swing.JFrame{
                              viewlike.addMouseListener(new MouseAdapter() {
                                 public void mouseClicked(MouseEvent e) {
                                     //   String idpost = ((JButton) e.getSource()).getName();
-                                    new Likes(idpost).setVisible(true);
+                                    new Likes(usernameorigin,idpost).setVisible(true);
                                     
                                 }
                             });
@@ -996,9 +1003,7 @@ public void onSeekComplete(final MediaPlayer mp) {
         bio = new javax.swing.JLabel();
         following = new javax.swing.JLabel();
         fer = new javax.swing.JLabel();
-        ercount = new javax.swing.JLabel();
         followers = new javax.swing.JLabel();
-        ingcount = new javax.swing.JLabel();
         out = new javax.swing.JLabel();
         contact = new javax.swing.JLabel();
         explore = new javax.swing.JLabel();
@@ -1080,16 +1085,10 @@ public void onSeekComplete(final MediaPlayer mp) {
 
         fer.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
-        ercount.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ercount.setText("count");
-
         followers.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         followers.setForeground(new java.awt.Color(18, 33, 139));
         followers.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         followers.setText("following");
-
-        ingcount.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ingcount.setText("count");
 
         out.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         out.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1162,13 +1161,11 @@ public void onSeekComplete(final MediaPlayer mp) {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(following, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(fer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(ercount, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(fer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(followers, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(fing, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(ingcount, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(fing, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(24, 24, 24))))
             .addGroup(jPanel12Layout.createSequentialGroup()
                 .addContainerGap()
@@ -1200,11 +1197,7 @@ public void onSeekComplete(final MediaPlayer mp) {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(fer, javax.swing.GroupLayout.DEFAULT_SIZE, 53, Short.MAX_VALUE)
-                                    .addComponent(fing, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(ingcount, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(ercount, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+                                    .addComponent(fing, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                             .addComponent(bio, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel12Layout.createSequentialGroup()
                         .addContainerGap()
@@ -1212,7 +1205,7 @@ public void onSeekComplete(final MediaPlayer mp) {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(scrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 553, Short.MAX_VALUE))
+                .addComponent(scrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -1598,13 +1591,11 @@ public void onSeekComplete(final MediaPlayer mp) {
     private javax.swing.JLabel close;
     private javax.swing.JLabel contact;
     private javax.swing.JLabel edit;
-    private javax.swing.JLabel ercount;
     private javax.swing.JLabel explore;
     private javax.swing.JLabel fer;
     private javax.swing.JLabel fing;
     private javax.swing.JLabel followers;
     private javax.swing.JLabel following;
-    private javax.swing.JLabel ingcount;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;

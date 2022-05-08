@@ -50,7 +50,7 @@
                       <Component id="jPanel2" max="32767" attributes="0"/>
                       <Group type="102" attributes="0">
                           <Component id="back" min="-2" pref="46" max="-2" attributes="0"/>
-                          <EmptySpace max="32767" attributes="0"/>
+                          <EmptySpace pref="1163" max="32767" attributes="0"/>
                           <Component id="min" min="-2" pref="43" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="close" min="-2" pref="43" max="-2" attributes="0"/>
@@ -426,9 +426,9 @@
                                                       <Group type="102" alignment="0" attributes="0">
                                                           <EmptySpace max="-2" attributes="0"/>
                                                           <Component id="jPanel13" min="-2" max="-2" attributes="0"/>
-                                                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                                                          <Component id="jSeparator1" min="-2" max="-2" attributes="0"/>
                                                           <EmptySpace max="-2" attributes="0"/>
+                                                          <Component id="jSeparator1" min="-2" max="-2" attributes="0"/>
+                                                          <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                                                           <Component id="scrollPane1" max="32767" attributes="0"/>
                                                           <EmptySpace max="-2" attributes="0"/>
                                                       </Group>
@@ -456,68 +456,61 @@
                                                               <Group type="103" groupAlignment="0" attributes="0">
                                                                   <Group type="102" alignment="0" attributes="0">
                                                                       <Component id="name" min="-2" pref="223" max="-2" attributes="0"/>
-                                                                      <EmptySpace pref="252" max="32767" attributes="0"/>
+                                                                      <EmptySpace max="32767" attributes="0"/>
                                                                       <Component id="follow" min="-2" pref="64" max="-2" attributes="0"/>
-                                                                      <EmptySpace max="-2" attributes="0"/>
-                                                                      <Component id="explore" min="-2" pref="74" max="-2" attributes="0"/>
-                                                                  </Group>
-                                                                  <Component id="jSeparator2" max="32767" attributes="0"/>
-                                                                  <Group type="102" alignment="0" attributes="0">
-                                                                      <Component id="bio" max="32767" attributes="0"/>
                                                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                                                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                                                          <Component id="following" max="32767" attributes="0"/>
-                                                                          <Component id="ercount" alignment="1" max="32767" attributes="0"/>
-                                                                          <Component id="fer" alignment="1" max="32767" attributes="0"/>
-                                                                      </Group>
-                                                                      <EmptySpace max="-2" attributes="0"/>
-                                                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                                                          <Component id="followers" max="32767" attributes="0"/>
-                                                                          <Component id="fing" max="32767" attributes="0"/>
-                                                                          <Component id="ingcount" alignment="0" max="32767" attributes="0"/>
+                                                                          <Group type="102" attributes="0">
+                                                                              <Component id="following" min="-2" max="-2" attributes="0"/>
+                                                                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                                                              <Component id="followers" min="-2" max="-2" attributes="0"/>
+                                                                          </Group>
+                                                                          <Group type="102" alignment="1" attributes="0">
+                                                                              <Component id="fer" max="32767" attributes="0"/>
+                                                                              <EmptySpace max="-2" attributes="0"/>
+                                                                              <Component id="fing" min="-2" pref="55" max="-2" attributes="0"/>
+                                                                          </Group>
                                                                       </Group>
                                                                   </Group>
+                                                                  <Group type="102" attributes="0">
+                                                                      <Component id="bio" max="32767" attributes="0"/>
+                                                                      <EmptySpace min="-2" pref="126" max="-2" attributes="0"/>
+                                                                  </Group>
+                                                                  <Component id="jSeparator2" max="32767" attributes="0"/>
                                                               </Group>
-                                                              <EmptySpace min="-2" max="-2" attributes="0"/>
+                                                              <EmptySpace max="-2" attributes="0"/>
                                                           </Group>
                                                       </Group>
                                                     </DimensionLayout>
                                                     <DimensionLayout dim="1">
                                                       <Group type="103" groupAlignment="0" attributes="0">
-                                                          <Group type="102" attributes="0">
-                                                              <Component id="jPanel14" max="32767" attributes="0"/>
-                                                              <EmptySpace min="-2" max="-2" attributes="0"/>
-                                                              <Component id="jPanel15" min="-2" max="-2" attributes="0"/>
-                                                          </Group>
-                                                          <Group type="102" attributes="0">
+                                                          <Group type="102" alignment="1" attributes="0">
                                                               <EmptySpace max="-2" attributes="0"/>
-                                                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                                                  <Component id="explore" alignment="0" max="32767" attributes="0"/>
-                                                                  <Component id="name" pref="58" max="32767" attributes="0"/>
-                                                                  <Component id="follow" max="32767" attributes="0"/>
+                                                              <Group type="103" groupAlignment="3" attributes="0">
+                                                                  <Component id="followers" alignment="3" min="-2" pref="19" max="-2" attributes="0"/>
+                                                                  <Component id="following" alignment="3" max="32767" attributes="0"/>
                                                               </Group>
-                                                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                                              <Component id="jSeparator2" min="-2" max="-2" attributes="0"/>
                                                               <EmptySpace max="-2" attributes="0"/>
                                                               <Group type="103" groupAlignment="0" attributes="0">
-                                                                  <Component id="bio" max="32767" attributes="0"/>
-                                                                  <Group type="102" attributes="0">
-                                                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                                                          <Component id="following" pref="19" max="32767" attributes="0"/>
-                                                                          <Component id="followers" max="32767" attributes="0"/>
-                                                                      </Group>
-                                                                      <EmptySpace max="-2" attributes="0"/>
-                                                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                                                          <Component id="fer" pref="41" max="32767" attributes="0"/>
-                                                                          <Component id="fing" max="32767" attributes="0"/>
-                                                                      </Group>
-                                                                      <EmptySpace max="-2" attributes="0"/>
-                                                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                                                          <Component id="ingcount" max="32767" attributes="0"/>
-                                                                          <Component id="ercount" max="32767" attributes="0"/>
-                                                                      </Group>
+                                                                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                                                      <Component id="name" pref="58" max="32767" attributes="0"/>
+                                                                      <Component id="follow" max="32767" attributes="0"/>
                                                                   </Group>
+                                                                  <Component id="fer" min="-2" pref="49" max="-2" attributes="0"/>
+                                                                  <Component id="fing" alignment="0" min="-2" pref="58" max="-2" attributes="0"/>
                                                               </Group>
+                                                              <EmptySpace max="-2" attributes="0"/>
+                                                              <Component id="jSeparator2" min="-2" max="-2" attributes="0"/>
+                                                              <EmptySpace max="-2" attributes="0"/>
+                                                              <Component id="bio" min="-2" pref="74" max="-2" attributes="0"/>
+                                                              <EmptySpace max="-2" attributes="0"/>
+                                                          </Group>
+                                                          <Group type="102" alignment="1" attributes="0">
+                                                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                                              <Component id="jPanel14" min="-2" max="-2" attributes="0"/>
+                                                              <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
+                                                              <Component id="jPanel15" min="-2" max="-2" attributes="0"/>
+                                                              <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
                                                           </Group>
                                                       </Group>
                                                     </DimensionLayout>
@@ -560,14 +553,6 @@
                                                         </Component>
                                                       </SubComponents>
                                                     </Container>
-                                                    <Component class="javax.swing.JLabel" name="explore">
-                                                      <Properties>
-                                                        <Property name="horizontalAlignment" type="int" value="0"/>
-                                                        <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                                                          <Color id="Hand Cursor"/>
-                                                        </Property>
-                                                      </Properties>
-                                                    </Component>
                                                     <Component class="javax.swing.JSeparator" name="jSeparator2">
                                                     </Component>
                                                     <Component class="javax.swing.JLabel" name="name">
@@ -628,18 +613,6 @@
                                                         <Property name="verticalAlignment" type="int" value="1"/>
                                                       </Properties>
                                                     </Component>
-                                                    <Component class="javax.swing.JLabel" name="ercount">
-                                                      <Properties>
-                                                        <Property name="horizontalAlignment" type="int" value="0"/>
-                                                        <Property name="text" type="java.lang.String" value="count"/>
-                                                      </Properties>
-                                                    </Component>
-                                                    <Component class="javax.swing.JLabel" name="ingcount">
-                                                      <Properties>
-                                                        <Property name="horizontalAlignment" type="int" value="0"/>
-                                                        <Property name="text" type="java.lang.String" value="count"/>
-                                                      </Properties>
-                                                    </Component>
                                                     <Container class="javax.swing.JPanel" name="jPanel15">
                                                       <Properties>
                                                         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -655,12 +628,15 @@
                                                         </DimensionLayout>
                                                         <DimensionLayout dim="1">
                                                           <Group type="103" groupAlignment="0" attributes="0">
-                                                              <EmptySpace min="0" pref="75" max="32767" attributes="0"/>
+                                                              <EmptySpace min="0" pref="26" max="32767" attributes="0"/>
                                                           </Group>
                                                         </DimensionLayout>
                                                       </Layout>
                                                     </Container>
                                                     <Component class="javax.swing.JLabel" name="follow">
+                                                      <Events>
+                                                        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="followMouseClicked"/>
+                                                      </Events>
                                                     </Component>
                                                   </SubComponents>
                                                 </Container>

@@ -116,7 +116,7 @@ public class loginForm extends javax.swing.JFrame {
         btnForgotPassword.setBackground(new java.awt.Color(0, 102, 102));
         btnForgotPassword.setFont(new java.awt.Font("Georgia", 3, 10)); // NOI18N
         btnForgotPassword.setForeground(new java.awt.Color(255, 255, 255));
-        btnForgotPassword.setText("Forgot Password?");
+        btnForgotPassword.setText("Reset Password?");
         btnForgotPassword.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnForgotPasswordActionPerformed(evt);
