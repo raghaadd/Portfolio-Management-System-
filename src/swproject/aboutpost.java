@@ -153,7 +153,7 @@ static admin1 admin=new admin1();
          //  Class.forName("com.mysql.jdbc,Drive");
          Connection conn= DriverManager.getConnection("jdbc:mysql://localhost:3306/database1","root","11923918r");
 
-          String sql="Select count(idpost) from post";
+          String sql="Select count(idpost) from post ";
           PreparedStatement pst=conn.prepareStatement(sql);
            ResultSet rs=pst.executeQuery();
            if(rs.next()){

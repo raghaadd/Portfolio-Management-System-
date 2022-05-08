@@ -19,7 +19,7 @@ import javax.swing.table.DefaultTableModel;
  * @author DELL
  */
 public class showallposts extends javax.swing.JFrame {
-int id,deleteitem,q,i;
+int id,deleteitem,q,q1,q2,i;
     /**
      * Creates new form showallposts
      */
@@ -42,9 +42,26 @@ int id,deleteitem,q,i;
         String sql="Select * from post";
          PreparedStatement pst=conn.prepareStatement(sql);
            ResultSet rs=pst.executeQuery();
+           
+           String sql1="Select * from comments";
+         PreparedStatement pst1=conn.prepareStatement(sql1);
+           ResultSet rs1=pst1.executeQuery();
+           
+           
+           String sql2="Select * from likes";
+         PreparedStatement pst2=conn.prepareStatement(sql2);
+           ResultSet rs2=pst2.executeQuery();
+           
+           
+           
+           
            ResultSetMetaData stData=rs.getMetaData();
+           ResultSetMetaData stData1=rs1.getMetaData();
+           ResultSetMetaData stData2=rs2.getMetaData();
            
            q=stData.getColumnCount();
+             q1=stData1.getColumnCount();
+               q2=stData2.getColumnCount();
            DefaultTableModel RecordTable=(DefaultTableModel)posttable.getModel();
            RecordTable.setRowCount(0);
            
@@ -56,6 +73,32 @@ int id,deleteitem,q,i;
                  columnData.add(rs.getString("content"));
                  columnData.add(rs.getString("description"));
                  columnData.add(rs.getString("username"));
+                
+               }
+               RecordTable.addRow(columnData);
+           }
+           
+           while(rs1.next()){
+               Vector columnData=new Vector();
+               for(i=1;i<=q1;i++)
+               {
+                   columnData.add(rs1.getString("idcomments"));
+                 columnData.add(rs1.getString("username"));
+                 columnData.add(rs1.getString("content"));
+                  columnData.add(rs1.getString("idpost"));
+                
+               }
+               RecordTable.addRow(columnData);
+           }
+           
+           
+           while(rs2.next()){
+               Vector columnData=new Vector();
+               for(i=1;i<=q2;i++)
+               {
+                   columnData.add(rs2.getString("idlikes"));
+                 columnData.add(rs2.getString("idpost"));
+                 columnData.add(rs2.getString("username"));
                 
                }
                RecordTable.addRow(columnData);
@@ -84,6 +127,7 @@ int id,deleteitem,q,i;
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        count1 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -96,14 +140,14 @@ int id,deleteitem,q,i;
         posttable.setBackground(new java.awt.Color(26, 162, 163));
         posttable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "ID_Post", "Content", "Description", "Username"
+                "ID_Post", "Content", "Description", "Username", "Comments"
             }
         ));
         posttable.setGridColor(new java.awt.Color(18, 33, 139));
@@ -123,7 +167,7 @@ int id,deleteitem,q,i;
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(339, Short.MAX_VALUE))
+                .addContainerGap(333, Short.MAX_VALUE))
         );
 
         jButton1.setBackground(new java.awt.Color(26, 162, 163));
@@ -175,11 +219,17 @@ int id,deleteitem,q,i;
                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(count1, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(77, 77, 77))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(49, 49, 49)
+                .addGap(29, 29, 29)
+                .addComponent(count1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -209,16 +259,58 @@ int id,deleteitem,q,i;
       //   Class.forName("mysql.jdbc,Drive");
          Connection conn= DriverManager.getConnection("jdbc:mysql://localhost:3306/database1","root","11923918r");
         String sql="Select * from post";
-        
-        //  String sql="Select count(followercount) from appuser";
          PreparedStatement pst=conn.prepareStatement(sql);
            ResultSet rs=pst.executeQuery();
+           
+           String sql1="Select count(idcomments) from comments where idpost= 1";
+   PreparedStatement pst1=conn.prepareStatement(sql1);
+           ResultSet rs1=pst1.executeQuery();
+           
+           
            DefaultTableModel model=(DefaultTableModel)posttable.getModel();
+          
            model.setRowCount(0);
-           while(rs.next()){
-               model.addRow(new String[]{rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4)});
-               
+           Object[] row=new Object[5];
+           while(rs.next()||rs1.next()){
+               row[0]=rs.getString(1);
+                row[1]=rs.getString(2);
+                 row[2]=rs.getString(3);
+                  row[3]=rs.getString(4);
+                  
+                  
+                  if(rs1.next()){
+           String count=rs1.getString("count(idcomments)");
+           row[4]=count;
+           
            }
+                  
+            //  model.addRow(new String[]{rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4)});
+              
+             // System.out.println("hiii");
+               model.addRow(row);
+         }
+           
+           
+           
+           
+           
+          // String sql1="Select count(idcomments) from comments  ";
+           
+           //where idpost= ' "+rs.getInt(1)+" '
+          // PreparedStatement pst1=conn.prepareStatement(sql1);
+          // ResultSet rs1=pst1.executeQuery();
+           
+          //  while(rs1.next()){
+          //     model.addRow(new String[]{rs.getString(5)});
+               
+          // }
+          
+           //if(rs1.next()){
+           //    String count=rs1.getString("count(idcomments)");
+             //  model.addRow(new String[]{rs.getString(count)});
+           //     System.out.print(count);
+               
+          //}
        
        }
        catch (Exception ex){
@@ -239,13 +331,26 @@ int id,deleteitem,q,i;
             {
           //    Class.forName("mysql.jdbc,Drive");  
               Connection conn= DriverManager.getConnection("jdbc:mysql://localhost:3306/database1","root","11923918r");
-              String sql=("delete from post where idpost=?");
+              String sql=("delete from post where idpost=?");  
               PreparedStatement pst=conn.prepareStatement(sql);
+              
+              String sql1=("delete from likes where idpost=?"); 
+              PreparedStatement pst1=conn.prepareStatement(sql1);
+              
+              String sql2=("delete from comments where idpost=?"); 
+              PreparedStatement pst2=conn.prepareStatement(sql2);
+              
               pst.setInt(1, id);
               pst.executeUpdate();
               
+              pst1.setInt(1, id);
+              pst1.executeUpdate();
+              
+              pst2.setInt(1, id);
+              pst2.executeUpdate();
+              
               JOptionPane.showMessageDialog(this, "Delete Successfully!");
-              upDateDB();
+          //    upDateDB();
               
             }
                
@@ -303,6 +408,7 @@ int id,deleteitem,q,i;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField count1;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
