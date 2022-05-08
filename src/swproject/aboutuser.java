@@ -219,11 +219,11 @@ public class aboutuser extends javax.swing.JFrame {
          //  Class.forName("com.mysql.jdbc,Drive");
          Connection conn= DriverManager.getConnection("jdbc:mysql://localhost:3306/database1","root","11923918r");
 
-          String sql="Select count(followercount) from appuser";
+          String sql="Select count(username) from appuser";
           PreparedStatement pst=conn.prepareStatement(sql);
            ResultSet rs=pst.executeQuery();
            if(rs.next()){
-           String count=rs.getString("count(followercount)");
+           String count=rs.getString("count(username)");
            nou.setText(count);
            }
           

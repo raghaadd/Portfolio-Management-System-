@@ -215,28 +215,45 @@ public class S$D extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchActionPerformed
-       
+      int count=0;
         try{
             
            // Class.forName("mysql.jdbc,Drive");  
               Connection conn= DriverManager.getConnection("jdbc:mysql://localhost:3306/database1","root","11923918r");
               String sql=("Select username,email,bio,followercount from appuser where username=?");
               PreparedStatement pst=conn.prepareStatement(sql);
-           pst.setString(1, un.getText());
-             ResultSet rs=pst.executeQuery();
+              pst.setString(1, un.getText());
+              ResultSet rs=pst.executeQuery();
+             
+              String sql1=("Select * from follower where username=?");
+              PreparedStatement pst1=conn.prepareStatement(sql1);
+              pst1.setString(1, un.getText());
+              ResultSet rs1=pst1.executeQuery();
+              while(rs1.next())
+              {
+                  count++;
+              }
+              
+              
              if(rs.next())
              {
                
                  em.setText(rs.getString("email"));
                   bio.setText(rs.getString("bio"));
-                   fc.setText(rs.getString("followercount"));
+                   fc.setText(String.valueOf(count));
                    
              }
             
              else
              {
                   JOptionPane.showMessageDialog(null, "Record Not Found!");
+                  un.setText("");
+               em.setText("");
+               bio.setText("");
+               fc.setText("");
              }
+             
+             
              conn.close();          
         }   
        catch (Exception ex){
@@ -245,6 +262,62 @@ public class S$D extends javax.swing.JFrame {
        }
     }//GEN-LAST:event_searchActionPerformed
 
+    
+    
+//**************************************************************/************************************
+    
+     public String searchfromjunit(String user) {                                       
+        boolean flagtest=false;
+        
+        try{
+
+              Connection conn= DriverManager.getConnection("jdbc:mysql://localhost:3306/database1","root","11923918r");
+              String sql=("Select username,email,bio,followercount from appuser where username=?");
+              PreparedStatement pst=conn.prepareStatement(sql);
+              pst.setString(1, user);
+              ResultSet rs=pst.executeQuery();
+              
+              flagtest=true;
+              
+           if(rs.next())
+           {
+                 
+             }
+            else
+             {
+           
+              flagtest=false;
+             }
+             conn.close();          
+        }   
+       catch (Exception ex){
+           //JOptionPane.showMessageDialog(this, e);
+           System.out.println("Error :" +ex.getMessage());
+       }
+        return(flagtest?"search successfully":"something wrong happen");
+    }                                      
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     private void deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteActionPerformed
       
         try{
@@ -255,6 +328,13 @@ public class S$D extends javax.swing.JFrame {
               PreparedStatement pst=conn.prepareStatement(sql);
               pst.setString(1, un.getText());
               pst.executeUpdate();
+              
+              
+              String sql1="delete from person where email=?";
+              PreparedStatement pst1=conn.prepareStatement(sql1);
+              pst1.setString(1, em.getText());
+              pst1.executeUpdate();
+              
                JOptionPane.showMessageDialog(null, "Record Deleted Successfully!");
                un.setText("");
                em.setText("");
