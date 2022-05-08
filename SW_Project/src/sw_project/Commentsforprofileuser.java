@@ -357,6 +357,16 @@ public class Commentsforprofileuser extends javax.swing.JFrame {
         try {
             //******************* open connection with mysql:
             Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sys", "root", "123456");
+            String sql2 = "select * from post";
+            Statement st2 = conn.createStatement();
+            ResultSet rs2 = st2.executeQuery(sql2);
+            while (rs2.next()) {
+
+                if (idpost == rs2.getInt("idpost")) {
+                    usernamepost = rs2.getString("username");
+                    break;
+                }
+            }
 
             //********************* insert data into post table:
             String sql1 = "insert into comments (username,content,idpost,usercomment) values (?,?,?,?)";

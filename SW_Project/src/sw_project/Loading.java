@@ -4,52 +4,50 @@
  * and open the template in the editor.
  */
 package sw_project;
+
 import java.awt.Color;
+
 /**
  *
  * @author Msys
  */
-public class Loading extends javax.swing.JFrame implements Runnable{
+public class Loading extends javax.swing.JFrame implements Runnable {
 
     /**
      * Creates new form Loading
      */
     Thread t;
+
     public Loading() {
         initComponents();
-         super.pack();
-        super.setLocationRelativeTo(null); 
-        t=new Thread(this);
+        super.pack();
+        super.setLocationRelativeTo(null);
+        t = new Thread(this);
         t.start();
     }
-@Override
-    public void run(){
-        try{
-            for(int i=0;i<101;i++)
-            {
-                int m=jProgressBar1.getMaximum();
-                int n=jProgressBar1.getValue();
-                if(n<m)
-                {
-                    jProgressBar1.setValue(jProgressBar1.getValue()+1);
-                    jLabel2.setText(Integer.toString(i+1)+"%");
+
+    @Override
+    public void run() {
+        try {
+            for (int i = 0; i < 101; i++) {
+                int m = jProgressBar1.getMaximum();
+                int n = jProgressBar1.getValue();
+                if (n < m) {
+                    jProgressBar1.setValue(jProgressBar1.getValue() + 1);
+                    jLabel2.setText(Integer.toString(i + 1) + "%");
                 }//end of if
-                else 
-                {
-                    i=101;
+                else {
+                    i = 101;
                     setVisible(false);
-                    firstpage22.mainpage.setVisible(true);
-//                    LogIn log=new LogIn();
-//                    log.setVisible(true);
-                    
-                    
+                    new loginForm().setVisible(true);
+
                 }//end of else
-                   Thread.sleep(10);
+                Thread.sleep(10);
             }
-        }catch(Exception e)
-        {
+        } catch (Exception e) {
         }
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -168,5 +166,4 @@ public class Loading extends javax.swing.JFrame implements Runnable{
     public static javax.swing.JProgressBar jProgressBar1;
     // End of variables declaration//GEN-END:variables
 
-    
 }

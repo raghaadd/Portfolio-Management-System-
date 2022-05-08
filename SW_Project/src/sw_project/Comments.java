@@ -61,6 +61,7 @@ public class Comments extends javax.swing.JFrame {
         Connection conn = null;
         ResultSet rs = null;
         Boolean flag = true;
+        int totalcomment = 0;
         try {
             conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sys", "root", "123456");
             String sql1 = "select * from comments";
@@ -69,6 +70,7 @@ public class Comments extends javax.swing.JFrame {
             while (rs1.next()) {
 
                 if (idpost == rs1.getInt("idpost")) {
+                    totalcomment++;
                     usernamepost = rs1.getString("username");
                     jhh.setLayout(null);//new FlowLayout());
                     //**********************add the jpanel
@@ -161,6 +163,7 @@ public class Comments extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, ex.getMessage());
             System.err.println(ex);
         }
+        jLabelcomment.setText(String.valueOf(totalcomment));
     }
 
     /**
@@ -181,6 +184,7 @@ public class Comments extends javax.swing.JFrame {
         jTextArea1 = new javax.swing.JTextArea();
         jButtonback = new javax.swing.JButton();
         scrollPane1 = new java.awt.ScrollPane();
+        jLabelcomment = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -219,6 +223,8 @@ public class Comments extends javax.swing.JFrame {
             }
         });
 
+        jLabelcomment.setForeground(new java.awt.Color(255, 255, 255));
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -229,24 +235,27 @@ public class Comments extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jButtonback, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(120, 120, 120)
-                        .addComponent(jLabel2)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jButtonsend, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 241, Short.MAX_VALUE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(scrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(jButtonsend, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 237, Short.MAX_VALUE))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabelcomment, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(scrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel2)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabelcomment, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(8, 8, 8)
                 .addComponent(scrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -322,6 +331,16 @@ public class Comments extends javax.swing.JFrame {
         try {
             //******************* open connection with mysql:
             Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sys", "root", "123456");
+            String sql2 = "select * from post";
+            Statement st2 = conn.createStatement();
+            ResultSet rs2 = st2.executeQuery(sql2);
+            while (rs2.next()) {
+
+                if (idpost == rs2.getInt("idpost")) {
+                    usernamepost=rs2.getString("username");
+                    break;
+                }
+            }
 
             //********************* insert data into post table:
             String sql1 = "insert into comments (username,content,idpost,usercomment) values (?,?,?,?)";
@@ -330,9 +349,13 @@ public class Comments extends javax.swing.JFrame {
             pstmt1.setString(2, jTextArea1.getText());
             pstmt1.setInt(3, idpost);
             pstmt1.setString(4, usernameorigin);
+             System.out.println("commentS:post " + usernamepost);
+            System.out.println("commentS:origin " + usernameorigin);
+            System.out.println("commentS:idpost " + idpost);
             pstmt1.executeUpdate();
             jTextArea1.setText("");
             //getusername();
+           
 
         } catch (SQLException ex) {
             Logger.getLogger(Comments.class.getName()).log(Level.SEVERE, null, ex);
@@ -379,6 +402,7 @@ public class Comments extends javax.swing.JFrame {
     private javax.swing.JButton jButtonsend;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabelcomment;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

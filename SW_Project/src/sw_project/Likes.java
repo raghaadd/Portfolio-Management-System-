@@ -58,6 +58,7 @@ public class Likes extends javax.swing.JFrame {
         Connection conn = null;
         ResultSet rs = null;
         Boolean flag = true;
+        int totallikes=0;
         try {
             conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sys", "root", "123456");
             String sql1 = "select * from Likes";
@@ -66,6 +67,7 @@ public class Likes extends javax.swing.JFrame {
             while (rs1.next()) {
 
                 if (idpost == rs1.getInt("idpost")) {
+                    totallikes++;
                     jhh.setLayout(null);//new FlowLayout());
                     //**********************add the jpanel
                     jhh.setPreferredSize(new Dimension(100, 50));
@@ -149,6 +151,7 @@ public class Likes extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, ex.getMessage());
             System.err.println(ex);
         }
+        jLabeltotal.setText(String.valueOf(totallikes));
     }
 
     /**
@@ -166,6 +169,7 @@ public class Likes extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         scrollPane1 = new java.awt.ScrollPane();
+        jLabeltotal = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -189,6 +193,8 @@ public class Likes extends javax.swing.JFrame {
             }
         });
 
+        jLabeltotal.setForeground(new java.awt.Color(255, 255, 255));
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -201,7 +207,10 @@ public class Likes extends javax.swing.JFrame {
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabeltotal, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(scrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 11, Short.MAX_VALUE)))
                 .addContainerGap())
@@ -210,7 +219,9 @@ public class Likes extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(17, 17, 17)
-                .addComponent(jLabel2)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabeltotal, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26)
                 .addComponent(scrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(32, 32, 32)
@@ -323,6 +334,7 @@ public class Likes extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabeltotal;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

@@ -186,14 +186,12 @@ public class otherusers22 extends javax.swing.JFrame {
             while (rs1.next()) {
 
                 usenamepost = rs1.getString("username");
-                System.out.println("user::: " + usenamepost);
                 name.setText(usernamevisit);
                 //Object usernameorigin = null;
                 idpost = rs1.getString("idpost");
 
                 if (usenamepost.equals(usernamevisit)) {
                     String content = rs1.getString("content");
-                    System.out.println("content::: " + content);
 
                     //***********************getbio and photo******************************
                     String sql5 = "select * from appuser where username='" + usenamepost + "'";

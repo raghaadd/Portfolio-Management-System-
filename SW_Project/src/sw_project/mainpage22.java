@@ -47,7 +47,7 @@ public class mainpage22 extends javax.swing.JFrame {
      * Creates new form mainpage22
      */
     JPanel postbase = new JPanel();
-    String usernameorigin = "saja123";//"saja123"; //get this value from login page
+    String usernameorigin = "saja123"; //get this value from login page
     boolean likeflag = false;//*************** to know if the user has been liked the post or not
     boolean saveflag = false;//*************** to know if the user has been saved the post or not
 
