@@ -127,7 +127,6 @@ int id,deleteitem,q,q1,q2,i;
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-        count1 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -140,14 +139,14 @@ int id,deleteitem,q,q1,q2,i;
         posttable.setBackground(new java.awt.Color(26, 162, 163));
         posttable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "ID_Post", "Content", "Description", "Username", "Comments"
+                "ID_Post", "Content", "Description", "Username"
             }
         ));
         posttable.setGridColor(new java.awt.Color(18, 33, 139));
@@ -219,17 +218,11 @@ int id,deleteitem,q,q1,q2,i;
                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(count1, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(77, 77, 77))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addComponent(count1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(55, 55, 55)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -261,33 +254,22 @@ int id,deleteitem,q,q1,q2,i;
         String sql="Select * from post";
          PreparedStatement pst=conn.prepareStatement(sql);
            ResultSet rs=pst.executeQuery();
-           
-           String sql1="Select count(idcomments) from comments where idpost= 1";
-   PreparedStatement pst1=conn.prepareStatement(sql1);
-           ResultSet rs1=pst1.executeQuery();
-           
-           
+ 
            DefaultTableModel model=(DefaultTableModel)posttable.getModel();
           
            model.setRowCount(0);
-           Object[] row=new Object[5];
-           while(rs.next()||rs1.next()){
-               row[0]=rs.getString(1);
-                row[1]=rs.getString(2);
-                 row[2]=rs.getString(3);
-                  row[3]=rs.getString(4);
-                  
-                  
-                  if(rs1.next()){
-           String count=rs1.getString("count(idcomments)");
-           row[4]=count;
-           
+     
+           while(rs.next())
+           {
+              
+                   model.addRow(new String[]{rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4)});
            }
                   
-            //  model.addRow(new String[]{rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4)});
+                  
+             
               
              // System.out.println("hiii");
-               model.addRow(row);
+        
          }
            
            
@@ -312,7 +294,7 @@ int id,deleteitem,q,q1,q2,i;
                
           //}
        
-       }
+       
        catch (Exception ex){
            //JOptionPane.showMessageDialog(this, e);
            System.out.println("Error :" +ex.getMessage());
@@ -408,7 +390,6 @@ int id,deleteitem,q,q1,q2,i;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField count1;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
