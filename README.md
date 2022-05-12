@@ -92,9 +92,20 @@ During this meeting, we have tried to create a LOGO for our system and we have s
     <img src="https://user-images.githubusercontent.com/100478249/168151144-c551b7d3-d091-43b4-9123-0b8b4f94514d.jpeg">
       <img src="https://user-images.githubusercontent.com/100478249/168151446-81353101-b9d8-418f-8f24-fa2d4a7d0d44.jpeg">
   </li>
-      <li>User profile interface:<img src="https://user-images.githubusercontent.com/100478249/168151639-c12255cf-f68e-4c0a-bfcd-4402c8127e77.jpeg">
-    <img src="https://user-images.githubusercontent.com/100478249/168151647-6714a91d-67ce-4a30-97cc-37bb2b879e00.jpeg">
+      <li>User profile interface include following and follower lists, edit posts, and edit personal inforamtion:<img src="https://user-images.githubusercontent.com/100478249/168151639-c12255cf-f68e-4c0a-bfcd-4402c8127e77.jpeg">
+    <img src="https://user-images.githubusercontent.com/100478249/168152206-f4cc886f-611f-44c7-8cf4-0843913a0b5a.jpeg">
+         <img src="https://user-images.githubusercontent.com/100478249/168151647-6714a91d-67ce-4a30-97cc-37bb2b879e00.jpeg">
+         <img src="https://user-images.githubusercontent.com/100478249/168152225-f8e4a558-4497-45b7-bfba-5d0c1e8bebf3.jpeg">
+         <img src="https://user-images.githubusercontent.com/100478249/168152239-50fd6503-f7dc-41cf-838c-e2bc9122336b.jpeg">
+         <img src="https://user-images.githubusercontent.com/100478249/168152273-8bbdda39-06b4-494a-90c5-1885519a5e0b.jpeg">
+  </li>
+  <li> Save post interface:  <img src="https://user-images.githubusercontent.com/100478249/168152542-9460a8f8-cac6-456b-b9c0-94fe0b0065fe.jpeg">
+  </li>
+   <li> Add post interface:  <img src="https://user-images.githubusercontent.com/100478249/168152654-28af669e-4a8b-4b11-a79b-e02a1e10fe08.jpeg">
+  </li>
+   <li> Follow or unfollow other users (notice the color of heart):  <img src="https://user-images.githubusercontent.com/100478249/168152978-8dd6154b-7a09-4225-9924-a5ac06487910.jpeg">
+   <img src="https://user-images.githubusercontent.com/100478249/168152990-b6bc8b30-2d41-4274-81d6-deec24eed9e5.jpeg">  
   </li>
   </ul>
-
+ 
 
