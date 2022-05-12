@@ -87,8 +87,10 @@ During this meeting, we have tried to create a LOGO for our system and we have s
     <img src="https://user-images.githubusercontent.com/100478249/168150382-3c5bafb0-9208-4fb1-ba31-200345fef32d.jpeg">
     <img src="https://user-images.githubusercontent.com/100478249/168150397-7cf21f0e-a64e-478f-b6c3-474acdd7cf3c.jpeg">
   </li>
+    <li>Search interface by write hashtag or any username:<img src="https://user-images.githubusercontent.com/100478249/168151120-ae44eed9-07ce-4942-ac8b-a47d31558cea.jpeg">
+    <img src="https://user-images.githubusercontent.com/100478249/168151133-84f0e632-3ad5-4b4e-a0db-cc019a7efbb9.jpeg">
+    <img src="https://user-images.githubusercontent.com/100478249/168151144-c551b7d3-d091-43b4-9123-0b8b4f94514d.jpeg">
+  </li>
   </ul>
   
-
-
 
