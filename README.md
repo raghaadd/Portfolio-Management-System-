@@ -90,7 +90,11 @@ During this meeting, we have tried to create a LOGO for our system and we have s
     <li>Search interface by write hashtag or any username:<img src="https://user-images.githubusercontent.com/100478249/168151120-ae44eed9-07ce-4942-ac8b-a47d31558cea.jpeg">
     <img src="https://user-images.githubusercontent.com/100478249/168151133-84f0e632-3ad5-4b4e-a0db-cc019a7efbb9.jpeg">
     <img src="https://user-images.githubusercontent.com/100478249/168151144-c551b7d3-d091-43b4-9123-0b8b4f94514d.jpeg">
+      <img src="https://user-images.githubusercontent.com/100478249/168151446-81353101-b9d8-418f-8f24-fa2d4a7d0d44.jpeg">
+  </li>
+      <li>User profile interface:<img src="https://user-images.githubusercontent.com/100478249/168151639-c12255cf-f68e-4c0a-bfcd-4402c8127e77.jpeg">
+    <img src="https://user-images.githubusercontent.com/100478249/168151647-6714a91d-67ce-4a30-97cc-37bb2b879e00.jpeg">
   </li>
   </ul>
-  
+
 
