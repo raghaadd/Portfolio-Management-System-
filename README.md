@@ -47,7 +47,18 @@
   <li>As a user, I can follow other users in the system.</li>
   <li>As an admin, I can contorl the whole system and see users activites, so that I can delete any users or posts.</li>
   </ul>
-
+<h2 align="left"> Daily Scrums </h2> 
+<ul>
+  <li>First zoom meeting:One of team member wasn’t able to access the Slack workshop inviting link which was sent on her WhatsApp. So, in this meeting, we have discussed only general ideas, and it was an open conversation meeting. We haven't discussed any specific details until six of us were able to join the meeting held the next day where decisions were taken as a team.
+ </li>
+  <li>Second zoom meeting: The second meeting was held at 08:40 PM and continued up to one hour, all of the team members were in, we had moved a step forward in this discussion, and we have achieved a lot of decisions, we have distributed the roles between us, also we have selected the used programs which are NetBeans, MySQL workbench, Slack, Trello, Draw.IO, and other apps of documentation, designing, and contacting.
+During this meeting, we have tried to create a LOGO for our system and we have selected some colors to use and try, but we didn't choose a specific design till the next meeting had occurred.
+</li>
+  <li>•	Third zoom meeting: In this meeting, we have written some user stories to specify the user and admin requirements from the system. After that we upload these stories on the Trello to start work on it.
+</li>
+  <li>Fourth zoom meeting: In this meeting, we discussed about tables and UML diagrams. We set basically the functions we may need in our system.
+</li>
+  </ul>
 
 
 
