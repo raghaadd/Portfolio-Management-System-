@@ -54,11 +54,19 @@
   <li>Second zoom meeting: The second meeting was held at 08:40 PM and continued up to one hour, all of the team members were in, we had moved a step forward in this discussion, and we have achieved a lot of decisions, we have distributed the roles between us, also we have selected the used programs which are NetBeans, MySQL workbench, Slack, Trello, Draw.IO, and other apps of documentation, designing, and contacting.
 During this meeting, we have tried to create a LOGO for our system and we have selected some colors to use and try, but we didn't choose a specific design till the next meeting had occurred.
 </li>
-  <li>•	Third zoom meeting: In this meeting, we have written some user stories to specify the user and admin requirements from the system. After that we upload these stories on the Trello to start work on it.
+  <li>Third zoom meeting: In this meeting, we have written some user stories to specify the user and admin requirements from the system. After that we upload these stories on the Trello to start work on it.
 </li>
   <li>Fourth zoom meeting: In this meeting, we discussed about tables and UML diagrams. We set basically the functions we may need in our system.
 </li>
   </ul>
-
+  <h2 align="left">Pair Programming </h2> 
+  <h3 align="left">Two programmers work together at one workstation, Sara and Masa work togther, in addition Asma and Rand work toghter</h3> 
+  
+  <h2 align="left">Burn Down Chart</h2> 
+  
+  <h2 align="left">Product Demo </h2> 
+  <ul>
+  <li> First page include project logo: <img src="https://user-images.githubusercontent.com/100478249/168147774-74f96c33-bc56-421f-b2a7-e3cf94f070d2.jpeg" width="200" height="200"></li>
+  </ul>
 
 
