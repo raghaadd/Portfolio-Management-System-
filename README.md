@@ -60,7 +60,9 @@ During this meeting, we have tried to create a LOGO for our system and we have s
 </li>
   </ul>
   <h2 align="left">Pair Programming </h2> 
-  <h3 align="left">Two programmers work together at one workstation, Sara and Masa work togther, in addition Asma and Rand work toghter</h3> 
+  <h6 align="left">Two programmers work together at one workstation, Sara and Masa work togther, in addition Asma and Rand work toghter</h6> 
+  <img src="https://user-images.githubusercontent.com/100478249/168154175-3a60206f-fe96-4dd5-b2fe-b11c39e9a433.jpeg">
+  <img src="https://user-images.githubusercontent.com/100478249/168154187-af02671a-bb15-4e67-93ec-2fa5a430f865.jpeg">
   
   <h2 align="left">Burn Down Chart</h2> 
   
