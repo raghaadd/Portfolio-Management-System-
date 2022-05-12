@@ -71,6 +71,15 @@ During this meeting, we have tried to create a LOGO for our system and we have s
   <img src="https://user-images.githubusercontent.com/100478249/168148530-decdbdf7-5d52-4daf-90ab-2f691c6828d0.jpeg">
   <img src="https://user-images.githubusercontent.com/100478249/168148589-3470e3a5-6bd0-4eb2-9c3e-19c9e3d50db0.jpeg">
   </li>
+  <li>Admin interfaces: <img src="https://user-images.githubusercontent.com/100478249/168149083-d427d47a-fc3e-4e1c-ac27-d65455ca466d.jpeg">
+  <img src="https://user-images.githubusercontent.com/100478249/168149129-2c5479d4-092a-4de6-baf5-fff462f7c4b5.jpeg">
+  <img src="https://user-images.githubusercontent.com/100478249/168149203-3072705d-a779-48b7-827e-8e8a0d7f515c.jpeg">
+  <img src="https://user-images.githubusercontent.com/100478249/168149279-15cdad62-856d-467c-be7a-fd6dd19e87d3.jpeg">
+  <img src="https://user-images.githubusercontent.com/100478249/168149333-215fadd7-6960-4e64-88c7-991f6f108c93.jpeg">
+  <img src="https://user-images.githubusercontent.com/100478249/168149422-80b56cd4-f90b-4132-9965-d32042e775e5.jpeg">
+  <img src="https://user-images.githubusercontent.com/100478249/168149431-2b3b0cad-987e-4523-8cc1-8934c80e9d1d.jpeg">
+  </li>
   </ul>
+
 
 
