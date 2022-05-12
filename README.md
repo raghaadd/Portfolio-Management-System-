@@ -66,7 +66,7 @@ During this meeting, we have tried to create a LOGO for our system and we have s
   
   <h2 align="left">Product Demo </h2> 
   <ul>
-  <li> First page include project logo: <img src="https://user-images.githubusercontent.com/100478249/168147774-74f96c33-bc56-421f-b2a7-e3cf94f070d2.jpeg" width="200" height="200"></li>
+  <li> First page include project logo: <img src="https://user-images.githubusercontent.com/100478249/168147774-74f96c33-bc56-421f-b2a7-e3cf94f070d2.jpeg"></li>
   </ul>
 
 
