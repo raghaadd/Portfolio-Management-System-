@@ -25,6 +25,12 @@
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; *Frontend Developer*  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; *Frontend Developer*
 
 ===========================================================================<br>
+<h2 align="left"> Stakeholders </h2> 
+<h3 align="left"> We have two types of stakeholders in our system only: </h3> 
+<ul> 
+  <li>Users</li>
+  <li>Admin</li>
+</ul>
 
 
 
