@@ -65,7 +65,7 @@ During this meeting, we have tried to create a LOGO for our system and we have s
   <img src="https://user-images.githubusercontent.com/100478249/168154187-af02671a-bb15-4e67-93ec-2fa5a430f865.jpeg">
   
   <h2 align="left">Burn Down Chart</h2> 
-  
+  <img src="https://user-images.githubusercontent.com/100478249/168412076-cb04a8d3-4ec1-450d-bfff-16581c5bad03.png)"><br>
   <h2 align="left">Product Demo </h2> 
   <ul>
   <li> First UI include project logo and the name of project: <img src="https://user-images.githubusercontent.com/100478249/168147774-74f96c33-bc56-421f-b2a7-e3cf94f070d2.jpeg"></li>
